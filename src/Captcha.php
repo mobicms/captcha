@@ -16,8 +16,7 @@ namespace Mobicms\Captcha;
  * Class Captcha
  *
  * @package Mobicms\Captcha
- * @author  Oleg (AlkatraZ) Kasyanov <dev@mobicms.net>
- * @version v.2.2.0 2015-08-13
+ * @author  Oleg Kasyanov <dev@mobicms.net>
  */
 class Captcha
 {
@@ -130,7 +129,7 @@ class Captcha
      */
     private function chooseFont()
     {
-        $dir = __DIR__ . DS . 'fonts' . DS;
+        $dir = dirname(__DIR__) . DS . 'fonts' . DS;
         $fontsList = glob($dir . '*.ttf');
         $font = basename($fontsList[mt_rand(0, count($fontsList) - 1)]);
 
