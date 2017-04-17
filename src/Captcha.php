@@ -129,7 +129,7 @@ class Captcha
      */
     private function chooseFont()
     {
-        $dir = dirname(__DIR__) . DS . 'fonts' . DS;
+        $dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
         $fontsList = glob($dir . '*.ttf');
         $font = basename($fontsList[mt_rand(0, count($fontsList) - 1)]);
 
