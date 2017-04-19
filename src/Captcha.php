@@ -1,13 +1,12 @@
 <?php
-/*
- * mobiCMS Content Management System (http://mobicms.net)
+/**
+ * mobiCMS (https://mobicms.org/)
+ * This file is part of mobiCMS Content Management System,
+ * but can be used as an independent library in other projects
  *
- * For copyright and license information, please see the LICENSE.md
- * Installing the system or redistributions of files must retain the above copyright notice.
- *
- * @link        http://mobicms.net mobiCMS Project
- * @copyright   Copyright (C) mobiCMS Community
- * @license     LICENSE.md (see attached file)
+ * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE.md file)
+ * @link        http://mobicms.org mobiCMS Project
+ * @copyright   Copyright (C) 2017 Oleg Kasyanov
  */
 
 namespace Mobicms\Captcha;
