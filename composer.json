@@ -1,7 +1,7 @@
 {
   "name": "mobicms/mobicms-captcha",
   "description": "mobiCMS, Captcha package",
-  "type": "library",
+  "type": "mobicms-core",
   "homepage": "https://github.com/mobicms/mobicms-captcha",
   "license": "MIT",
   "keywords": [
