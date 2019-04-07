@@ -64,11 +64,12 @@ class Captcha
     /**
      * Captcha code generation
      *
-     * @return string
+     * @return bool|string
+     * @throws \Exception
      */
     public function generateCode()
     {
-        $lenght = mt_rand($this->lenghtMin, $this->lenghtMax);
+        $lenght = random_int($this->lenghtMin, $this->lenghtMax);
 
         do {
             $code = substr(str_shuffle(str_repeat($this->letters, 3)), 0, $lenght);
@@ -82,6 +83,7 @@ class Captcha
      *
      * @param $string
      * @return string
+     * @throws \Exception
      */
     public function generateImage($string)
     {
@@ -103,9 +105,10 @@ class Captcha
     /**
      * Drawing the text on the image
      *
-     * @param resource $image
-     * @param array    $captcha
-     * @param string   $font
+     * @param       $image
+     * @param array $captcha
+     * @param       $font
+     * @throws \Exception
      */
     private function drawText(&$image, array $captcha, $font)
     {
@@ -113,10 +116,10 @@ class Captcha
 
         for ($i = 0; $i < $len; $i++) {
             $xPos = ($this->width - $this->fontSize) / $len * $i + ($this->fontSize / 2);
-            $xPos = mt_rand($xPos, $xPos + 5);
+            $xPos = random_int($xPos, $xPos + 5);
             $yPos = $this->height - (($this->height - $this->fontSize) / 2);
-            $capcolor = imagecolorallocate($image, rand(0, 150), rand(0, 150), rand(0, 150));
-            $capangle = rand(-25, 25);
+            $capcolor = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
+            $capangle = random_int(-25, 25);
             imagettftext($image, $this->fontSize, $capangle, $xPos, $yPos, $capcolor, $font, $captcha[$i]);
         }
     }
@@ -125,12 +128,13 @@ class Captcha
      * Choosing a random font from the list of available
      *
      * @return string
+     * @throws \Exception
      */
     private function chooseFont()
     {
         $dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
         $fontsList = glob($dir . '*.ttf');
-        $font = basename($fontsList[mt_rand(0, count($fontsList) - 1)]);
+        $font = basename($fontsList[random_int(0, count($fontsList) - 1)]);
 
         return $dir . $font;
     }
