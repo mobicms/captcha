@@ -1,13 +1,14 @@
 <?php
 /**
- * mobiCMS (https://mobicms.org/)
  * This file is part of mobiCMS Content Management System,
- * but can be used as an independent library in other projects
+ * but can be used as an independent library in other projects.
  *
+ * @copyright   Oleg Kasyanov <dev@mobicms.net>
  * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE.md file)
  * @link        http://mobicms.org mobiCMS Project
- * @copyright   Copyright (C) 2017 Oleg Kasyanov
  */
+
+declare(strict_types=1);
 
 namespace Mobicms\Captcha;
 
@@ -64,10 +65,10 @@ class Captcha
     /**
      * Captcha code generation
      *
-     * @return bool|string
+     * @return string
      * @throws \Exception
      */
-    public function generateCode()
+    public function generateCode() : string
     {
         $lenght = random_int($this->lenghtMin, $this->lenghtMax);
 
@@ -85,7 +86,7 @@ class Captcha
      * @return string
      * @throws \Exception
      */
-    public function generateImage($string)
+    public function generateImage($string) : string
     {
         $font = $this->chooseFont();
         $captcha = $this->prepareString($string, $font);
@@ -110,13 +111,13 @@ class Captcha
      * @param       $font
      * @throws \Exception
      */
-    private function drawText(&$image, array $captcha, $font)
+    private function drawText(&$image, array $captcha, $font) : void
     {
         $len = count($captcha);
 
         for ($i = 0; $i < $len; $i++) {
             $xPos = ($this->width - $this->fontSize) / $len * $i + ($this->fontSize / 2);
-            $xPos = random_int($xPos, $xPos + 5);
+            $xPos = random_int((int) $xPos, (int) $xPos + 5);
             $yPos = $this->height - (($this->height - $this->fontSize) / 2);
             $capcolor = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
             $capangle = random_int(-25, 25);
@@ -130,7 +131,7 @@ class Captcha
      * @return string
      * @throws \Exception
      */
-    private function chooseFont()
+    private function chooseFont() : string
     {
         $dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
         $fontsList = glob($dir . '*.ttf');
@@ -146,7 +147,7 @@ class Captcha
      * @param string $font
      * @return array
      */
-    private function prepareString($string, $font)
+    private function prepareString($string, $font) : array
     {
         $font = basename($font);
 
@@ -166,7 +167,7 @@ class Captcha
      * @param array  $args
      * @return string
      */
-    private function setCase($string, array $args)
+    private function setCase($string, array $args) : string
     {
         switch ($args['case']) {
             case 2:
