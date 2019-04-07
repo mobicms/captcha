@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mobicms\\Captcha\\": "src/"
+            "Batumibiz\\Captcha\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MobicmsTest\\Captcha\\": "test/"
+            "BatumibizTest\\Captcha\\": "test/"
         }
     },
     "scripts": {

@@ -1,8 +1,8 @@
 <?php
 
-namespace MobicmsTest\Captcha;
+namespace BatumibizTest\Captcha;
 
-use Mobicms\Captcha\Captcha;
+use Batumibiz\Captcha\Captcha;
 use PHPUnit\Framework\TestCase;
 
 class CaptchaTest extends TestCase

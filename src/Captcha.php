@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace Mobicms\Captcha;
+namespace Batumibiz\Captcha;
 
 /**
  * Class Captcha
