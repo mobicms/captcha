@@ -9,8 +9,8 @@
         "captcha"
     ],
     "require": {
-        "php": "^7.1",
-        "ext-gd": "^7.1"
+        "php": "^7.2",
+        "ext-gd": "^7.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",
