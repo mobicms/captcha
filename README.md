@@ -16,21 +16,19 @@ Prevent form spam by generating random Captcha images.
 
 ## Install via Composer
 
-`composer require mobicms/captcha`
+`composer require batumibiz/captcha`
 
 ## Usage
 
-1. Generating code:
+1. Display in form:
 
-    ```php
+    ```html+php
+    <?php
     $captcha = new Mobicms\Captcha\Captcha;
     $code = $captcha->generateCode();
     $_SESSION['code'] = $code;
-    ```
+    ?>
 
-2. Display in form:
-
-    ```html+php
     <form method="post">
     <!-- ... -->
     <img alt="Verification code"
@@ -43,7 +41,7 @@ Prevent form spam by generating random Captcha images.
     </form>
 	```
 
-3. Check whether the entered code is correct:
+2. Check whether the entered code is correct:
 
     ```php
     $result = filter_input(INPUT_POST, 'code');
