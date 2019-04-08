@@ -1,9 +1,9 @@
 # A simple PHP CAPTCHA library
 
-[![License](https://poser.pugx.org/mobicms/captcha/license?format=flat-square)](https://packagist.org/packages/mobicms/captcha)
-[![Total Downloads](https://poser.pugx.org/mobicms/captcha/downloads?format=flat-square)](https://packagist.org/packages/mobicms/captcha)
+[![License](https://poser.pugx.org/batumibiz/captcha/license?format=flat-square)](https://packagist.org/packages/batumibiz/captcha)
+[![Total Downloads](https://poser.pugx.org/batumibiz/captcha/downloads?format=flat-square)](https://packagist.org/packages/batumibiz/captcha)
 [![SemVer](http://img.shields.io/:semver-2.0.0-informational.svg?style=flat-square)](http://semver.org)
-[![Latest Stable Version](https://poser.pugx.org/mobicms/captcha/v/stable?format=flat-square)](https://packagist.org/packages/mobicms/captcha)
+[![Latest Stable Version](https://poser.pugx.org/batumibiz/captcha/v/stable?format=flat-square)](https://packagist.org/packages/batumibiz/captcha)
 
 [![Build Status](https://scrutinizer-ci.com/g/batumibiz/captcha/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/batumibiz/captcha/build-status/develop)
 [![Code Coverage](https://scrutinizer-ci.com/g/batumibiz/captcha/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/batumibiz/captcha/?branch=develop)
