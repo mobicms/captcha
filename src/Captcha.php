@@ -57,8 +57,8 @@ class Captcha
     /**
      * Captcha code generation
      *
-     * @return string
      * @throws \Exception
+     * @return string
      */
     public function generateCode() : string
     {
@@ -75,8 +75,8 @@ class Captcha
      * Captcha image generation
      *
      * @param $string
-     * @return string
      * @throws \Exception
+     * @return string
      */
     public function generateImage($string) : string
     {
@@ -120,8 +120,8 @@ class Captcha
     /**
      * Choosing a random font from the list of available
      *
-     * @return string
      * @throws \Exception
+     * @return string
      */
     private function chooseFont() : string
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BatumibizTest\Captcha;
 
 use Batumibiz\Captcha\Captcha;
