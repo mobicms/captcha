@@ -4,33 +4,39 @@ Detailed change in the [repository log](https://github.com/batumibiz/captcha/com
 
 ## Unreleased 
 
-### Added
+#### Added
 - Nothing
   
-### Changed
+#### Changed
 - Nothing
 
-### Deprecated
+#### Deprecated
 - Nothing
   
-### Removed
+#### Removed
 - Nothing
 
-### Fixed
+#### Fixed
 - Nothing
 
-### Security
+#### Security
 - Nothing
+
+
+## 2.0.1 - 2019-10-26
+
+#### Changed
+- Updated dependencies
 
 
 ## 2.0.0 - 2019-04-08
 
-### Added
+#### Added
 - Added test case
 
-### Changed
+#### Changed
 - Changed vendor name
-- The minimum required PHP version is 7.2.
+- The minimum required PHP version is 7.2
 - Some code improvements
 
 

@@ -1,23 +1,15 @@
 <?php
-/**
- * This file is part of mobiCMS Content Management System,
- * but can be used as an independent library in other projects.
- *
- * @copyright   Oleg Kasyanov <dev@mobicms.net>
- * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE.md file)
- * @link        http://mobicms.org mobiCMS Project
- */
 
 declare(strict_types=1);
 
+/**
+ * @copyright   Oleg Kasyanov <dev@mobicms.net>
+ * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE.md file)
+ * @link        https://github.com/batumibiz/captcha
+ */
+
 namespace Batumibiz\Captcha;
 
-/**
- * Class Captcha
- *
- * @package Mobicms\Captcha
- * @author  Oleg Kasyanov <dev@mobicms.net>
- */
 class Captcha
 {
     /**
