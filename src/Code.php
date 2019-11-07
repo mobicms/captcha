@@ -31,6 +31,11 @@ class Code
         $this->letters = $letters;
     }
 
+    public function __toString() : string
+    {
+        return $this->generate();
+    }
+
     public function generate() : string
     {
         $lenght = mt_rand($this->lengthMin, $this->lengthMax);
@@ -40,10 +45,5 @@ class Code
         } while (preg_match('/cp|cb|ck|c6|c9|rn|rm|mm|co|do|cl|db|qp|qb|dp|ww/', $code));
 
         return $code;
-    }
-
-    public function __toString() : string
-    {
-        return $this->generate();
     }
 }
