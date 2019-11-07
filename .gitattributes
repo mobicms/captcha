@@ -4,3 +4,10 @@
 *.php   text eol=lf
 *.txt   text eol=lf
 *.yml   text eol=lf
+/.coveralls.yml export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/composer.lock export-ignore
+/phpcs.xml export-ignore
+/phpunit.xml.dist export-ignore
+/test/ export-ignore
