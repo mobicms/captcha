@@ -2,25 +2,23 @@
 All notable changes to this project will be documented in this file.  
 Detailed change in the [repository log](https://github.com/batumibiz/captcha/commits/).
 
-## Unreleased 
+## 3.0.0 - 2019-11-08
 
 #### Added
-- Nothing
+- Added few fonts
+- Ability to use custom fonts
+- Separate classes to generate CAPTCHA code and image
+- Ability to shuffle used fonts in the image
   
 #### Changed
-- Nothing
+- Changed package directory structure
+- Refactoring
 
 #### Deprecated
-- Nothing
+- Batumibiz\Captcha\Captcha::class
   
 #### Removed
-- Nothing
-
-#### Fixed
-- Nothing
-
-#### Security
-- Nothing
+- The problematic font granps.ttf has been removed
 
 
 ## 2.0.1 - 2019-10-26
