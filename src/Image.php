@@ -12,34 +12,13 @@ namespace Batumibiz\Captcha;
 
 class Image
 {
-    /**
-     * @var int Image Height
-     */
-    public $height = 50;
-
-    /**
-     * @var int Default font size
-     */
-    public $fontSize = 24;
-
-    /**
-     * @var array Individual sizes of fonts (if not present, use default)
-     */
-    public $customFonts = [
-        '3dlet.ttf'          => ['size' => 32, 'case' => 1],
-        'baby_blocks.ttf'    => ['size' => 16, 'case' => 0],
-        'betsy_flanagan.ttf' => ['size' => 28, 'case' => 0],
-        'granps.ttf'         => ['size' => 26, 'case' => 2],
-        'karmaticarcade.ttf' => ['size' => 20, 'case' => 0],
-        'tonight.ttf'        => ['size' => 28, 'case' => 0],
-    ];
-
     private $code;
 
     private $options = [
         'image_width'     => 160,
         'image_height'    => 60,
         'fonts_directory' => __DIR__ . '/../resources/fonts',
+        'fonts_shuffle'   => false,
         'fonts_size'      => 24,
         'fonts_tuning'    => [
             '3dlet.ttf' => [
@@ -89,18 +68,18 @@ class Image
      */
     public function __toString() : string
     {
-        return $this->generateImage();
+        return $this->generate();
     }
 
     /**
      * @throws \Exception
      */
-    public function generateImage() : string
+    public function generate() : string
     {
         $font = $this->chooseFont();
         $captcha = $this->prepareString($this->code, $font);
 
-        $image = imagecreatetruecolor($this->options['image_width'], $this->height);
+        $image = imagecreatetruecolor($this->options['image_width'], $this->options['image_height']);
         imagesavealpha($image, true);
         imagefill($image, 0, 0, imagecolorallocatealpha($image, 0, 0, 0, 127));
         $this->drawText($image, $captcha, $font);
@@ -125,12 +104,12 @@ class Image
         $len = count($captcha);
 
         for ($i = 0; $i < $len; $i++) {
-            $xPos = ($this->options['image_width'] - $this->fontSize) / $len * $i + ($this->fontSize / 2);
+            $xPos = ($this->options['image_width'] - $this->options['fonts_size']) / $len * $i + ($this->options['fonts_size'] / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
-            $yPos = $this->height - (($this->height - $this->fontSize) / 2);
+            $yPos = $this->options['image_height'] - (($this->options['image_height'] - $this->options['fonts_size']) / 2);
             $capcolor = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
             $capangle = random_int(-25, 25);
-            imagettftext($image, $this->fontSize, $capangle, $xPos, $yPos, $capcolor, $font, $captcha[$i]);
+            imagettftext($image, $this->options['fonts_size'], $capangle, $xPos, $yPos, $capcolor, $font, $captcha[$i]);
         }
     }
 
@@ -155,9 +134,9 @@ class Image
     {
         $font = basename($font);
 
-        if (isset($this->customFonts[$font])) {
-            $args = $this->customFonts[$font];
-            $this->fontSize = $args['size'];
+        if (isset($this->options['fonts_tuning'][$font])) {
+            $args = $this->options['fonts_tuning'][$font];
+            $this->options['fonts_size'] = $args['size'];
             $string = $this->setCase($string, $args);
         }
 
