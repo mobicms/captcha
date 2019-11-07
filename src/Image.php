@@ -13,6 +13,7 @@ namespace Batumibiz\Captcha;
 class Image
 {
     private $code;
+
     private $fontList;
 
     private $options = [
@@ -24,27 +25,27 @@ class Image
         'fonts_tuning'    => [
             '3dlet.ttf' => [
                 'size' => 32,
-                'case' => self::FONT_CASE_LOWER
+                'case' => self::FONT_CASE_LOWER,
             ],
 
             'baby_blocks.ttf' => [
                 'size' => 16,
-                'case' => self::FONT_CASE_RANDOM
+                'case' => self::FONT_CASE_RANDOM,
             ],
 
             'betsy_flanagan.ttf' => [
                 'size' => 28,
-                'case' => self::FONT_CASE_RANDOM
+                'case' => self::FONT_CASE_RANDOM,
             ],
 
             'karmaticarcade.ttf' => [
                 'size' => 20,
-                'case' => self::FONT_CASE_RANDOM
+                'case' => self::FONT_CASE_RANDOM,
             ],
 
             'tonight.ttf' => [
                 'size' => 28,
-                'case' => self::FONT_CASE_RANDOM
+                'case' => self::FONT_CASE_RANDOM,
             ],
         ],
     ];

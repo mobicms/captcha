@@ -13,7 +13,9 @@ namespace Batumibiz\Captcha;
 class Code
 {
     private $lengthMin;
+
     private $lengthMax;
+
     private $letters;
 
     /**
