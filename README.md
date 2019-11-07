@@ -23,18 +23,13 @@ Prevent form spam by generating random Captcha images.
 
     ```html+php
     <?php
-    $captcha = new Mobicms\Captcha\Captcha;
-    $code = $captcha->generateCode();
+    $code = (string) new Batumibiz\Captcha\Code;
     $_SESSION['code'] = $code;
     ?>
 
     <form method="post">
     <!-- ... -->
-    <img alt="Verification code"
-        width="<?= $captcha->width ?>"
-        height="<?= $captcha->height ?>"
-        src="<?= $captcha->generateImage($code) ?>"
-    >
+    <img alt="Verification code" src="<?= new Batumibiz\Captcha\Image($code) ?>">
     <input type="text" size="5" name="code">
     <!-- ... -->
     </form>
