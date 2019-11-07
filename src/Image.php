@@ -13,12 +13,13 @@ namespace Batumibiz\Captcha;
 class Image
 {
     private $code;
+    private $fontList;
 
     private $options = [
         'image_width'     => 160,
         'image_height'    => 60,
         'fonts_directory' => __DIR__ . '/../resources/fonts',
-        'fonts_shuffle'   => false,
+        'fonts_shuffle'   => true,
         'fonts_size'      => 24,
         'fonts_tuning'    => [
             '3dlet.ttf' => [
@@ -61,6 +62,7 @@ class Image
     {
         $this->code = $code;
         $this->options = array_replace_recursive($this->options, $options);
+        $this->fontList = glob(realpath($this->options['fonts_directory']) . DIRECTORY_SEPARATOR . '*.ttf');
     }
 
     /**
@@ -76,13 +78,10 @@ class Image
      */
     public function generate() : string
     {
-        $font = $this->chooseFont();
-        $captcha = $this->prepareString($this->code, $font);
-
         $image = imagecreatetruecolor($this->options['image_width'], $this->options['image_height']);
         imagesavealpha($image, true);
         imagefill($image, 0, 0, imagecolorallocatealpha($image, 0, 0, 0, 127));
-        $this->drawText($image, $captcha, $font);
+        $this->drawText($image);
 
         ob_start();
         imagepng($image);
@@ -95,13 +94,13 @@ class Image
      * Drawing the text on the image
      *
      * @param       $image
-     * @param array $captcha
-     * @param       $font
      * @throws \Exception
      */
-    private function drawText(&$image, array $captcha, $font) : void
+    private function drawText(&$image) : void
     {
-        $len = count($captcha);
+        $font = $this->fontList[mt_rand(0, count($this->fontList) - 1)];
+        $code = str_split($this->code);
+        $len = count($code);
 
         for ($i = 0; $i < $len; $i++) {
             $xPos = ($this->options['image_width'] - $this->options['fonts_size']) / $len * $i + ($this->options['fonts_size'] / 2);
@@ -109,28 +108,17 @@ class Image
             $yPos = $this->options['image_height'] - (($this->options['image_height'] - $this->options['fonts_size']) / 2);
             $capcolor = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
             $capangle = random_int(-25, 25);
-            imagettftext($image, $this->options['fonts_size'], $capangle, $xPos, $yPos, $capcolor, $font, $captcha[$i]);
+
+            if ($this->options['fonts_shuffle']) {
+                $font = $this->fontList[mt_rand(0, count($this->fontList) - 1)];
+            }
+
+            $letter = $this->prepareLetter($code[$i], $font);
+            imagettftext($image, $this->options['fonts_size'], $capangle, $xPos, $yPos, $capcolor, $font, $letter);
         }
     }
 
-    /**
-     * Choosing a random font from the list of available
-     */
-    private function chooseFont() : string
-    {
-        $fontsList = glob(realpath($this->options['fonts_directory']) . DIRECTORY_SEPARATOR . '*.ttf');
-
-        return $fontsList[mt_rand(0, count($fontsList) - 1)];
-    }
-
-    /**
-     * Set font size
-     *
-     * @param string $string
-     * @param string $font
-     * @return array
-     */
-    private function prepareString($string, $font) : array
+    private function prepareLetter($string, $font) : string
     {
         $font = basename($font);
 
@@ -140,7 +128,7 @@ class Image
             $string = $this->setCase($string, $args);
         }
 
-        return str_split($string);
+        return $string;
     }
 
     /**
