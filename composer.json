@@ -1,11 +1,10 @@
 {
     "name": "batumibiz/captcha",
-    "description": "mobiCMS, Captcha package",
+    "description": "A simple PHP CAPTCHA library",
     "type": "library",
     "homepage": "https://github.com/batumibiz/captcha",
     "license": "MIT",
     "keywords": [
-        "mobicms",
         "captcha"
     ],
     "require": {
