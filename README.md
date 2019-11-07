@@ -11,7 +11,7 @@
 
 Prevent form spam by generating random Captcha images.
 
-![Captchas examples](example/captcha_example.png)
+![Captchas examples](resources/example/captcha_example.png)
 
 ## Install via Composer
 

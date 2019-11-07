@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * @copyright   Oleg Kasyanov <dev@mobicms.net>
- * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE.md file)
+ * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE file)
  * @link        https://github.com/batumibiz/captcha
  */
 
@@ -57,8 +57,8 @@ class Captcha
     /**
      * Captcha code generation
      *
-     * @throws \Exception
      * @return string
+     * @throws \Exception
      */
     public function generateCode() : string
     {
@@ -75,8 +75,8 @@ class Captcha
      * Captcha image generation
      *
      * @param $string
-     * @throws \Exception
      * @return string
+     * @throws \Exception
      */
     public function generateImage($string) : string
     {
@@ -119,17 +119,12 @@ class Captcha
 
     /**
      * Choosing a random font from the list of available
-     *
-     * @throws \Exception
-     * @return string
      */
     private function chooseFont() : string
     {
-        $dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
-        $fontsList = glob($dir . '*.ttf');
-        $font = basename($fontsList[random_int(0, count($fontsList) - 1)]);
+        $fontsList = glob(__DIR__ . '/../resources/fonts/*.ttf');
 
-        return $dir . $font;
+        return $fontsList[mt_rand(0, count($fontsList) - 1)];
     }
 
     /**
