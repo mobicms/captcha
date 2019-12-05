@@ -17,7 +17,9 @@ use Exception;
 class Code
 {
     private $lengthMin;
+
     private $lengthMax;
+
     private $letters;
 
     /**

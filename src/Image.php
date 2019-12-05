@@ -17,7 +17,9 @@ use Exception;
 class Image
 {
     private $code;
+
     private $fontList;
+
     private $options = [
         'image_width'     => 160,
         'image_height'    => 60,
