@@ -1,13 +1,13 @@
 # A simple PHP CAPTCHA library
 
-[![License](https://poser.pugx.org/batumibiz/captcha/license?format=flat-square)](https://packagist.org/packages/batumibiz/captcha)
-[![Total Downloads](https://poser.pugx.org/batumibiz/captcha/downloads?format=flat-square)](https://packagist.org/packages/batumibiz/captcha)
-[![Latest Stable Version](https://poser.pugx.org/batumibiz/captcha/v/stable?format=flat-square)](https://packagist.org/packages/batumibiz/captcha)
+[![Build Status](https://travis-ci.org/mobicms/captcha.svg?branch=develop)](https://travis-ci.org/mobicms/captcha)
+[![Code Coverage](https://scrutinizer-ci.com/g/mobicms/captcha/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
+[![StyleCI](https://github.styleci.io/repos/226185078/shield?branch=develop)](https://github.styleci.io/repos/226185078)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mobicms/captcha/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
 
-[![Build Status](https://scrutinizer-ci.com/g/batumibiz/captcha/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/batumibiz/captcha/build-status/develop)
-[![Code Coverage](https://scrutinizer-ci.com/g/batumibiz/captcha/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/batumibiz/captcha/?branch=develop)
-[![StyleCI](https://github.styleci.io/repos/102107214/shield?branch=develop)](https://github.styleci.io/repos/102107214)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/batumibiz/captcha/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/batumibiz/captcha/?branch=develop)
+[![Packagist](https://img.shields.io/packagist/l/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
+[![Packagist](https://img.shields.io/packagist/dt/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/mobicms/captcha.svg?label=stable)](https://github.com/mobicms/captcha/releases)
 
 Prevent form spam by generating random Captcha images.
 
@@ -23,13 +23,13 @@ Prevent form spam by generating random Captcha images.
 
     ```html+php
     <?php
-    $code = (string) new Batumibiz\Captcha\Code;
+    $code = (string) new Mobicms\Captcha\Code;
     $_SESSION['code'] = $code;
     ?>
 
     <form method="post">
     <!-- ... -->
-    <img alt="Verification code" src="<?= new Batumibiz\Captcha\Image($code) ?>">
+    <img alt="Verification code" src="<?= new Mobicms\Captcha\Image($code) ?>">
     <input type="text" size="5" name="code">
     <!-- ... -->
     </form>
