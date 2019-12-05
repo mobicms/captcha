@@ -1,21 +1,23 @@
 <?php
 
-declare(strict_types=1);
-
 /**
+ * This file is part of mobicms/captcha library
+ *
  * @copyright   Oleg Kasyanov <dev@mobicms.net>
  * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE file)
  * @link        https://github.com/batumibiz/captcha
  */
 
-namespace Batumibiz\Captcha;
+declare(strict_types=1);
+
+namespace Mobicms\Captcha;
+
+use Exception;
 
 class Image
 {
     private $code;
-
     private $fontList;
-
     private $options = [
         'image_width'     => 160,
         'image_height'    => 60,
@@ -62,17 +64,17 @@ class Image
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->generate();
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function generate() : string
+    public function generate(): string
     {
         $image = imagecreatetruecolor($this->options['image_width'], $this->options['image_height']);
         imagesavealpha($image, true);
@@ -90,17 +92,17 @@ class Image
      * Drawing the text on the image
      *
      * @param       $image
-     * @throws \Exception
+     * @throws Exception
      */
-    private function drawTextOnImage(&$image) : void
+    private function drawTextOnImage(&$image): void
     {
-        $font = $this->fontList[mt_rand(0, count($this->fontList) - 1)];
+        $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
         $code = str_split($this->code);
         $len = count($code);
 
         for ($i = 0; $i < $len; $i++) {
             if ($this->options['fonts_shuffle']) {
-                $font = $this->fontList[mt_rand(0, count($this->fontList) - 1)];
+                $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
             }
 
             $fontName = basename($font);
@@ -115,14 +117,14 @@ class Image
         }
     }
 
-    private function determineFontSize(string $fontName) : int
+    private function determineFontSize(string $fontName): int
     {
         return isset($this->options['fonts_tuning'][$fontName])
             ? (int) $this->options['fonts_tuning'][$fontName]['size']
             : (int) $this->options['fonts_size'];
     }
 
-    private function setLetterCase(string $string, string $fontName) : string
+    private function setLetterCase(string $string, string $fontName): string
     {
         if (isset($this->options['fonts_tuning'][$fontName])) {
             switch ($this->options['fonts_tuning'][$fontName]['case']) {
