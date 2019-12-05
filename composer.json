@@ -1,10 +1,11 @@
 {
-    "name": "batumibiz/captcha",
+    "name": "mobicms/captcha",
     "description": "A simple PHP CAPTCHA library",
     "type": "library",
-    "homepage": "https://github.com/batumibiz/captcha",
+    "homepage": "https://github.com/mobicms/captcha",
     "license": "MIT",
     "keywords": [
+        "php",
         "captcha"
     ],
     "require": {
@@ -17,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Batumibiz\\Captcha\\": "src/"
+            "Mobicms\\Captcha\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BatumibizTest\\Captcha\\": "test/"
+            "MobicmsTest\\Captcha\\": "test/"
         }
     },
     "scripts": {
