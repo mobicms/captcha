@@ -15,7 +15,7 @@ Prevent form spam by generating random Captcha images.
 
 ## Install via Composer
 
-`composer require batumibiz/captcha`
+`composer require mobicms/captcha`
 
 ## Usage
 
