@@ -19,54 +19,19 @@ class Image
 {
     private $code;
 
-    private $fontList = [];
+    private $fontList;
 
-    private $options = [
-        'image_width'     => 160,
-        'image_height'    => 60,
-        'fonts_directory' => __DIR__ . '/../resources/fonts',
-        'fonts_shuffle'   => true,
-        'fonts_size'      => 24,
-        'fonts_tuning'    => [
-            '3dlet.ttf' => [
-                'size' => 32,
-                'case' => self::FONT_CASE_LOWER,
-            ],
+    private $options;
 
-            'baby_blocks.ttf' => [
-                'size' => 16,
-                'case' => self::FONT_CASE_RANDOM,
-            ],
-
-            'betsy_flanagan.ttf' => [
-                'size' => 28,
-                'case' => self::FONT_CASE_RANDOM,
-            ],
-
-            'karmaticarcade.ttf' => [
-                'size' => 20,
-                'case' => self::FONT_CASE_RANDOM,
-            ],
-
-            'tonight.ttf' => [
-                'size' => 28,
-                'case' => self::FONT_CASE_RANDOM,
-            ],
-        ],
-    ];
-
-    public const FONT_CASE_UPPER = 2;
-    public const FONT_CASE_LOWER = 1;
-    public const FONT_CASE_RANDOM = 0;
-
-    public function __construct(string $code, array $options = [])
+    public function __construct(string $code, Options $options = null)
     {
         $this->code = $code;
-        $this->options = array_replace_recursive($this->options, $options);
-        $fontList = glob(realpath($this->options['fonts_directory']) . DIRECTORY_SEPARATOR . '*.ttf');
+        $optionsObj = $options ?? new Options();
+        $this->options = $optionsObj->getOptionsArray();
+        $fontList = glob(realpath($this->options['fonts_folder']) . DIRECTORY_SEPARATOR . '*.ttf');
 
         if ([] === $fontList || false === $fontList) {
-            throw new LogicException('The fonts you specified do not exist.');
+            throw new LogicException('The specified folder does not contain any fonts.');
         }
 
         $this->fontList = $fontList;
@@ -118,7 +83,7 @@ class Image
             }
 
             $fontName = basename($font);
-            $letter = $this->setLetterCase($code[$i], $font);
+            $letter = $this->setLetterCase($code[$i], $fontName);
             $fontSize = $this->determineFontSize($fontName);
             $xPos = ($this->options['image_width'] - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
@@ -138,13 +103,11 @@ class Image
 
     private function setLetterCase(string $string, string $fontName): string
     {
-        $font = basename($fontName);
-
-        if (isset($this->options['fonts_tuning'][$font])) {
-            switch ($this->options['fonts_tuning'][$font]['case']) {
-                case 2:
+        if (isset($this->options['fonts_tuning'][$fontName])) {
+            switch ($this->options['fonts_tuning'][$fontName]['case']) {
+                case Options::FONT_CASE_UPPER:
                     return strtoupper($string);
-                case 1:
+                case Options::FONT_CASE_LOWER:
                     return strtolower($string);
             }
         }
