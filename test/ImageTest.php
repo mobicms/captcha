@@ -65,6 +65,7 @@ class ImageTest extends TestCase
 
     /**
      * @dataProvider customFontValues
+     * @param mixed $case
      * @throws Exception
      */
     public function testSetLetterCase($case)

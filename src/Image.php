@@ -63,11 +63,13 @@ class Image
     {
         $this->code = $code;
         $this->options = array_replace_recursive($this->options, $options);
-        $this->fontList = glob(realpath($this->options['fonts_directory']) . DIRECTORY_SEPARATOR . '*.ttf');
+        $fontList = glob(realpath($this->options['fonts_directory']) . DIRECTORY_SEPARATOR . '*.ttf');
 
-        if ([] === $this->fontList) {
+        if ([] === $fontList || false === $fontList) {
             throw new LogicException('The fonts you specified do not exist.');
         }
+
+        $this->fontList = $fontList;
     }
 
     /**
@@ -79,18 +81,21 @@ class Image
     }
 
     /**
+     * @return string
      * @throws Exception
      */
     public function generate(): string
     {
-        $image = imagecreatetruecolor($this->options['image_width'], $this->options['image_height']);
-        imagesavealpha($image, true);
-        imagefill($image, 0, 0, imagecolorallocatealpha($image, 0, 0, 0, 127));
-        $this->drawTextOnImage($image);
-
         ob_start();
-        imagepng($image);
-        imagedestroy($image);
+        $image = imagecreatetruecolor($this->options['image_width'], $this->options['image_height']);
+
+        if ($image !== false) {
+            imagesavealpha($image, true);
+            imagefill($image, 0, 0, imagecolorallocatealpha($image, 0, 0, 0, 127));
+            $this->drawTextOnImage($image);
+            imagepng($image);
+            imagedestroy($image);
+        }
 
         return 'data:image/png;base64,' . base64_encode(ob_get_clean());
     }
