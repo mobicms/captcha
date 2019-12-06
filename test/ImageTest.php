@@ -13,12 +13,16 @@ declare(strict_types=1);
 namespace MobicmsTest\Captcha;
 
 use Exception;
+use InvalidArgumentException;
 use LogicException;
 use Mobicms\Captcha\Image;
+use Mobicms\Captcha\Options;
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
 {
+    private $testImage = __DIR__ . '/../test.png';
+
     public function testCanCreateInstance(): Image
     {
         $captcha = new Image('abcd');
@@ -31,10 +35,21 @@ class ImageTest extends TestCase
      * @param Image $captcha
      * @throws Exception
      */
-    public function testCanGenerateImage(Image $captcha): void
+    public function testCanGenerateDataImageString(Image $captcha): void
     {
         $image = $captcha->generate();
         $this->assertStringStartsWith('data:image/png;base64', $image);
+    }
+
+    /**
+     * @depends testCanCreateInstance
+     * @param Image $captcha
+     * @throws Exception
+     */
+    public function testCanGenerateValidImage(Image $captcha): void
+    {
+        $this->writeImage($captcha->generate());
+        $this->assertValidImage(160, 60);
     }
 
     /**
@@ -47,19 +62,20 @@ class ImageTest extends TestCase
         $this->assertStringStartsWith('data:image/png;base64', $image);
     }
 
-    public function testCanSetCustomFontsFolder(): void
+    public function testSetCustomFontsFolder(): void
     {
-        $options = ['fonts_directory' => __DIR__];
-        $captcha = new Image('abcd', $options);
-        $image = $captcha->generate();
+        $options = new Options();
+        $options->setFontsFolder(__DIR__);
+        $image = (new Image('abcd', $options))->generate();
         $this->assertStringStartsWith('data:image/png;base64', $image);
     }
 
-    public function testInvalidFolderOrFontsDoesNotExist(): void
+    public function testFontsDoesNotExist(): void
     {
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('The fonts you specified do not exist.');
-        $options = ['fonts_directory' => 'invalid_folder'];
+        $this->expectExceptionMessage('The specified folder does not contain any fonts.');
+        $options = new Options();
+        $options->setFontsFolder(__DIR__ . '/../src');
         new Image('abcd', $options);
     }
 
@@ -70,26 +86,39 @@ class ImageTest extends TestCase
      */
     public function testSetLetterCase($case)
     {
-        $options = [
-            'fonts_directory' => __DIR__,
-            'fonts_tuning'    => [
-                'test.ttf' => [
-                    'size' => 32,
-                    'case' => $case,
-                ],
-            ],
-        ];
+        $options = new Options();
+        $options
+            ->setFontsFolder(__DIR__)
+            ->adjustFont('test.ttf', 32, $case);
         $captcha = new Image('abcd', $options);
         $image = $captcha->generate();
         $this->assertStringStartsWith('data:image/png;base64', $image);
     }
 
+    ////////////////////////////////////////////////////////////////////////////////
+    // Auxiliary methods                                                          //
+    ////////////////////////////////////////////////////////////////////////////////
+
+    private function assertValidImage(int $width, int $height)
+    {
+        $info = getimagesize($this->testImage);
+        $this->assertSame($width, $info[0]);
+        $this->assertSame($height, $info[1]);
+        $this->assertSame('image/png', $info['mime']);
+    }
+
+    private function writeImage(string $image)
+    {
+        $image = str_replace('data:image/png;base64,', '', $image);
+        file_put_contents($this->testImage, base64_decode($image));
+    }
+
     public function customFontValues(): array
     {
         return [
-            'RANDOM' => [Image::FONT_CASE_RANDOM],
-            'UPPER'  => [Image::FONT_CASE_UPPER],
-            'LOWER'  => [Image::FONT_CASE_LOWER],
+            'RANDOM' => [Options::FONT_CASE_RANDOM],
+            'UPPER'  => [Options::FONT_CASE_UPPER],
+            'LOWER'  => [Options::FONT_CASE_LOWER],
         ];
     }
 }

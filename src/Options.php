@@ -14,6 +14,8 @@ namespace Mobicms\Captcha;
 
 use InvalidArgumentException;
 
+use function pathinfo;
+
 class Options
 {
     private $options = [
@@ -106,9 +108,10 @@ class Options
         int $size,
         int $case = self::FONT_CASE_RANDOM
     ): self {
-        //if (preg_match('/^.*\.(jpg|jpeg|png|gif)$/i', $fontName)) {
-        //    throw new InvalidArgumentException('Хуевый файл шрифта');
-        //}
+        if (pathinfo($fontName, PATHINFO_EXTENSION) !== 'ttf') {
+            throw new InvalidArgumentException('The font file must be with the extension .ttf');
+        }
+
         $this->options['fonts_tuning'][$fontName] = [
             'size' => $size,
             'case' => $case,
