@@ -63,12 +63,7 @@ class Options
 
     public function setImageSize(int $width, int $height): self
     {
-        if (
-            null === $width
-            || null === $height
-            || $width < 20
-            || $height < 20
-        ) {
+        if ($width < 20 || $height < 20) {
             throw new InvalidArgumentException('Image size cannot be less than 20x20px');
         }
 
