@@ -13,12 +13,13 @@ declare(strict_types=1);
 namespace Mobicms\Captcha;
 
 use Exception;
+use LogicException;
 
 class Image
 {
     private $code;
 
-    private $fontList;
+    private $fontList = [];
 
     private $options = [
         'image_width'     => 160,
@@ -63,6 +64,10 @@ class Image
         $this->code = $code;
         $this->options = array_replace_recursive($this->options, $options);
         $this->fontList = glob(realpath($this->options['fonts_directory']) . DIRECTORY_SEPARATOR . '*.ttf');
+
+        if ([] === $this->fontList) {
+            throw new LogicException('The fonts you specified do not exist.');
+        }
     }
 
     /**
@@ -128,8 +133,10 @@ class Image
 
     private function setLetterCase(string $string, string $fontName): string
     {
-        if (isset($this->options['fonts_tuning'][$fontName])) {
-            switch ($this->options['fonts_tuning'][$fontName]['case']) {
+        $font = basename($fontName);
+
+        if (isset($this->options['fonts_tuning'][$font])) {
+            switch ($this->options['fonts_tuning'][$font]['case']) {
                 case 2:
                     return strtoupper($string);
                 case 1:
