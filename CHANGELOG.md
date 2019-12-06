@@ -8,6 +8,7 @@ Detailed change can see in the [repository log](https://github.com/mobicms/captc
 #### Added
 - Added few fonts
 - Ability to use custom fonts
+- Ability to set various image options through class `Options`
 - Separate classes to generate CAPTCHA code and image
 - Ability to shuffle used fonts in the image
 - Added test case
