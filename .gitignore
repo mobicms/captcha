@@ -2,5 +2,6 @@
 /composer.lock
 /clover.xml
 /phpunit.xml
+/test.png
 /*.cache
 vendor/
