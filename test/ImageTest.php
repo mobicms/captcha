@@ -48,7 +48,7 @@ class ImageTest extends TestCase
     public function testCanGenerateValidImage(Image $captcha): void
     {
         $this->writeImage($captcha->generate());
-        $this->assertValidImage(160, 60);
+        $this->assertValidImage(190, 80);
     }
 
     /**
