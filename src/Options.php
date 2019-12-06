@@ -19,14 +19,14 @@ use function pathinfo;
 class Options
 {
     private $options = [
-        'image_width'   => 160,
-        'image_height'  => 60,
+        'image_width'   => 190,
+        'image_height'  => 80,
         'fonts_folder'  => __DIR__ . '/../resources/fonts',
         'fonts_shuffle' => true,
-        'fonts_size'    => 24,
+        'fonts_size'    => 26,
         'fonts_tuning'  => [
             '3dlet.ttf' => [
-                'size' => 32,
+                'size' => 38,
                 'case' => self::FONT_CASE_LOWER,
             ],
 
@@ -36,7 +36,7 @@ class Options
             ],
 
             'betsy_flanagan.ttf' => [
-                'size' => 28,
+                'size' => 30,
                 'case' => self::FONT_CASE_RANDOM,
             ],
 

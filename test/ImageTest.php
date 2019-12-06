@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace MobicmsTest\Captcha;
 
 use Exception;
-use InvalidArgumentException;
 use LogicException;
 use Mobicms\Captcha\Image;
 use Mobicms\Captcha\Options;
