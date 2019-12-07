@@ -1,7 +1,11 @@
 .idea
-/composer.lock
-/clover.xml
-/phpunit.xml
+.gitattributes
+.scrutinizer.yml
+.styleci.yml
+.travis.yml
+composer.lock
+clover.xml
+phpunit.xml
 /test.png
 /*.cache
 vendor/
