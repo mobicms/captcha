@@ -28,6 +28,7 @@ matrix:
         - DEPS=locked
         - CS_CHECK=true
         - TEST_COVERAGE=true
+        - ANALYSIS=true
     - php: 7.3
       env:
         - DEPS=latest
@@ -45,6 +46,7 @@ install:
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage; else composer test; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check; fi
+  - if [[ $ANALYSIS == 'true' ]]; then composer psalm; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then
