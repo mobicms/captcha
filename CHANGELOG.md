@@ -3,6 +3,12 @@ This project follows [semantic versioning](https://semver.org/).
 All notable changes to this project will be documented in this file.  
 Detailed change can see in the [repository log](https://github.com/mobicms/captcha/commits/).
 
+## 2.0.1 - 2019-12-08
+
+#### Changed
+- Small internal improvements
+
+
 ## 2.0.0 - 2019-12-06
 
 #### Added
