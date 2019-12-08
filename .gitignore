@@ -6,6 +6,7 @@
 composer.lock
 clover.xml
 phpunit.xml
+psalm.xml
 /test.png
 /*.cache
 vendor/
