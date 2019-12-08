@@ -17,10 +17,13 @@ use LogicException;
 
 class Image
 {
+    /** @var string */
     private $code;
 
+    /** @var array */
     private $fontList;
 
+    /** @var array */
     private $options;
 
     public function __construct(string $code, Options $options = null)
@@ -55,20 +58,25 @@ class Image
         $image = imagecreatetruecolor($this->options['image_width'], $this->options['image_height']);
 
         if ($image !== false) {
-            imagesavealpha($image, true);
-            imagefill($image, 0, 0, imagecolorallocatealpha($image, 0, 0, 0, 127));
-            $this->drawTextOnImage($image);
-            imagepng($image);
-            imagedestroy($image);
+            $color = imagecolorallocatealpha($image, 0, 0, 0, 127);
+
+            if ($color !== false) {
+                imagesavealpha($image, true);
+                imagefill($image, 0, 0, $color);
+                $this->drawTextOnImage($image);
+                imagepng($image);
+                imagedestroy($image);
+            }
         }
 
-        return 'data:image/png;base64,' . base64_encode(ob_get_clean());
+        $out = ob_get_clean();
+        return 'data:image/png;base64,' . base64_encode((string) $out);
     }
 
     /**
      * Drawing the text on the image
      *
-     * @param       $image
+     * @param resource $image
      * @throws Exception
      */
     private function drawTextOnImage(&$image): void
@@ -88,9 +96,12 @@ class Image
             $xPos = ($this->options['image_width'] - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
             $yPos = $this->options['image_height'] - (($this->options['image_height'] - $fontSize) / 2);
-            $capcolor = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
             $capangle = random_int(-25, 25);
-            imagettftext($image, $fontSize, $capangle, $xPos, $yPos, $capcolor, $font, $letter);
+            $capcolor = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
+
+            if ($capcolor !== false) {
+                imagettftext($image, $fontSize, $capangle, $xPos, (int) $yPos, $capcolor, $font, $letter);
+            }
         }
     }
 

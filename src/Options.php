@@ -18,6 +18,7 @@ use function pathinfo;
 
 class Options
 {
+    /** @var array */
     private $options = [
         'image_width'   => 190,
         'image_height'  => 80,
@@ -80,7 +81,7 @@ class Options
 
     public function setDefaultFontSize(int $size): self
     {
-        if (null === $size || $size <= 0) {
+        if ($size <= 0) {
             throw new InvalidArgumentException('You specified the wrong font size.');
         }
 
