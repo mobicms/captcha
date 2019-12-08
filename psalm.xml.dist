@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<psalm
+    totallyTyped="false"
+    findUnusedCode="true"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <LessSpecificReturnType errorLevel="info" />
+
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Mobicms\Captcha\Code"/>
+                <referencedClass name="Mobicms\Captcha\Image"/>
+            </errorLevel>
+        </UnusedClass>
+
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Mobicms\Captcha\Options::setImageSize"/>
+                <referencedMethod name="Mobicms\Captcha\Options::setFontShuffle"/>
+                <referencedMethod name="Mobicms\Captcha\Options::setDefaultFontSize"/>
+                <referencedMethod name="Mobicms\Captcha\Options::setFontsFolder"/>
+                <referencedMethod name="Mobicms\Captcha\Options::adjustFont"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+    </issueHandlers>
+</psalm>
