@@ -1,15 +1,37 @@
 # Changelog
-This project follows [semantic versioning](https://semver.org/).  
+ 
 All notable changes to this project will be documented in this file.  
-Detailed change can see in the [repository log](https://github.com/mobicms/captcha/commits/).
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2.0.1 - 2019-12-08
+## [Unreleased]
+
+#### Added
+- Nothing
+  
+#### Changed
+- Nothing
+
+#### Deprecated
+- Nothing
+  
+#### Removed
+- Nothing
+
+#### Fixed
+- Nothing
+
+#### Security
+- Nothing
+
+
+## [2.0.1] - 2019-12-08
 
 #### Changed
 - Small internal improvements
 
 
-## 2.0.0 - 2019-12-06
+## [2.0.0] - 2019-12-06
 
 #### Added
 - Added few fonts
@@ -29,5 +51,11 @@ Detailed change can see in the [repository log](https://github.com/mobicms/captc
 - Mobicms\Captcha\Captcha::class
 
 
-## 1.0.0 - 2017-09-01
+## [1.0.0] - 2017-09-01
 Initial release
+
+
+[Unreleased]: https://github.com/mobicms/captcha/compare/2.0.1...HEAD
+[2.0.1]: https://github.com/mobicms/captcha/compare/2.0.0...2.0.1
+[2.0.0]: https://github.com/mobicms/captcha/compare/1.0.0...2.0.0
+[1.0.0]: https://github.com/mobicms/captcha/releases/tag/1.0.0
