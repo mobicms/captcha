@@ -82,7 +82,7 @@ command line, while in the project root directory (the same place as the
 `composer.json` file):
 
 ```
-composer run test
+composer check
 ```
 
 
