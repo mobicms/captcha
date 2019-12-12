@@ -27,4 +27,4 @@
 - [ ] I have read the **CONTRIBUTING** document.
 - [ ] I have added tests to cover my changes.
 - [ ] All new and existing tests passed.
-- [ ] I have run `composer run test` locally, and there were no failures or errors.
+- [ ] I have run `composer check` locally, and there were no failures or errors.
