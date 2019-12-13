@@ -1,8 +1,4 @@
 .idea
-.gitattributes
-.scrutinizer.yml
-.styleci.yml
-.travis.yml
 composer.lock
 clover.xml
 phpunit.xml
