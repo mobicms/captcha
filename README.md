@@ -3,15 +3,14 @@
 This package is part of [mobiCMS](https://github.com/mobicms/mobicms) and [JohnCMS](https://github.com/simba77/johncms),
 but can be used freely in any other projects.
 
-[![Build Status](https://travis-ci.org/mobicms/captcha.svg?branch=develop)](https://travis-ci.org/mobicms/captcha)
-[![Code Coverage](https://scrutinizer-ci.com/g/mobicms/captcha/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
-[![StyleCI](https://github.styleci.io/repos/226185078/shield?branch=develop)](https://github.styleci.io/repos/226185078)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mobicms/captcha/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
-
 [![Packagist](https://img.shields.io/packagist/l/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
 [![Source Code](http://img.shields.io/badge/source-mobicms/captcha-blue.svg)](https://github.com/mobicms/captcha)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/mobicms/captcha.svg?label=stable)](https://github.com/mobicms/captcha/releases)
 [![Packagist](https://img.shields.io/packagist/dt/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
+
+[![Build Status](https://travis-ci.org/mobicms/captcha.svg?branch=develop)](https://travis-ci.org/mobicms/captcha)
+[![Code Coverage](https://scrutinizer-ci.com/g/mobicms/captcha/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mobicms/captcha/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
 
 This library is a simple PHP CAPTCHA.  
 Prevent form spam by generating random Captcha images.
