@@ -6,41 +6,23 @@ cache:
 
 env:
   global:
-    - COMPOSER_ARGS="--no-interaction"
-    - COVERAGE_DEPS="php-coveralls/php-coveralls"
+    - COMPOSER_ARGS="--no-interaction --no-progress --no-suggest --no-scripts"
 
 matrix:
   include:
     - php: 7.2
-      env:
-        - DEPS=lowest
-    - php: 7.2
-      env:
-        - DEPS=locked
-    - php: 7.2
-      env:
-        - DEPS=latest
     - php: 7.3
+    - php: 7.4
       env:
-        - DEPS=lowest
-    - php: 7.3
-      env:
-        - DEPS=locked
         - CS_CHECK=true
         - TEST_COVERAGE=true
         - ANALYSIS=true
-    - php: 7.3
-      env:
-        - DEPS=latest
 
 before_install:
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0; fi
 
 install:
-  - travis_retry composer install $COMPOSER_ARGS --ignore-platform-reqs
-  - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS; fi
-  - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS; fi
-  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS $COVERAGE_DEPS; fi
+  - travis_retry composer install --ignore-platform-reqs $COMPOSER_ARGS
   - stty cols 120 && composer show
 
 script:
@@ -50,7 +32,6 @@ script:
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then
-    travis_retry php vendor/bin/php-coveralls -v;
     wget https://scrutinizer-ci.com/ocular.phar;
     php ocular.phar code-coverage:upload --format=php-clover clover.xml;
     fi
