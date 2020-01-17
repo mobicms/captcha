@@ -23,8 +23,11 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "tests/resources/stubs/constants.php"
+        ],
         "psr-4": {
-            "MobicmsTest\\Captcha\\": "test/"
+            "MobicmsTest\\Captcha\\": "tests/testsuite/"
         }
     },
     "scripts": {

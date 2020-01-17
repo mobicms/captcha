@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
 {
-    private $testImage = __DIR__ . '/../test.png';
+    private $testImage = TEST_OUT_PATH . 'test.png';
 
     public function testCanCreateInstance(): Image
     {
@@ -64,7 +64,7 @@ class ImageTest extends TestCase
     public function testSetCustomFontsFolder(): void
     {
         $options = new Options();
-        $options->setFontsFolder(__DIR__);
+        $options->setFontsFolder(TEST_FONTS_PATH);
         $image = (new Image('abcd', $options))->generate();
         $this->assertStringStartsWith('data:image/png;base64', $image);
     }
@@ -74,7 +74,7 @@ class ImageTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('The specified folder does not contain any fonts.');
         $options = new Options();
-        $options->setFontsFolder(__DIR__ . '/../src');
+        $options->setFontsFolder(__DIR__);
         new Image('abcd', $options);
     }
 
@@ -87,7 +87,7 @@ class ImageTest extends TestCase
     {
         $options = new Options();
         $options
-            ->setFontsFolder(__DIR__)
+            ->setFontsFolder(TEST_FONTS_PATH)
             ->adjustFont('test.ttf', 32, $case);
         $captcha = new Image('abcd', $options);
         $image = $captcha->generate();

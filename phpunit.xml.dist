@@ -5,7 +5,7 @@
          colors="true">
     <testsuites>
         <testsuite name="mobicms-render">
-            <directory>./test</directory>
+            <directory>./tests/testsuite</directory>
         </testsuite>
     </testsuites>
 
