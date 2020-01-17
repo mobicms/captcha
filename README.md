@@ -28,11 +28,38 @@ command to install the package and add it as a requirement to your project's
 composer require mobicms/captcha
 ```
 
+## Usage
 
-## Documentation
+- Display in form:
 
-Check out the [documentation wiki](https://github.com/mobicms/captcha/wiki) for detailed information
-and code examples.
+```html+php
+<?php
+$code = (string) new Mobicms\Captcha\Code;
+$_SESSION['code'] = $code;
+?>
+
+<form method="post">
+<!-- ... -->
+<img alt="Verification code" src="<?= new Mobicms\Captcha\Image($code) ?>">
+<input type="text" size="5" name="code">
+<!-- ... -->
+</form>
+```
+
+- Check whether the entered code is correct:
+
+```php
+$result = filter_input(INPUT_POST, 'code');
+$session = filter_input(INPUT_SESSION, 'code');
+
+if ($result !== null && $session !== null) {
+    if (strtolower($result) == strtolower($session)) {
+        // CAPTCHA code is correct
+    } else {
+        // CAPTCHA code is incorrect, show an error to the user
+    }
+}
+```
 
 
 ## Contributing
