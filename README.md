@@ -8,7 +8,7 @@ but can be used freely in any other projects.
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/mobicms/captcha.svg?label=stable)](https://github.com/mobicms/captcha/releases)
 [![Packagist](https://img.shields.io/packagist/dt/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
 
-[![GitHub Workflow Status](https://github.com/mobicms/captcha/workflows/CI/badge.svg)](https://github.com/mobicms/captcha/actions)
+[![CI](https://github.com/mobicms/captcha/workflows/PHP-CI/badge.svg?branch=develop)](https://github.com/mobicms/captcha/actions)
 [![Code Coverage](https://scrutinizer-ci.com/g/mobicms/captcha/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mobicms/captcha/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
 
