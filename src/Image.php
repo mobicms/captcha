@@ -85,13 +85,13 @@ class Image
         $code = str_split($this->code);
         $len = count($code);
 
-        for ($i = 0; $i < $len; $i++) {
+        foreach ($code as $i => $iValue) {
             if ($this->options['fonts_shuffle']) {
                 $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
             }
 
             $fontName = basename($font);
-            $letter = $this->setLetterCase($code[$i], $fontName);
+            $letter = $this->setLetterCase($iValue, $fontName);
             $fontSize = $this->determineFontSize($fontName);
             $xPos = ($this->options['image_width'] - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
