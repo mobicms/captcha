@@ -5,7 +5,7 @@ but can be used freely in any other projects.
 
 [![Packagist](https://img.shields.io/packagist/l/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
 [![Source Code](http://img.shields.io/badge/source-mobicms/captcha-blue.svg)](https://github.com/mobicms/captcha)
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/mobicms/captcha.svg?label=stable)](https://github.com/mobicms/captcha/releases)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mobicms/captcha)](https://github.com/mobicms/captcha/releases)
 [![Packagist](https://img.shields.io/packagist/dt/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
 
 [![CI](https://github.com/mobicms/captcha/workflows/PHP-CI/badge.svg)](https://github.com/mobicms/captcha/actions)
