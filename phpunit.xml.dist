@@ -4,7 +4,7 @@
          bootstrap="vendor/autoload.php"
          colors="true">
     <testsuites>
-        <testsuite name="mobicms-render">
+        <testsuite name="mobicms-captcha">
             <directory>./tests/testsuite</directory>
         </testsuite>
     </testsuites>
