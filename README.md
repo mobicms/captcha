@@ -1,6 +1,6 @@
 # `mobicms/captcha`
 
-This package is part of [mobiCMS](https://github.com/mobicms/mobicms) and [JohnCMS](https://github.com/simba77/johncms),
+This package is part of [mobiCMS](https://github.com/mobicms/mobicms) and [JohnCMS](https://github.com/johncms/johncms),
 but can be used freely in any other projects.
 
 [![Packagist](https://img.shields.io/packagist/l/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
@@ -8,15 +8,22 @@ but can be used freely in any other projects.
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/mobicms/captcha.svg?label=stable)](https://github.com/mobicms/captcha/releases)
 [![Packagist](https://img.shields.io/packagist/dt/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
 
-[![CI](https://github.com/mobicms/captcha/workflows/PHP-CI/badge.svg?branch=develop)](https://github.com/mobicms/captcha/actions)
-[![Code Coverage](https://scrutinizer-ci.com/g/mobicms/captcha/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mobicms/captcha/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/mobicms/captcha/?branch=develop)
+[![CI](https://github.com/mobicms/captcha/workflows/PHP-CI/badge.svg)](https://github.com/mobicms/captcha/actions)
+[![Code Coverage](https://scrutinizer-ci.com/g/mobicms/captcha/badges/coverage.png)](https://scrutinizer-ci.com/g/mobicms/captcha/code-structure/master/code-coverage)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mobicms/captcha/badges/quality-score.png)](https://scrutinizer-ci.com/g/mobicms/captcha)
 
-This library is a simple PHP CAPTCHA.  
-Prevent form spam by generating random Captcha images.
+This library is a simple PHP CAPTCHA. Prevent form spam by generating random Captcha images.
 
 ![Captchas examples](resources/example/captcha_example.png)
 
+- Not create any temporary files.
+- There are many settings that allow you to change the look of the picture.
+- You can use your own font sets.
+
+[![YAGNI](https://img.shields.io/badge/principle-YAGNI-blue.svg)](https://en.wikipedia.org/wiki/YAGNI)
+[![KISS](https://img.shields.io/badge/principle-KISS-blue.svg)](https://en.wikipedia.org/wiki/KISS_principle)  
+In our development, we follow the principles of [YAGNI](https://en.wikipedia.org/wiki/YAGNI) and [KISS](https://en.wikipedia.org/wiki/KISS_principle).  
+The source code should not have extra unnecessary functionality and should be as simple and efficient as possible.
 
 ## Installation
 
