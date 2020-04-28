@@ -4,6 +4,7 @@ build:
       environment:
         php:
           version: 7.4
+          compile_options: '--enable-gd'
       tests:
         override:
           - php-scrutinizer-run
