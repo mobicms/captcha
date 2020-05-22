@@ -1,6 +1,14 @@
-filter:
-  excluded_paths:
-    - 'tests/*'
+build:
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
+          - phpcs-run
+
+  dependencies:
+    override:
+      - composer install --ignore-platform-reqs --no-interaction
 
 tools:
   external_code_coverage: true
