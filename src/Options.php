@@ -18,8 +18,10 @@ use function pathinfo;
 
 class Options
 {
-    /** @var array */
-    private $options = [
+    /**
+     * @var array<string, mixed>
+     */
+    private array $options = [
         'image_width'   => 190,
         'image_height'  => 80,
         'fonts_folder'  => __DIR__ . '/../resources/fonts',
@@ -57,6 +59,9 @@ class Options
     public const FONT_CASE_LOWER = 1;
     public const FONT_CASE_RANDOM = 0;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getOptionsArray(): array
     {
         return $this->options;

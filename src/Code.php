@@ -12,15 +12,13 @@ declare(strict_types=1);
 
 namespace Mobicms\Captcha;
 
-use Exception;
-
 class Code
 {
-    private $lengthMin;
+    private int $lengthMin;
 
-    private $lengthMax;
+    private int $lengthMax;
 
-    private $letters;
+    private string $letters;
 
     /**
      * @param int $lengthMin The minimum length of CAPTCHA code
@@ -38,8 +36,7 @@ class Code
     }
 
     /**
-     * @return string
-     * @throws Exception
+     * @throws \Throwable
      */
     public function __toString(): string
     {
@@ -47,8 +44,7 @@ class Code
     }
 
     /**
-     * @return string
-     * @throws Exception
+     * @throws \Throwable
      */
     public function generate(): string
     {

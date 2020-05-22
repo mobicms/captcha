@@ -12,19 +12,21 @@ declare(strict_types=1);
 
 namespace Mobicms\Captcha;
 
-use Exception;
 use LogicException;
 
 class Image
 {
-    /** @var string */
-    private $code;
+    private string $code;
 
-    /** @var array */
-    private $fontList;
+    /**
+     * @var array<string>
+     */
+    private array $fontList;
 
-    /** @var array */
-    private $options;
+    /**
+     * @var array<mixed>
+     */
+    private array $options;
 
     public function __construct(string $code, Options $options = null)
     {
@@ -41,7 +43,7 @@ class Image
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function __toString(): string
     {
@@ -49,8 +51,7 @@ class Image
     }
 
     /**
-     * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function generate(): string
     {
@@ -77,7 +78,7 @@ class Image
      * Drawing the text on the image
      *
      * @param resource $image
-     * @throws Exception
+     * @throws \Exception
      */
     private function drawTextOnImage(&$image): void
     {
