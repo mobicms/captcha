@@ -34,7 +34,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-progress --no-suggest --prefer-dist --no-interaction --ignore-platform-reqs
+        run: composer install --no-progress --no-suggest --no-interaction
 
       - name: PhpUnit test-coverage
         run: |
@@ -66,7 +66,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-progress --no-suggest --prefer-dist --no-interaction --ignore-platform-reqs
+        run: composer install --no-progress --no-suggest --no-interaction
 
       - name: PHP CodeSniffer
         run: composer cs-check
@@ -95,7 +95,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-progress --no-suggest --prefer-dist --no-interaction --ignore-platform-reqs
+        run: composer install --no-progress --no-suggest --no-interaction
 
       - name: Static Analysis using Psalm
         run: composer psalm
