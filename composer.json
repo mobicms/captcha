@@ -29,7 +29,7 @@
             "tests/resources/stubs/constants.php"
         ],
         "psr-4": {
-            "MobicmsTest\\Captcha\\": "tests/testsuite/"
+            "MobicmsTest\\Captcha\\": "tests/unit/"
         }
     },
     "scripts": {
