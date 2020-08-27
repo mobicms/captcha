@@ -16,7 +16,7 @@ use InvalidArgumentException;
 
 use function pathinfo;
 
-class Options
+class Options extends Configuration
 {
     /**
      * @var array<string, mixed>
