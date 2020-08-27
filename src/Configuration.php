@@ -66,7 +66,7 @@ class Configuration
 
     public function getFontsFolder(): string
     {
-        return $this->fontsFolder;
+        return realpath($this->fontsFolder);
     }
 
     public function getFontShuffle(): bool
@@ -79,6 +79,9 @@ class Configuration
         return $this->defaultFontSize;
     }
 
+    /**
+     * @return array<string, array<string, int>>
+     */
     public function getFontsConfiguration(): array
     {
         return $this->fontsConfiguration;

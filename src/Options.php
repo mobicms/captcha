@@ -30,7 +30,7 @@ class Options extends Configuration
 
     public function setImageWidth(int $width): self
     {
-        if ($width) {
+        if ($width < 20) {
             throw new InvalidArgumentException('Image size cannot be less than 20x10px');
         }
 
