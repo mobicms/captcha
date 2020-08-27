@@ -18,82 +18,84 @@ use PHPUnit\Framework\TestCase;
 
 class OptionsTest extends TestCase
 {
-    /** @var Options */
-    private $oprions;
+    private Options $options;
 
     public function setUp(): void
     {
-        $this->oprions = new Options();
+        $this->options = new Options();
     }
 
-    public function testGetOptionsArray(): void
+    public function testSetImageHeight(): void
     {
-        $this->assertIsArray($this->oprions->getOptionsArray());
+        $this->options->setImageHeight(100);
+        $this->assertSame(100, $this->options->getImageHeight());
     }
 
-    public function testSetImageSize(): void
-    {
-        $this->oprions->setImageSize(27, 27);
-        $options = $this->oprions->getOptionsArray();
-        $this->assertSame(27, $options['image_width']);
-        $this->assertSame(27, $options['image_height']);
-    }
-
-    public function testSetInvalidImageSize(): void
+    public function testSetImageHeightInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Image size cannot be less than');
-        $this->oprions->setImageSize(0, 1);
+        $this->options->setImageHeight(1);
     }
 
-    public function testSetFontShuffle(): void
+    public function testSetImageWidth(): void
     {
-        $this->oprions->setFontShuffle(false);
-        $options = $this->oprions->getOptionsArray();
-        $this->assertFalse($options['fonts_shuffle']);
+        $this->options->setImageWidth(100);
+        $this->assertSame(100, $this->options->getImageWidth());
     }
 
-    public function testSetDefaultFontSize(): void
-    {
-        $this->oprions->setDefaultFontSize(40);
-        $options = $this->oprions->getOptionsArray();
-        $this->assertSame(40, $options['fonts_size']);
-    }
-
-    public function testInvalidDefaultFontSize(): void
+    public function testSetImageWidthInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('You specified the wrong font size.');
-        $this->oprions->setDefaultFontSize(-5);
+        $this->options->setImageWidth(1);
     }
 
     public function testSetFontsFolder(): void
     {
-        $this->oprions->setFontsFolder(__DIR__);
-        $options = $this->oprions->getOptionsArray();
-        $this->assertSame(__DIR__, $options['fonts_folder']);
+        $this->options->setFontsFolder(__DIR__);
+        $this->assertSame(__DIR__, $this->options->getFontsFolder());
     }
 
     public function testInvalidFontsFolder(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The specified folder does not exist.');
-        $this->oprions->setFontsFolder('invalid_folder');
+        $this->options->setFontsFolder('invalid_folder');
+    }
+
+    public function testSetFontShuffle(): void
+    {
+        $this->options->setFontShuffle(false);
+        $this->assertFalse($this->options->getFontShuffle());
+        $this->options->setFontShuffle(true);
+        $this->assertTrue($this->options->getFontShuffle());
+    }
+
+    public function testSetDefaultFontSize(): void
+    {
+        $this->options->setDefaultFontSize(40);
+        $this->assertSame(40, $this->options->getDefaultFontSize());
+    }
+
+    public function testInvalidDefaultFontSize(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('You specified the wrong font size.');
+        $this->options->setDefaultFontSize(1);
     }
 
     public function testAdjustFont(): void
     {
         $font = 'somefont.ttf';
-        $this->oprions->adjustFont($font, 40, Options::FONT_CASE_UPPER);
-        $options = $this->oprions->getOptionsArray();
-        $this->assertArrayHasKey($font, $options['fonts_tuning']);
-        $this->assertSame(40, $options['fonts_tuning'][$font]['size']);
-        $this->assertSame(Options::FONT_CASE_UPPER, $options['fonts_tuning'][$font]['case']);
+        $this->options->adjustFont($font, 40, Options::FONT_CASE_UPPER);
+        $config = $this->options->getFontsConfiguration();
+        $this->assertArrayHasKey($font, $config);
+        $this->assertSame(40, $config[$font]['size']);
+        $this->assertSame(Options::FONT_CASE_UPPER, $config[$font]['case']);
     }
 
     public function testInvalidFontName(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->oprions->adjustFont('somefont.jpg', 27, Options::FONT_CASE_UPPER);
+        $this->options->adjustFont('somefont.jpg', 27, Options::FONT_CASE_UPPER);
     }
 }
