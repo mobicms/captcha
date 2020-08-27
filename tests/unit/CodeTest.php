@@ -5,7 +5,7 @@
  *
  * @copyright   Oleg Kasyanov <dev@mobicms.net>
  * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE file)
- * @link        https://github.com/batumibiz/captcha
+ * @link        https://github.com/mobicms/captcha
  */
 
 declare(strict_types=1);

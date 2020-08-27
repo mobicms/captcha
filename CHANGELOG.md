@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).  
 Detailed changes can see in the [repository log].
 
-## [3.0.0] - Unreleased
+## [Unreleased]
 
 #### Added
 - Nothing
@@ -56,7 +56,7 @@ Detailed changes can see in the [repository log].
 Initial release
 
 
-[3.0.0]: https://github.com/mobicms/captcha/compare/2.0.1...HEAD
+[Unreleased]: https://github.com/mobicms/captcha/compare/2.0.1...HEAD
 [2.0.1]: https://github.com/mobicms/captcha/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/mobicms/captcha/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/mobicms/captcha/releases/tag/1.0.0
