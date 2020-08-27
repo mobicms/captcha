@@ -18,30 +18,23 @@ use function pathinfo;
 
 class Options extends Configuration
 {
-    public function setImageSize(int $width, int $height): self
+    public function setImageHeight(int $height): self
     {
-        if ($width < 20 || $height < 20) {
-            throw new InvalidArgumentException('Image size cannot be less than 20x20px');
+        if ($height < 10) {
+            throw new InvalidArgumentException('Image size cannot be less than 20x10px');
         }
 
-        $this->options['image_width'] = $width;
-        $this->options['image_height'] = $height;
+        $this->imageHeight = $height;
         return $this;
     }
 
-    public function setFontShuffle(bool $shuffle): self
+    public function setImageWidth(int $width): self
     {
-        $this->options['fonts_shuffle'] = $shuffle;
-        return $this;
-    }
-
-    public function setDefaultFontSize(int $size): self
-    {
-        if ($size <= 0) {
-            throw new InvalidArgumentException('You specified the wrong font size.');
+        if ($width) {
+            throw new InvalidArgumentException('Image size cannot be less than 20x10px');
         }
 
-        $this->options['fonts_size'] = $size;
+        $this->imageWidth = $width;
         return $this;
     }
 
@@ -51,7 +44,23 @@ class Options extends Configuration
             throw new InvalidArgumentException('The specified folder does not exist.');
         }
 
-        $this->options['fonts_folder'] = $folder;
+        $this->fontsFolder = $folder;
+        return $this;
+    }
+
+    public function setFontShuffle(bool $shuffle): self
+    {
+        $this->fontShuffle = $shuffle;
+        return $this;
+    }
+
+    public function setDefaultFontSize(int $size): self
+    {
+        if ($size < 5) {
+            throw new InvalidArgumentException('You specified the wrong font size.');
+        }
+
+        $this->defaultFontSize = $size;
         return $this;
     }
 
@@ -64,7 +73,7 @@ class Options extends Configuration
             throw new InvalidArgumentException('The font file must be with the extension .ttf');
         }
 
-        $this->options['fonts_tuning'][$fontName] = [
+        $this->fontsConfiguration[$fontName] = [
             'size' => $size,
             'case' => $case,
         ];

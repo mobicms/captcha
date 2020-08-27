@@ -14,41 +14,39 @@ namespace Mobicms\Captcha;
 
 class Configuration
 {
+    protected int $imageHeight = 80;
+    protected int $imageWidth = 190;
+    protected string $fontsFolder = __DIR__ . '/../resources/fonts';
+    protected bool $fontShuffle = true;
+    protected int $defaultFontSize = 26;
+
     /**
-     * @deprecated
-     * @var array<string, mixed>
+     * @var array<string, array<string, int>>
      */
-    protected array $options = [
-        'image_width'   => 190,
-        'image_height'  => 80,
-        'fonts_folder'  => __DIR__ . '/../resources/fonts',
-        'fonts_shuffle' => true,
-        'fonts_size'    => 26,
-        'fonts_tuning'  => [
-            '3dlet.ttf' => [
-                'size' => 38,
-                'case' => self::FONT_CASE_LOWER,
-            ],
+    protected array $fontsConfiguration = [
+        '3dlet.ttf' => [
+            'size' => 38,
+            'case' => self::FONT_CASE_LOWER,
+        ],
 
-            'baby_blocks.ttf' => [
-                'size' => 16,
-                'case' => self::FONT_CASE_RANDOM,
-            ],
+        'baby_blocks.ttf' => [
+            'size' => 16,
+            'case' => self::FONT_CASE_RANDOM,
+        ],
 
-            'betsy_flanagan.ttf' => [
-                'size' => 30,
-                'case' => self::FONT_CASE_RANDOM,
-            ],
+        'betsy_flanagan.ttf' => [
+            'size' => 30,
+            'case' => self::FONT_CASE_RANDOM,
+        ],
 
-            'karmaticarcade.ttf' => [
-                'size' => 20,
-                'case' => self::FONT_CASE_RANDOM,
-            ],
+        'karmaticarcade.ttf' => [
+            'size' => 20,
+            'case' => self::FONT_CASE_RANDOM,
+        ],
 
-            'tonight.ttf' => [
-                'size' => 28,
-                'case' => self::FONT_CASE_RANDOM,
-            ],
+        'tonight.ttf' => [
+            'size' => 28,
+            'case' => self::FONT_CASE_RANDOM,
         ],
     ];
 
@@ -56,12 +54,33 @@ class Configuration
     public const FONT_CASE_LOWER = 1;
     public const FONT_CASE_RANDOM = 0;
 
-    /**
-     * @deprecated
-     * @return array<string, mixed>
-     */
-    public function getOptionsArray(): array
+    public function getImageHeight(): int
     {
-        return $this->options;
+        return $this->imageHeight;
+    }
+
+    public function getImageWidth(): int
+    {
+        return $this->imageWidth;
+    }
+
+    public function getFontsFolder(): string
+    {
+        return $this->fontsFolder;
+    }
+
+    public function getFontShuffle(): bool
+    {
+        return $this->fontShuffle;
+    }
+
+    public function getDefaultFontSize(): int
+    {
+        return $this->defaultFontSize;
+    }
+
+    public function getFontsConfiguration(): array
+    {
+        return $this->fontsConfiguration;
     }
 }

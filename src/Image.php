@@ -16,27 +16,18 @@ use LogicException;
 
 class Image
 {
-    private string $code;
-
     /**
      * @var array<string>
      */
     private array $fontList;
-
-    /**
-     * @deprecated
-     * @var array<mixed>
-     */
-    private array $optionsArray;
-
+    private string $code;
     private Configuration $config;
 
     public function __construct(string $code, Configuration $config = null)
     {
         $this->code = $code;
         $this->config = $config ?? new Configuration();
-        $this->optionsArray = $this->config->getOptionsArray(); //TODO: delete it
-        $fontList = glob(realpath($this->optionsArray['fonts_folder']) . DIRECTORY_SEPARATOR . '*.ttf');
+        $fontList = glob(realpath($this->config->getFontsFolder()) . DIRECTORY_SEPARATOR . '*.ttf');
 
         if ([] === $fontList || false === $fontList) {
             throw new LogicException('The specified folder does not contain any fonts.');
@@ -59,7 +50,7 @@ class Image
     public function generate(): string
     {
         ob_start();
-        $image = imagecreatetruecolor($this->optionsArray['image_width'], $this->optionsArray['image_height']);
+        $image = imagecreatetruecolor($this->config->getImageWidth(), $this->config->getImageHeight());
 
         if ($image !== false) {
             $color = imagecolorallocatealpha($image, 0, 0, 0, 127);
@@ -90,16 +81,16 @@ class Image
         $len = count($code);
 
         foreach ($code as $i => $iValue) {
-            if ($this->optionsArray['fonts_shuffle']) {
+            if ($this->config->getFontShuffle()) {
                 $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
             }
 
             $fontName = basename($font);
             $letter = $this->setLetterCase($iValue, $fontName);
             $fontSize = $this->determineFontSize($fontName);
-            $xPos = ($this->optionsArray['image_width'] - $fontSize) / $len * $i + ($fontSize / 2);
+            $xPos = ($this->config->getImageWidth() - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
-            $yPos = $this->optionsArray['image_height'] - (($this->optionsArray['image_height'] - $fontSize) / 2);
+            $yPos = $this->config->getImageHeight() - (($this->config->getImageHeight() - $fontSize) / 2);
             $capangle = random_int(-25, 25);
             $capcolor = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
 
@@ -111,18 +102,21 @@ class Image
 
     private function determineFontSize(string $fontName): int
     {
-        return isset($this->optionsArray['fonts_tuning'][$fontName])
-            ? (int) $this->optionsArray['fonts_tuning'][$fontName]['size']
-            : (int) $this->optionsArray['fonts_size'];
+        $config = $this->config->getFontsConfiguration();
+        return isset($config[$fontName])
+            ? (int) $config[$fontName]['size']
+            : (int) $this->config->getDefaultFontSize();
     }
 
     private function setLetterCase(string $string, string $fontName): string
     {
-        if (isset($this->optionsArray['fonts_tuning'][$fontName])) {
-            switch ($this->optionsArray['fonts_tuning'][$fontName]['case']) {
-                case Options::FONT_CASE_UPPER:
+        $config = $this->config->getFontsConfiguration();
+
+        if (isset($config[$fontName])) {
+            switch ($config[$fontName]['case']) {
+                case Configuration::FONT_CASE_UPPER:
                     return strtoupper($string);
-                case Options::FONT_CASE_LOWER:
+                case Configuration::FONT_CASE_LOWER:
                     return strtolower($string);
             }
         }
