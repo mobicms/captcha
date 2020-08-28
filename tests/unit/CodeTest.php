@@ -24,14 +24,12 @@ class CodeTest extends TestCase
     public function testCanGenerateRandomCode(): void
     {
         $code = (new Code())->generate();
-        $this->assertIsString($code);
         $this->assertGreaterThanOrEqual(3, strlen($code));
     }
 
     public function testToString(): void
     {
         $code = (string) new Code();
-        $this->assertIsString($code);
         $this->assertGreaterThanOrEqual(3, strlen($code));
     }
 

@@ -52,7 +52,6 @@ class ConfigurationTest extends TestCase
     public function testGetFontsConfiguration(): void
     {
         $config = $this->config->getFontsConfiguration();
-        $this->assertIsArray($config);
         $this->assertArrayHasKey('baby_blocks.ttf', $config);
     }
 }

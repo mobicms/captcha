@@ -14,53 +14,48 @@ namespace MobicmsTest\Captcha;
 
 use Exception;
 use LogicException;
+use Mobicms\Captcha\Configuration;
 use Mobicms\Captcha\Image;
 use Mobicms\Captcha\Options;
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
 {
-    private $testImage = TEST_OUT_PATH . 'test.png';
+    private string $testImage = TEST_OUT_PATH . 'test.png';
+    private Image $image;
 
-    public function testCanCreateInstance(): Image
+    public function setUp(): void
     {
-        $captcha = new Image('abcd');
-        $this->assertInstanceOf(Image::class, $captcha);
-        return $captcha;
+        $this->image = new Image('abcd');
     }
 
     /**
-     * @depends testCanCreateInstance
-     * @param Image $captcha
      * @throws Exception
      */
-    public function testCanGenerateDataImageString(Image $captcha): void
+    public function testCanGenerateDataImageString(): void
     {
-        $image = $captcha->generate();
+        $image = $this->image->generate();
         $this->assertStringStartsWith('data:image/png;base64', $image);
     }
 
     /**
-     * @depends testCanCreateInstance
-     * @param Image $captcha
      * @throws Exception
      */
-    public function testCanGenerateValidImage(Image $captcha): void
+    public function testCanGenerateValidImage(): void
     {
-        $this->writeImage($captcha->generate());
+        $this->writeImage($this->image->generate());
         $this->assertValidImage(190, 80);
     }
 
-    /**
-     * @depends testCanCreateInstance
-     * @param Image $captcha
-     */
-    public function testToString(Image $captcha): void
+    public function testToString(): void
     {
-        $image = (string) $captcha;
+        $image = (string) $this->image;
         $this->assertStringStartsWith('data:image/png;base64', $image);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testSetCustomFontsFolder(): void
     {
         $options = new Options();
@@ -80,10 +75,10 @@ class ImageTest extends TestCase
 
     /**
      * @dataProvider customFontValues
-     * @param mixed $case
+     * @param int $case
      * @throws Exception
      */
-    public function testSetLetterCase($case)
+    public function testSetLetterCase(int $case): void
     {
         $options = new Options();
         $options
@@ -98,7 +93,7 @@ class ImageTest extends TestCase
     // Auxiliary methods                                                          //
     ////////////////////////////////////////////////////////////////////////////////
 
-    private function assertValidImage(int $width, int $height)
+    private function assertValidImage(int $width, int $height): void
     {
         $info = getimagesize($this->testImage);
         $this->assertSame($width, $info[0]);
@@ -106,18 +101,21 @@ class ImageTest extends TestCase
         $this->assertSame('image/png', $info['mime']);
     }
 
-    private function writeImage(string $image)
+    private function writeImage(string $image): void
     {
         $image = str_replace('data:image/png;base64,', '', $image);
         file_put_contents($this->testImage, base64_decode($image));
     }
 
+    /**
+     * @return array<string, array<int>>
+     */
     public function customFontValues(): array
     {
         return [
-            'RANDOM' => [Options::FONT_CASE_RANDOM],
-            'UPPER'  => [Options::FONT_CASE_UPPER],
-            'LOWER'  => [Options::FONT_CASE_LOWER],
+            'RANDOM' => [Configuration::FONT_CASE_RANDOM],
+            'UPPER'  => [Configuration::FONT_CASE_UPPER],
+            'LOWER'  => [Configuration::FONT_CASE_LOWER],
         ];
     }
 }
