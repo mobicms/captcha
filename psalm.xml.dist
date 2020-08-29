@@ -13,7 +13,11 @@
     </projectFiles>
 
     <issueHandlers>
-
+        <PossiblyInvalidArgument>
+            <errorLevel type="suppress">
+                <file name="tests/unit/CodeTest.php"/>
+            </errorLevel>
+        </PossiblyInvalidArgument>
     </issueHandlers>
 
     <plugins>
