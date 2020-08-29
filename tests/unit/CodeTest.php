@@ -12,16 +12,12 @@ declare(strict_types=1);
 
 namespace MobicmsTest\Captcha;
 
-use Exception;
 use InvalidArgumentException;
 use Mobicms\Captcha\Code;
 use PHPUnit\Framework\TestCase;
 
 class CodeTest extends TestCase
 {
-    /**
-     * @throws Exception
-     */
     public function testCanGenerateRandomCode(): void
     {
         $code = (new Code())->generate();
@@ -52,9 +48,6 @@ class CodeTest extends TestCase
 
     /**
      * @dataProvider invalidValues
-     * @param int $lengthMin
-     * @param int $lengthMax
-     * @param string $characterSet
      */
     public function testInvalidParameterValues(
         int $lengthMin,
@@ -70,7 +63,7 @@ class CodeTest extends TestCase
     ////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @return array<string, array<int, int, string>>
+     * @return array[]
      */
     public function invalidValues(): array
     {
