@@ -8,10 +8,12 @@ Detailed changes can see in the [repository log].
 ## [Unreleased]
 
 #### Added
-- Nothing
+- New CAPTCHA image configuration
   
 #### Changed
 - Bumped minimum PHP version to 7.4
+- Code generator: added parameter check
+- Various improvements
 
 #### Deprecated
 - Nothing
