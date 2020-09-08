@@ -5,27 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).  
 Detailed changes can see in the [repository log].
 
-## [Unreleased]
+## [3.0.0] - 2020-09-08
 
 #### Added
-- New CAPTCHA image configuration
+- New class for adjustment of a configuration options
   
 #### Changed
 - Bumped minimum PHP version to 7.4
 - Code generator: added parameter check
 - Various improvements
-
-#### Deprecated
-- Nothing
-  
-#### Removed
-- Nothing
-
-#### Fixed
-- Nothing
-
-#### Security
-- Nothing
 
 
 ## [2.0.1] - 2019-12-08
@@ -59,6 +47,7 @@ Initial release
 
 
 [Unreleased]: https://github.com/mobicms/captcha/compare/2.0.1...HEAD
+[3.0.0]: https://github.com/mobicms/captcha/compare/2.0.1...3.0.0
 [2.0.1]: https://github.com/mobicms/captcha/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/mobicms/captcha/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/mobicms/captcha/releases/tag/1.0.0
