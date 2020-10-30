@@ -16,8 +16,8 @@
         "phpunit/phpunit": "^9.4",
         "slevomat/coding-standard": "^6.4",
         "squizlabs/php_codesniffer": "^3.5",
-        "vimeo/psalm": "^3.17",
-        "psalm/plugin-phpunit": "^0.12"
+        "vimeo/psalm": "^4.1",
+        "psalm/plugin-phpunit": "^0.13"
     },
     "autoload": {
         "psr-4": {
