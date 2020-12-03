@@ -104,8 +104,8 @@ class Image
     {
         $config = $this->config->getFontsConfiguration();
         return isset($config[$fontName])
-            ? (int) $config[$fontName]['size']
-            : (int) $this->config->getDefaultFontSize();
+            ? $config[$fontName]['size']
+            : $this->config->getDefaultFontSize();
     }
 
     private function setLetterCase(string $string, string $fontName): string
