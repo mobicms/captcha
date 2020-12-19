@@ -3,8 +3,7 @@
 This package is part of [mobiCMS](https://github.com/mobicms/mobicms) and [JohnCMS](https://github.com/johncms/johncms),
 but can be used freely in any other projects.
 
-[![Packagist](https://img.shields.io/packagist/l/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
-[![Source Code](http://img.shields.io/badge/source-mobicms/captcha-blue.svg)](https://github.com/mobicms/captcha)
+[![Packagist](https://img.shields.io/packagist/l/mobicms/captcha)](https://github.com/mobicms/captcha/blob/develop/LICENSE)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mobicms/captcha)](https://github.com/mobicms/captcha/releases)
 [![Packagist](https://img.shields.io/packagist/dt/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
 
