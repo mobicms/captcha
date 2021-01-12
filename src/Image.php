@@ -58,7 +58,7 @@ class Image
             if ($color !== false) {
                 imagesavealpha($image, true);
                 imagefill($image, 0, 0, $color);
-                $image = $this->drawTextOnImage($image);
+                $image = $this->drawTextOnImage(/** @scrutinizer ignore-type */ $image);
                 imagepng($image);
                 imagedestroy($image);
             }
@@ -75,11 +75,11 @@ class Image
      * @return resource
      * @throws \Exception
      */
-    private function drawTextOnImage($image)
+    private function drawTextOnImage(/** @scrutinizer ignore-type */ $image)
     {
         $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
         $code = str_split($this->code);
-        $len = count($code);
+        $len = count(/** @scrutinizer ignore-type */ $code);
 
         foreach ($code as $i => $iValue) {
             if ($this->config->getFontShuffle()) {
