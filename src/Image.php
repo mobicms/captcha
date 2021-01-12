@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of mobicms/captcha library
+ * This file is part of mobicms/captcha package
  *
  * @copyright   Oleg Kasyanov <dev@mobicms.net>
  * @license     https://opensource.org/licenses/MIT MIT (see the LICENSE file)
