@@ -58,7 +58,7 @@ class Image
             if ($color !== false) {
                 imagesavealpha($image, true);
                 imagefill($image, 0, 0, $color);
-                $this->drawTextOnImage($image);
+                $image = $this->drawTextOnImage($image);
                 imagepng($image);
                 imagedestroy($image);
             }
@@ -72,9 +72,10 @@ class Image
      * Drawing the text on the image
      *
      * @param resource $image
+     * @return resource
      * @throws \Exception
      */
-    private function drawTextOnImage(&$image): void
+    private function drawTextOnImage($image)
     {
         $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
         $code = str_split($this->code);
@@ -98,6 +99,8 @@ class Image
                 imagettftext($image, $fontSize, $capangle, $xPos, (int) $yPos, $capcolor, $font, $letter);
             }
         }
+
+        return $image;
     }
 
     private function determineFontSize(string $fontName): int
