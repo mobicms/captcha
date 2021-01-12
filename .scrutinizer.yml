@@ -2,16 +2,16 @@ build:
   environment:
     php: 7.4.14
 
+  dependencies:
+    override:
+      - composer install --no-progress --no-suggest --no-interaction --ignore-platform-reqs
+
   nodes:
     analysis:
       tests:
         override:
           - php-scrutinizer-run
           - phpcs-run
-
-  dependencies:
-    override:
-      - composer install --ignore-platform-reqs --no-interaction
 
 tools:
   external_code_coverage: true
