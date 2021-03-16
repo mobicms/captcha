@@ -1,5 +1,4 @@
 .idea
-composer.lock
 clover.xml
 phpunit.xml
 psalm.xml
