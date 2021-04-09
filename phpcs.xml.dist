@@ -35,7 +35,6 @@
     <rule ref="SlevomatCodingStandard.Classes.UselessLateStaticBinding"/>
 
     <!-- Rules for detecting dead or useless code -->
-    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements"/>
     <rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure"/>
     <rule ref="SlevomatCodingStandard.Functions.UnusedParameter"/>
     <rule ref="SlevomatCodingStandard.Functions.UselessParameterDefaultValue"/>
