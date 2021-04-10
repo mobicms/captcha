@@ -35,12 +35,12 @@
     "scripts": {
         "check": [
             "@cs-check",
-            "@psalm",
+            "@static-analysis",
             "@test"
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "psalm": "psalm --show-info=true",
+        "static-analysis": "psalm --show-info=true",
         "test": "phpunit --colors=always",
         "test-coverage": [
             "@putenv XDEBUG_MODE=coverage",

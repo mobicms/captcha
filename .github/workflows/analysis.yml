@@ -58,4 +58,4 @@ jobs:
         run: composer install --no-progress --no-suggest --no-interaction
 
       - name: Static Analysis using Psalm
-        run: composer psalm
+        run: composer static-analysis
