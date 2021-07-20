@@ -12,18 +12,18 @@ but can be used freely in any other projects.
 [![Code Coverage](https://scrutinizer-ci.com/g/mobicms/captcha/badges/coverage.png)](https://scrutinizer-ci.com/g/mobicms/captcha/code-structure/develop/code-coverage)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mobicms/captcha/badges/quality-score.png)](https://scrutinizer-ci.com/g/mobicms/captcha)
 
+[![YAGNI](https://img.shields.io/badge/principle-YAGNI-blueviolet.svg)](https://en.wikipedia.org/wiki/YAGNI)
+[![KISS](https://img.shields.io/badge/principle-KISS-blueviolet.svg)](https://en.wikipedia.org/wiki/KISS_principle)
+
 This library is a simple PHP CAPTCHA. Prevent form spam by generating random Captcha images.
 
 ![Captchas examples](resources/example/captcha_example.png)
 
-- Not create any temporary files.
-- There are many settings that allow you to change the look of the picture.
-- You can use your own font sets.
-
-[![YAGNI](https://img.shields.io/badge/principle-YAGNI-blue.svg)](https://en.wikipedia.org/wiki/YAGNI)
-[![KISS](https://img.shields.io/badge/principle-KISS-blue.svg)](https://en.wikipedia.org/wiki/KISS_principle)  
-In our development, we follow the principles of [YAGNI](https://en.wikipedia.org/wiki/YAGNI) and [KISS](https://en.wikipedia.org/wiki/KISS_principle).  
-The source code should not have extra unnecessary functionality and should be as simple and efficient as possible.
+Major features:
+- lightweight and fast
+- not create any temporary files
+- there are many settings that allow you to change the look of the picture
+- you can use your own font sets
 
 ## Installation
 
@@ -76,6 +76,8 @@ Contributions are welcome! Please read [CONTRIBUTING](https://github.com/mobicms
 This project adheres to a [Contributor Code of Conduct](https://github.com/mobicms/captcha/blob/develop/.github/CODE_OF_CONDUCT.md).
 By participating in this project and its community, you are expected to uphold this code.
 
+In our development, we follow the principles of [YAGNI](https://en.wikipedia.org/wiki/YAGNI) and [KISS](https://en.wikipedia.org/wiki/KISS_principle).  
+The source code should not have extra unnecessary functionality and should be as simple and efficient as possible.
 
 ## License
 
