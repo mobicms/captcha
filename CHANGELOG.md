@@ -26,16 +26,11 @@ Detailed changes can see in the [repository log].
 - Nothing
 
 
-## [3.0.2] - 2021-07-21
-
-#### Changed
-- Small improvements
-
-
-## [3.0.1] - 2020-12-19
+## [3.1.0] - 2021-07-21
 
 #### Changed
 - Added PHP 8.x support
+- Various code improvements
 
 
 ## [3.0.0] - 2020-09-08
@@ -79,9 +74,8 @@ Detailed changes can see in the [repository log].
 Initial release
 
 
-[Unreleased]: https://github.com/mobicms/captcha/compare/3.0.1...HEAD
-[3.0.2]: https://github.com/mobicms/captcha/compare/3.0.1...3.0.2
-[3.0.1]: https://github.com/mobicms/captcha/compare/3.0.0...3.0.1
+[Unreleased]: https://github.com/mobicms/captcha/compare/3.1.0...HEAD
+[3.1.0]: https://github.com/mobicms/captcha/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/mobicms/captcha/compare/2.0.1...3.0.0
 [2.0.1]: https://github.com/mobicms/captcha/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/mobicms/captcha/compare/1.0.0...2.0.0

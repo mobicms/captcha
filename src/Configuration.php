@@ -6,6 +6,10 @@ namespace Mobicms\Captcha;
 
 class Configuration
 {
+    public const FONT_CASE_UPPER = 2;
+    public const FONT_CASE_LOWER = 1;
+    public const FONT_CASE_RANDOM = 0;
+
     protected int $imageHeight = 80;
     protected int $imageWidth = 190;
     protected string $fontsFolder = __DIR__ . '/../resources/fonts';
@@ -13,7 +17,7 @@ class Configuration
     protected int $defaultFontSize = 26;
 
     /**
-     * @var array<string, array<string, int>>
+     * @var array<string, array<int>>
      */
     protected array $fontsConfiguration = [
         '3dlet.ttf' => [
@@ -42,10 +46,6 @@ class Configuration
         ],
     ];
 
-    public const FONT_CASE_UPPER = 2;
-    public const FONT_CASE_LOWER = 1;
-    public const FONT_CASE_RANDOM = 0;
-
     public function getImageHeight(): int
     {
         return $this->imageHeight;
@@ -72,7 +72,7 @@ class Configuration
     }
 
     /**
-     * @return array<string, array<string, int>>
+     * @return array<string, array<int>>
      */
     public function getFontsConfiguration(): array
     {

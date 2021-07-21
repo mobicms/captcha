@@ -8,9 +8,7 @@ use LogicException;
 
 class Image
 {
-    /**
-     * @var array<string>
-     */
+    /** @var array<array-key, string> */
     private array $fontList;
     private string $code;
     private Configuration $config;
@@ -19,13 +17,7 @@ class Image
     {
         $this->code = $code;
         $this->config = $config ?? new Configuration();
-        $fontList = glob(realpath($this->config->getFontsFolder()) . DIRECTORY_SEPARATOR . '*.ttf');
-
-        if ([] === $fontList || false === $fontList) {
-            throw new LogicException('The specified folder does not contain any fonts.');
-        }
-
-        $this->fontList = $fontList;
+        $this->fontList = $this->prepareFontsList();
     }
 
     /**
@@ -117,5 +109,19 @@ class Image
         }
 
         return $string;
+    }
+
+    /**
+     * @return array<array-key, string>
+     */
+    private function prepareFontsList(): array
+    {
+        $list = glob(realpath($this->config->getFontsFolder()) . DIRECTORY_SEPARATOR . '*.ttf');
+
+        if ([] === $list || false === $list) {
+            throw new LogicException('The specified folder does not contain any fonts.');
+        }
+
+        return $list;
     }
 }
