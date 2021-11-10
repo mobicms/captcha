@@ -11,7 +11,8 @@ Detailed changes can see in the [repository log].
 - Nothing
 
 #### Changed
-- Nothing
+- Bumped minimum PHP version to 8.0
+- Various source code improvements
 
 #### Deprecated
 - Nothing
@@ -30,7 +31,7 @@ Detailed changes can see in the [repository log].
 
 #### Changed
 - Added PHP 8.x support
-- Various code improvements
+- Various source code improvements
 
 
 ## [3.0.0] - 2020-09-08
