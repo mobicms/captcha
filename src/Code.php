@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 class Code
 {
-    /** @var array<array-key, int> */
+    /** @var array<int> */
     private array $length;
     private string $characterSet;
 
@@ -38,7 +38,7 @@ class Code
     }
 
     /**
-     * @return array<array-key, int>
+     * @return array<int>
      */
     private function prepareLength(?int $lengthMin, ?int $lengthMax): array
     {

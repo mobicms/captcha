@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Mobicms\Captcha;
 
+use GdImage;
 use LogicException;
+use Stringable;
 
-class Image
+class Image implements Stringable
 {
-    /** @var array<array-key, string> */
+    /** @var array<string> */
     private array $fontList;
+
     private string $code;
+
     private Configuration $config;
 
-    public function __construct(string $code, Configuration $config = null)
+    public function __construct(string|Stringable $code, Configuration $config = null)
     {
-        $this->code = $code;
+        $this->code = (string) $code;
         $this->config = $config ?? new Configuration();
         $this->fontList = $this->prepareFontsList();
     }
@@ -53,13 +57,9 @@ class Image
     }
 
     /**
-     * Drawing the text on the image
-     *
-     * @param resource $image
-     * @return resource
      * @throws \Exception
      */
-    private function drawTextOnImage(/** @scrutinizer ignore-type */ $image)
+    private function drawTextOnImage(GdImage $image): GdImage
     {
         $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
         $code = str_split($this->code);
@@ -112,7 +112,7 @@ class Image
     }
 
     /**
-     * @return array<array-key, string>
+     * @return array<string>
      */
     private function prepareFontsList(): array
     {
