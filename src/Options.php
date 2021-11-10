@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Mobicms\Captcha;
 
 use InvalidArgumentException;
+use Stringable;
 
 use function pathinfo;
+use function is_dir;
 
 class Options extends Configuration
 {
@@ -30,13 +32,14 @@ class Options extends Configuration
         return $this;
     }
 
-    public function setFontsFolder(string $folder): self
+    public function setFontsFolder(string|Stringable $folder): self
     {
-        if (! is_dir($folder)) {
+        $this->fontsFolder = (string) $folder;
+
+        if (! is_dir($this->fontsFolder)) {
             throw new InvalidArgumentException('The specified folder does not exist.');
         }
 
-        $this->fontsFolder = $folder;
         return $this;
     }
 
