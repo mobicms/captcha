@@ -2,14 +2,29 @@
     "name": "mobicms/captcha",
     "description": "A simple PHP CAPTCHA library",
     "type": "library",
-    "homepage": "https://github.com/mobicms/captcha",
     "license": "MIT",
     "keywords": [
         "php",
         "captcha"
     ],
+    "authors": [
+        {
+            "name": "Oleg Kasyanov",
+            "role": "Team Lead, Developer",
+            "homepage": "https://github.com/batumibiz",
+            "email": "oleg@mobicms.org"
+        },
+        {
+            "name": "mobiCMS Contributors",
+            "homepage": "https://github.com/mobicms/captcha/graphs/contributors"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/mobicms/captcha",
+        "issues": "https://github.com/mobicms/captcha/issues"
+    },
     "require": {
-        "php": "^8.0",
+        "php": "~8.0.0 || ~8.1.0",
         "ext-gd": "*"
     },
     "require-dev": {
