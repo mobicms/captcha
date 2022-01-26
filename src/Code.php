@@ -7,6 +7,8 @@ namespace Mobicms\Captcha;
 use InvalidArgumentException;
 use Stringable;
 
+use function random_int;
+
 class Code implements Stringable
 {
     private int $lengthMin;
@@ -50,7 +52,7 @@ class Code implements Stringable
 
     public function generate(): string
     {
-        $length = mt_rand($this->lengthMin, $this->lengthMax);
+        $length = random_int($this->lengthMin, $this->lengthMax);
 
         do {
             $code = substr(str_shuffle(str_repeat($this->characterSet, 3)), 0, $length);
