@@ -62,10 +62,10 @@ class Image implements Stringable
     private function drawTextOnImage(GdImage $image): GdImage
     {
         $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
-        $code = str_split($this->code);
-        $len = count(/** @scrutinizer ignore-type */ $code);
+        $symbols = str_split($this->code);
+        $len = count(/** @scrutinizer ignore-type */ $symbols);
 
-        foreach ($code as $i => $iValue) {
+        foreach ($symbols as $i => $iValue) {
             if ($this->config->getFontShuffle()) {
                 $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
             }
@@ -89,9 +89,9 @@ class Image implements Stringable
 
     private function determineFontSize(string $fontName): int
     {
-        $config = $this->config->getFontsConfiguration();
-        return isset($config[$fontName])
-            ? $config[$fontName]['size']
+        $fontsConfig = $this->config->getFontsConfiguration();
+        return isset($fontsConfig[$fontName])
+            ? $fontsConfig[$fontName]['size']
             : $this->config->getDefaultFontSize();
     }
 
