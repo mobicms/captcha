@@ -23,6 +23,11 @@
         "source": "https://github.com/mobicms/captcha",
         "issues": "https://github.com/mobicms/captcha/issues"
     },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
     "require": {
         "php": "~8.0.0 || ~8.1.0",
         "ext-gd": "*"
@@ -31,7 +36,7 @@
         "phpunit/phpunit": "^9.5",
         "slevomat/coding-standard": "^7.0",
         "squizlabs/php_codesniffer": "^3.6",
-        "vimeo/psalm": "^4.15",
+        "vimeo/psalm": "^4.18",
         "psalm/plugin-phpunit": "^0.15"
     },
     "autoload": {
