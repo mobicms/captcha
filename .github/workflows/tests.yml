@@ -43,7 +43,11 @@ jobs:
 
       - name: PhpUnit test-coverage
         if: matrix.php-versions == '8.0'
-        run: composer test-coverage
+        working-directory: ./
+        run: |
+          composer test-coverage
+          sed -i 's/\/home\/runner\/work\/captcha\/captcha\//\/github\/workspace\//g' report.xml
+          sed -i 's/\/home\/runner\/work\/captcha\/captcha\//\/github\/workspace\//g' clover.xml
 
       - name: Upload coverage report
         if: matrix.php-versions == '8.0'
