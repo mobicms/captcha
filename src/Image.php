@@ -76,11 +76,11 @@ class Image implements Stringable
             $xPos = ($this->config->getImageWidth() - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
             $yPos = $this->config->getImageHeight() - (($this->config->getImageHeight() - $fontSize) / 2);
-            $capangle = random_int(-25, 25);
-            $capcolor = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
+            $angle = random_int(-25, 25);
+            $color = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
 
-            if ($capcolor !== false) {
-                imagettftext($image, $fontSize, $capangle, $xPos, (int) $yPos, $capcolor, $font, $letter);
+            if ($color !== false) {
+                imagettftext($image, $fontSize, $angle, $xPos, (int) $yPos, $color, $font, $letter);
             }
         }
 
