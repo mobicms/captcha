@@ -61,7 +61,7 @@
         "test": "phpunit --colors=always",
         "test-coverage": [
             "@putenv XDEBUG_MODE=coverage",
-            "phpunit --colors=always --coverage-clover clover.xml"
+            "phpunit --colors=always --coverage-clover clover.xml --log-junit report.xml"
         ]
     }
 }

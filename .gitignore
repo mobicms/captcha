@@ -2,5 +2,6 @@
 clover.xml
 phpunit.xml
 psalm.xml
+report.xml
 /*.cache
 vendor/
