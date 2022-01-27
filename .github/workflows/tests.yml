@@ -47,10 +47,16 @@ jobs:
 
       - name: Upload coverage report
         if: matrix.php-versions == '8.0'
-        uses: SonarSource/sonarcloud-github-action@v1.6
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.php.coverage.reportPaths=./clover.xml
+            -Dsonar.organization=mobicms
+            -Dsonar.projectKey=mobicms_captcha
+            -Dsonar.sources=./src
+            -Dsonar.tests=./tests
+            -Dsonar.sourceEncoding=UTF-8
+            -Dsonar.php.tests.reportPath=report.xml
+            -Dsonar.php.coverage.reportPaths=clover.xml
