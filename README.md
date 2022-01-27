@@ -1,8 +1,5 @@
 # `mobicms/captcha`
 
-This package is part of [mobiCMS](https://github.com/mobicms/mobicms) and [JohnCMS](https://github.com/johncms/johncms),
-but can be used freely in any other projects.
-
 [![GitHub](https://img.shields.io/github/license/mobicms/captcha?color=green)](https://github.com/mobicms/captcha/blob/develop/LICENSE)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mobicms/captcha)](https://github.com/mobicms/captcha/releases)
 [![Packagist](https://img.shields.io/packagist/dt/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
@@ -13,13 +10,15 @@ but can be used freely in any other projects.
 
 This library is a simple PHP CAPTCHA. Prevent form spam by generating random Captcha images.
 
-![Captchas examples](resources/example/captcha_example.png)
-
 Major features:
 - lightweight and fast
 - not create any temporary files
 - there are many settings that allow you to change the look of the picture
 - you can use your own font sets
+
+Example:
+
+![Captchas examples](resources/example/captcha_example.png)
 
 ## Installation
 
