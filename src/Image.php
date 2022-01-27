@@ -89,18 +89,11 @@ class Image implements Stringable
 
     private function setLetterCase(string $string, string $fontName): string
     {
-        $config = $this->config->getFontsConfiguration();
-
-        if (isset($config[$fontName]['case'])) {
-            switch ($config[$fontName]['case']) {
-                case Configuration::FONT_CASE_UPPER:
-                    return strtoupper($string);
-                case Configuration::FONT_CASE_LOWER:
-                    return strtolower($string);
-            }
-        }
-
-        return $string;
+        return match ($this->config->getFontCase($fontName)) {
+            Configuration::FONT_CASE_UPPER => strtoupper($string),
+            Configuration::FONT_CASE_LOWER => strtolower($string),
+            default => $string,
+        };
     }
 
     /**

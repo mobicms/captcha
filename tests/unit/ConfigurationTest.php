@@ -35,10 +35,4 @@ class ConfigurationTest extends TestCase
     {
         $this->assertIsBool($this->config->getFontShuffle());
     }
-
-    public function testGetFontsConfiguration(): void
-    {
-        $config = $this->config->getFontsConfiguration();
-        $this->assertArrayHasKey('baby_blocks.ttf', $config);
-    }
 }

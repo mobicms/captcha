@@ -79,10 +79,8 @@ class OptionsTest extends TestCase
     {
         $font = 'somefont.ttf';
         $this->options->adjustFont($font, 40, Options::FONT_CASE_UPPER);
-        $config = $this->options->getFontsConfiguration();
-        $this->assertArrayHasKey($font, $config);
-        $this->assertSame(40, $config[$font]['size']);
-        $this->assertSame(Options::FONT_CASE_UPPER, $config[$font]['case']);
+        $this->assertSame(40, $this->options->getFontSize($font));
+        $this->assertSame(Options::FONT_CASE_UPPER, $this->options->getFontCase($font));
     }
 
     public function testInvalidFontName(): void

@@ -21,6 +21,7 @@ class Configuration
     protected array $fontsConfiguration = [
         '3dlet.ttf' => [
             'size' => 38,
+            'case' => self::FONT_CASE_LOWER,
         ],
 
         'baby_blocks.ttf' => [
@@ -65,11 +66,8 @@ class Configuration
         return $this->fontsConfiguration[$font]['size'] ?? $this->defaultFontSize;
     }
 
-    /**
-     * @return array<string, array<int>>
-     */
-    public function getFontsConfiguration(): array
+    public function getFontCase(string $font): int
     {
-        return $this->fontsConfiguration;
+        return $this->fontsConfiguration[$font]['case'] ?? 0;
     }
 }
