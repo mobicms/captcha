@@ -12,12 +12,14 @@ use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
 {
-    private string $stub = __DIR__ . '/../stubs/';
-    private Image $image;
+    private const FOLDER = __DIR__ . '/../stubs/';
+    private const DATAIMAGE = 'data:image/png;base64';
+
+    private Image $imageObj;
 
     public function setUp(): void
     {
-        $this->image = new Image('abcd');
+        $this->imageObj = new Image('abcd');
     }
 
     /**
@@ -25,8 +27,8 @@ class ImageTest extends TestCase
      */
     public function testCanGenerateDataImageString(): void
     {
-        $image = $this->image->generate();
-        $this->assertStringStartsWith('data:image/png;base64', $image);
+        $image = $this->imageObj->generate();
+        $this->assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
     /**
@@ -34,8 +36,8 @@ class ImageTest extends TestCase
      */
     public function testCanGenerateValidImage(): void
     {
-        $this->writeImage($this->image->generate());
-        $info = getimagesize($this->stub . 'test.png');
+        $this->writeImage($this->imageObj->generate());
+        $info = getimagesize(self::FOLDER . 'test.png');
         $this->assertSame(190, $info[0]);
         $this->assertSame(80, $info[1]);
         $this->assertSame('image/png', $info['mime']);
@@ -43,8 +45,8 @@ class ImageTest extends TestCase
 
     public function testToString(): void
     {
-        $image = (string) $this->image;
-        $this->assertStringStartsWith('data:image/png;base64', $image);
+        $image = (string) $this->imageObj;
+        $this->assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
     /**
@@ -53,9 +55,9 @@ class ImageTest extends TestCase
     public function testSetCustomFontsFolder(): void
     {
         $options = new Options();
-        $options->setFontsFolder($this->stub);
+        $options->setFontsFolder(self::FOLDER);
         $image = (new Image('abcd', $options))->generate();
-        $this->assertStringStartsWith('data:image/png;base64', $image);
+        $this->assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
     public function testFontsDoesNotExist(): void
@@ -75,11 +77,11 @@ class ImageTest extends TestCase
     {
         $options = new Options();
         $options
-            ->setFontsFolder($this->stub)
+            ->setFontsFolder(self::FOLDER)
             ->adjustFont('test.ttf', 32, $case);
         $captcha = new Image('abcd', $options);
         $image = $captcha->generate();
-        $this->assertStringStartsWith('data:image/png;base64', $image);
+        $this->assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -88,8 +90,8 @@ class ImageTest extends TestCase
 
     private function writeImage(string $image): void
     {
-        $image = str_replace('data:image/png;base64,', '', $image);
-        file_put_contents($this->stub . 'test.png', base64_decode($image));
+        $image = str_replace(self::DATAIMAGE, '', $image);
+        file_put_contents(self::FOLDER . 'test.png', base64_decode($image));
     }
 
     /**
