@@ -65,7 +65,7 @@ class OptionsTest extends TestCase
     public function testSetDefaultFontSize(): void
     {
         $this->options->setDefaultFontSize(40);
-        $this->assertSame(40, $this->options->getDefaultFontSize());
+        $this->assertSame(40, $this->options->getFontSize());
     }
 
     public function testInvalidDefaultFontSize(): void

@@ -36,11 +36,6 @@ class ConfigurationTest extends TestCase
         $this->assertIsBool($this->config->getFontShuffle());
     }
 
-    public function testGetDefaultFontSize(): void
-    {
-        $this->assertSame(26, $this->config->getDefaultFontSize());
-    }
-
     public function testGetFontsConfiguration(): void
     {
         $config = $this->config->getFontsConfiguration();

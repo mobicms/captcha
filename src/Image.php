@@ -72,7 +72,7 @@ class Image implements Stringable
 
             $fontName = basename($font);
             $letter = $this->setLetterCase($iValue, $fontName);
-            $fontSize = $this->determineFontSize($fontName);
+            $fontSize = $this->config->getFontSize($fontName);
             $xPos = ($this->config->getImageWidth() - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
             $yPos = $this->config->getImageHeight() - (($this->config->getImageHeight() - $fontSize) / 2);
@@ -85,14 +85,6 @@ class Image implements Stringable
         }
 
         return $image;
-    }
-
-    private function determineFontSize(string $fontName): int
-    {
-        $fontsConfig = $this->config->getFontsConfiguration();
-        return isset($fontsConfig[$fontName])
-            ? $fontsConfig[$fontName]['size']
-            : $this->config->getDefaultFontSize();
     }
 
     private function setLetterCase(string $string, string $fontName): string

@@ -60,9 +60,9 @@ class Configuration
         return $this->fontShuffle;
     }
 
-    public function getDefaultFontSize(): int
+    public function getFontSize(string $font = ''): int
     {
-        return $this->defaultFontSize;
+        return $this->fontsConfiguration[$font]['size'] ?? $this->defaultFontSize;
     }
 
     /**
