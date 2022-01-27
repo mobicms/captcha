@@ -98,7 +98,7 @@ class ImageTest extends TestCase
     public function customFontValues(): array
     {
         return [
-            'RANDOM' => [Configuration::FONT_CASE_RANDOM],
+            'RANDOM' => [0],
             'UPPER'  => [Configuration::FONT_CASE_UPPER],
             'LOWER'  => [Configuration::FONT_CASE_LOWER],
         ];

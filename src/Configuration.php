@@ -8,7 +8,6 @@ class Configuration
 {
     public const FONT_CASE_UPPER = 2;
     public const FONT_CASE_LOWER = 1;
-    public const FONT_CASE_RANDOM = 0;
 
     protected int $imageHeight = 80;
     protected int $imageWidth = 190;
@@ -22,27 +21,22 @@ class Configuration
     protected array $fontsConfiguration = [
         '3dlet.ttf' => [
             'size' => 38,
-            'case' => self::FONT_CASE_LOWER,
         ],
 
         'baby_blocks.ttf' => [
             'size' => 16,
-            'case' => self::FONT_CASE_RANDOM,
         ],
 
         'betsy_flanagan.ttf' => [
             'size' => 30,
-            'case' => self::FONT_CASE_RANDOM,
         ],
 
         'karmaticarcade.ttf' => [
             'size' => 20,
-            'case' => self::FONT_CASE_RANDOM,
         ],
 
         'tonight.ttf' => [
             'size' => 28,
-            'case' => self::FONT_CASE_RANDOM,
         ],
     ];
 

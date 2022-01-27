@@ -62,7 +62,7 @@ class Options extends Configuration
     public function adjustFont(
         string $fontName,
         int $size,
-        int $case = self::FONT_CASE_RANDOM
+        int $case = 0
     ): self {
         if (pathinfo($fontName, PATHINFO_EXTENSION) !== 'ttf') {
             throw new InvalidArgumentException('The font file must be with the extension .ttf');

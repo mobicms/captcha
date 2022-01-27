@@ -99,7 +99,7 @@ class Image implements Stringable
     {
         $config = $this->config->getFontsConfiguration();
 
-        if (isset($config[$fontName])) {
+        if (isset($config[$fontName]['case'])) {
             switch ($config[$fontName]['case']) {
                 case Configuration::FONT_CASE_UPPER:
                     return strtoupper($string);
