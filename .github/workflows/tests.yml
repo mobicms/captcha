@@ -58,6 +58,7 @@ jobs:
         with:
           args: >
             -Dsonar.organization=mobicms
+            -Dsonar.projectName=captcha
             -Dsonar.projectKey=mobicms_captcha
             -Dsonar.sources=./src
             -Dsonar.tests=./tests
