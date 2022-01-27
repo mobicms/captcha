@@ -44,9 +44,3 @@ jobs:
       - name: PhpUnit test-coverage
         if: matrix.php-versions == '8.0'
         run: composer test-coverage
-
-      - name: Upload coverage
-        if: matrix.php-versions == '8.0'
-        uses: sudo-bot/action-scrutinizer@latest
-        with:
-          cli-args: "--format=php-clover clover.xml"

@@ -9,8 +9,6 @@ but can be used freely in any other projects.
 
 [![CI-Analysis](https://github.com/mobicms/captcha/workflows/Analysis/badge.svg)](https://github.com/mobicms/captcha/actions?query=workflow%3AAnalysis)
 [![CI-Tests](https://github.com/mobicms/captcha/workflows/Tests/badge.svg)](https://github.com/mobicms/captcha/actions?query=workflow%3ATests)
-[![Code Coverage](https://scrutinizer-ci.com/g/mobicms/captcha/badges/coverage.png)](https://scrutinizer-ci.com/g/mobicms/captcha/code-structure/main/code-coverage)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mobicms/captcha/badges/quality-score.png)](https://scrutinizer-ci.com/g/mobicms/captcha)
 
 This library is a simple PHP CAPTCHA. Prevent form spam by generating random Captcha images.
 
