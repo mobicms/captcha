@@ -1,11 +1,11 @@
 name: Tests
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   tests:
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1']
+        php-versions: [ '8.0', '8.1' ]
 
     runs-on: ubuntu-latest
 
@@ -44,3 +44,13 @@ jobs:
       - name: PhpUnit test-coverage
         if: matrix.php-versions == '8.0'
         run: composer test-coverage
+
+      - name: Upload coverage report
+        if: matrix.php-versions == '8.0'
+        uses: SonarSource/sonarcloud-github-action@v1.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.python.coverage.reportPaths=clover.xml
