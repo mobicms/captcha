@@ -53,4 +53,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.python.coverage.reportPaths=clover.xml
+            -sonar.php.coverage.reportPaths=clover.xml
