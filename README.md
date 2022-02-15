@@ -6,7 +6,7 @@
 
 [![CI-Analysis](https://github.com/mobicms/captcha/workflows/Analysis/badge.svg)](https://github.com/mobicms/captcha/actions?query=workflow%3AAnalysis)
 [![CI-Tests](https://github.com/mobicms/captcha/workflows/Tests/badge.svg)](https://github.com/mobicms/captcha/actions?query=workflow%3ATests)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mobicms_captcha&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mobicms_captcha)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mobicms_captcha&metric=alert_status)](https://sonarcloud.io/summary/overall?id=mobicms_captcha)
 
 This library is a simple PHP CAPTCHA. Prevent form spam by generating random Captcha images.
 
