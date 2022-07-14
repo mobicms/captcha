@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MobicmsTest\Captcha;
 
 use LogicException;
-use Mobicms\Captcha\Configuration;
 use Mobicms\Captcha\Image;
 use Mobicms\Captcha\Options;
 use PHPUnit\Framework\TestCase;
@@ -101,8 +100,8 @@ class ImageTest extends TestCase
     {
         return [
             'RANDOM' => [0],
-            'UPPER'  => [Configuration::FONT_CASE_UPPER],
-            'LOWER'  => [Configuration::FONT_CASE_LOWER],
+            'UPPER'  => [Options::FONT_CASE_UPPER],
+            'LOWER'  => [Options::FONT_CASE_LOWER],
         ];
     }
 }

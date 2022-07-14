@@ -10,8 +10,43 @@ use Stringable;
 use function pathinfo;
 use function is_dir;
 
-class Options extends Configuration
+class Options
 {
+    public const FONT_CASE_UPPER = 2;
+    public const FONT_CASE_LOWER = 1;
+
+    protected int $imageHeight = 80;
+    protected int $imageWidth = 190;
+    protected string $fontsFolder = __DIR__ . '/../resources/fonts';
+    protected bool $fontShuffle = true;
+    protected int $defaultFontSize = 26;
+
+    /**
+     * @var array<string, array<int>>
+     */
+    protected array $fontsConfiguration = [
+        '3dlet.ttf' => [
+            'size' => 38,
+            'case' => self::FONT_CASE_LOWER,
+        ],
+
+        'baby_blocks.ttf' => [
+            'size' => 16,
+        ],
+
+        'betsy_flanagan.ttf' => [
+            'size' => 30,
+        ],
+
+        'karmaticarcade.ttf' => [
+            'size' => 20,
+        ],
+
+        'tonight.ttf' => [
+            'size' => 28,
+        ],
+    ];
+
     public function setImageHeight(int $height): self
     {
         if ($height < 10) {
@@ -22,6 +57,11 @@ class Options extends Configuration
         return $this;
     }
 
+    public function getImageHeight(): int
+    {
+        return $this->imageHeight;
+    }
+
     public function setImageWidth(int $width): self
     {
         if ($width < 20) {
@@ -30,6 +70,11 @@ class Options extends Configuration
 
         $this->imageWidth = $width;
         return $this;
+    }
+
+    public function getImageWidth(): int
+    {
+        return $this->imageWidth;
     }
 
     public function setFontsFolder(string|Stringable $folder): self
@@ -43,10 +88,20 @@ class Options extends Configuration
         return $this;
     }
 
+    public function getFontsFolder(): string
+    {
+        return realpath($this->fontsFolder);
+    }
+
     public function setFontShuffle(bool $shuffle): self
     {
         $this->fontShuffle = $shuffle;
         return $this;
+    }
+
+    public function getFontShuffle(): bool
+    {
+        return $this->fontShuffle;
     }
 
     public function setDefaultFontSize(int $size): self
@@ -57,6 +112,16 @@ class Options extends Configuration
 
         $this->defaultFontSize = $size;
         return $this;
+    }
+
+    public function getFontSize(string $font = ''): int
+    {
+        return $this->fontsConfiguration[$font]['size'] ?? $this->defaultFontSize;
+    }
+
+    public function getFontCase(string $font): int
+    {
+        return $this->fontsConfiguration[$font]['case'] ?? 0;
     }
 
     public function adjustFont(

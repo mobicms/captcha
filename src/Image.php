@@ -15,12 +15,12 @@ class Image implements Stringable
 
     private string $code;
 
-    private Configuration $config;
+    private Options $config;
 
-    public function __construct(string|Stringable $code, Configuration $config = null)
+    public function __construct(string|Stringable $code, Options $config = null)
     {
         $this->code = (string) $code;
-        $this->config = $config ?? new Configuration();
+        $this->config = $config ?? new Options();
         $this->fontList = $this->prepareFontsList();
     }
 
@@ -90,8 +90,8 @@ class Image implements Stringable
     private function setLetterCase(string $string, string $fontName): string
     {
         return match ($this->config->getFontCase($fontName)) {
-            Configuration::FONT_CASE_UPPER => strtoupper($string),
-            Configuration::FONT_CASE_LOWER => strtolower($string),
+            Options::FONT_CASE_UPPER => strtoupper($string),
+            Options::FONT_CASE_LOWER => strtolower($string),
             default => $string,
         };
     }

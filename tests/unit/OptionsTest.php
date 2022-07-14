@@ -17,6 +17,11 @@ class OptionsTest extends TestCase
         $this->options = new Options();
     }
 
+    public function testGetImageHeight(): void
+    {
+        $this->assertSame(80, $this->options->getImageHeight());
+    }
+
     public function testSetImageHeight(): void
     {
         $this->options->setImageHeight(100);
@@ -27,6 +32,11 @@ class OptionsTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->options->setImageHeight(1);
+    }
+
+    public function testGetImageWidth(): void
+    {
+        $this->assertSame(190, $this->options->getImageWidth());
     }
 
     public function testSetImageWidth(): void
@@ -41,6 +51,11 @@ class OptionsTest extends TestCase
         $this->options->setImageWidth(1);
     }
 
+    public function testGetFontsFolder(): void
+    {
+        $this->assertStringEndsWith('fonts', $this->options->getFontsFolder());
+    }
+
     public function testSetFontsFolder(): void
     {
         $this->options->setFontsFolder(__DIR__);
@@ -52,6 +67,11 @@ class OptionsTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The specified folder does not exist.');
         $this->options->setFontsFolder('invalid_folder');
+    }
+
+    public function testGetFontShuffle(): void
+    {
+        $this->assertIsBool($this->options->getFontShuffle());
     }
 
     public function testSetFontShuffle(): void
