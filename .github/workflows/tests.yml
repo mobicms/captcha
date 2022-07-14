@@ -36,15 +36,15 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-progress --no-suggest --no-interaction
+        run: composer install --no-progress --no-interaction --ignore-platform-req
 
       - name: PhpUnit test
-        if: matrix.php-versions != '8.0'
+        if: matrix.php-versions != '8.1'
         run: composer test
         continue-on-error: true
 
       - name: PhpUnit test-coverage
-        if: matrix.php-versions == '8.0'
+        if: matrix.php-versions == '8.1'
         working-directory: ./
         run: |
           composer test-coverage
@@ -52,7 +52,7 @@ jobs:
           sed -i 's/\/home\/runner\/work\/captcha\/captcha\//\/github\/workspace\//g' clover.xml
 
       - name: Upload coverage report
-        if: matrix.php-versions == '8.0'
+        if: matrix.php-versions == '8.1'
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

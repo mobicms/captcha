@@ -12,7 +12,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'
 
       - name: Get composer cache directory
         id: composer-cache
@@ -26,7 +26,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-progress --no-suggest --no-interaction
+        run: composer install --no-progress --no-interaction
 
       - name: PHP CodeSniffer
         run: composer cs-check
@@ -41,7 +41,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'
 
       - name: Get composer cache directory
         id: composer-cache
@@ -55,7 +55,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-progress --no-suggest --no-interaction
+        run: composer install --no-progress --no-interaction
 
       - name: Static Analysis using Psalm
         run: composer static-analysis
