@@ -10,7 +10,7 @@ use Stringable;
 use function pathinfo;
 use function is_dir;
 
-class Options
+class ImageOptions
 {
     public const FONT_CASE_UPPER = 2;
     public const FONT_CASE_LOWER = 1;
@@ -47,7 +47,7 @@ class Options
         ],
     ];
 
-    public function setImageHeight(int $height): self
+    public function setHeight(int $height): self
     {
         if ($height < 10) {
             throw new InvalidArgumentException('Image size cannot be less than 20x10px');
@@ -57,12 +57,12 @@ class Options
         return $this;
     }
 
-    public function getImageHeight(): int
+    public function getHeight(): int
     {
         return $this->imageHeight;
     }
 
-    public function setImageWidth(int $width): self
+    public function setWidth(int $width): self
     {
         if ($width < 20) {
             throw new InvalidArgumentException('Image size cannot be less than 20x10px');
@@ -72,7 +72,7 @@ class Options
         return $this;
     }
 
-    public function getImageWidth(): int
+    public function getWidth(): int
     {
         return $this->imageWidth;
     }

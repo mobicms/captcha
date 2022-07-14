@@ -5,50 +5,50 @@ declare(strict_types=1);
 namespace MobicmsTest\Captcha;
 
 use InvalidArgumentException;
-use Mobicms\Captcha\Options;
+use Mobicms\Captcha\ImageOptions;
 use PHPUnit\Framework\TestCase;
 
-class OptionsTest extends TestCase
+class ImageOptionsTest extends TestCase
 {
-    private Options $options;
+    private ImageOptions $options;
 
     public function setUp(): void
     {
-        $this->options = new Options();
+        $this->options = new ImageOptions();
     }
 
     public function testGetImageHeight(): void
     {
-        $this->assertSame(80, $this->options->getImageHeight());
+        $this->assertSame(80, $this->options->getHeight());
     }
 
     public function testSetImageHeight(): void
     {
-        $this->options->setImageHeight(100);
-        $this->assertSame(100, $this->options->getImageHeight());
+        $this->options->setHeight(100);
+        $this->assertSame(100, $this->options->getHeight());
     }
 
     public function testSetImageHeightInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->options->setImageHeight(1);
+        $this->options->setHeight(1);
     }
 
     public function testGetImageWidth(): void
     {
-        $this->assertSame(190, $this->options->getImageWidth());
+        $this->assertSame(190, $this->options->getWidth());
     }
 
     public function testSetImageWidth(): void
     {
-        $this->options->setImageWidth(100);
-        $this->assertSame(100, $this->options->getImageWidth());
+        $this->options->setWidth(100);
+        $this->assertSame(100, $this->options->getWidth());
     }
 
     public function testSetImageWidthInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->options->setImageWidth(1);
+        $this->options->setWidth(1);
     }
 
     public function testGetFontsFolder(): void
@@ -98,14 +98,14 @@ class OptionsTest extends TestCase
     public function testAdjustFont(): void
     {
         $font = 'somefont.ttf';
-        $this->options->adjustFont($font, 40, Options::FONT_CASE_UPPER);
+        $this->options->adjustFont($font, 40, ImageOptions::FONT_CASE_UPPER);
         $this->assertSame(40, $this->options->getFontSize($font));
-        $this->assertSame(Options::FONT_CASE_UPPER, $this->options->getFontCase($font));
+        $this->assertSame(ImageOptions::FONT_CASE_UPPER, $this->options->getFontCase($font));
     }
 
     public function testInvalidFontName(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->options->adjustFont('somefont.jpg', 27, Options::FONT_CASE_UPPER);
+        $this->options->adjustFont('somefont.jpg', 27, ImageOptions::FONT_CASE_UPPER);
     }
 }

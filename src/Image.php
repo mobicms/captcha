@@ -15,12 +15,14 @@ class Image implements Stringable
 
     private string $code;
 
-    private Options $config;
+    private ImageOptions $imageOptions;
 
-    public function __construct(string|Stringable $code, Options $config = null)
-    {
+    public function __construct(
+        string|Stringable $code,
+        ImageOptions $imageOptions = null
+    ) {
         $this->code = (string) $code;
-        $this->config = $config ?? new Options();
+        $this->imageOptions = $imageOptions ?? new ImageOptions();
         $this->fontList = $this->prepareFontsList();
     }
 
@@ -38,7 +40,7 @@ class Image implements Stringable
     public function generate(): string
     {
         ob_start();
-        $image = imagecreatetruecolor($this->config->getImageWidth(), $this->config->getImageHeight());
+        $image = imagecreatetruecolor($this->imageOptions->getWidth(), $this->imageOptions->getHeight());
 
         if ($image !== false) {
             $color = imagecolorallocatealpha($image, 0, 0, 0, 127);
@@ -66,16 +68,16 @@ class Image implements Stringable
         $len = count(/** @scrutinizer ignore-type */ $symbols);
 
         foreach ($symbols as $i => $iValue) {
-            if ($this->config->getFontShuffle()) {
+            if ($this->imageOptions->getFontShuffle()) {
                 $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
             }
 
             $fontName = basename($font);
             $letter = $this->setLetterCase($iValue, $fontName);
-            $fontSize = $this->config->getFontSize($fontName);
-            $xPos = ($this->config->getImageWidth() - $fontSize) / $len * $i + ($fontSize / 2);
+            $fontSize = $this->imageOptions->getFontSize($fontName);
+            $xPos = ($this->imageOptions->getWidth() - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
-            $yPos = $this->config->getImageHeight() - (($this->config->getImageHeight() - $fontSize) / 2);
+            $yPos = $this->imageOptions->getHeight() - (($this->imageOptions->getHeight() - $fontSize) / 2);
             $angle = random_int(-25, 25);
             $color = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
 
@@ -89,9 +91,9 @@ class Image implements Stringable
 
     private function setLetterCase(string $string, string $fontName): string
     {
-        return match ($this->config->getFontCase($fontName)) {
-            Options::FONT_CASE_UPPER => strtoupper($string),
-            Options::FONT_CASE_LOWER => strtolower($string),
+        return match ($this->imageOptions->getFontCase($fontName)) {
+            ImageOptions::FONT_CASE_UPPER => strtoupper($string),
+            ImageOptions::FONT_CASE_LOWER => strtolower($string),
             default => $string,
         };
     }
@@ -101,7 +103,7 @@ class Image implements Stringable
      */
     private function prepareFontsList(): array
     {
-        $list = glob(realpath($this->config->getFontsFolder()) . DIRECTORY_SEPARATOR . '*.ttf');
+        $list = glob(realpath($this->imageOptions->getFontsFolder()) . DIRECTORY_SEPARATOR . '*.ttf');
 
         if ([] === $list || false === $list) {
             throw new LogicException('The specified folder does not contain any fonts.');

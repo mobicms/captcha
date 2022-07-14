@@ -6,7 +6,7 @@ namespace MobicmsTest\Captcha;
 
 use LogicException;
 use Mobicms\Captcha\Image;
-use Mobicms\Captcha\Options;
+use Mobicms\Captcha\ImageOptions;
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
@@ -53,7 +53,7 @@ class ImageTest extends TestCase
      */
     public function testSetCustomFontsFolder(): void
     {
-        $options = new Options();
+        $options = new ImageOptions();
         $options->setFontsFolder(self::FOLDER);
         $image = (new Image('abcd', $options))->generate();
         $this->assertStringStartsWith(self::DATAIMAGE, $image);
@@ -63,7 +63,7 @@ class ImageTest extends TestCase
     {
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('The specified folder does not contain any fonts.');
-        $options = new Options();
+        $options = new ImageOptions();
         $options->setFontsFolder(__DIR__);
         new Image('abcd', $options);
     }
@@ -74,7 +74,7 @@ class ImageTest extends TestCase
      */
     public function testSetLetterCase(int $case): void
     {
-        $options = new Options();
+        $options = new ImageOptions();
         $options
             ->setFontsFolder(self::FOLDER)
             ->adjustFont('test.ttf', 32, $case);
@@ -100,8 +100,8 @@ class ImageTest extends TestCase
     {
         return [
             'RANDOM' => [0],
-            'UPPER'  => [Options::FONT_CASE_UPPER],
-            'LOWER'  => [Options::FONT_CASE_LOWER],
+            'UPPER'  => [ImageOptions::FONT_CASE_UPPER],
+            'LOWER'  => [ImageOptions::FONT_CASE_LOWER],
         ];
     }
 }
