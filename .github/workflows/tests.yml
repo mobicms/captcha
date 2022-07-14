@@ -36,7 +36,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-progress --no-interaction --ignore-platform-req
+        run: composer install --no-progress --no-interaction --ignore-platform-req=php
 
       - name: PhpUnit test
         if: matrix.php-versions != '8.1'
