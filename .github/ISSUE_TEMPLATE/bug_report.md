@@ -48,7 +48,7 @@ If applicable, add screenshots or program output to help explain your problem.
 
  - OS: [e.g. Windows 10, Linux (Ubuntu 18.04.1), macOS Mojave (10.14.2)]
  - PHP version: [e.g. 7.1.25, 7.2.13]
- - mobicms/captcha version: [e.g. 1.0.0, 1.0.1, 1.1.0]
+ - **mobicms** package version: [e.g. 1.0.0, 1.0.1, 1.1.0]
 
 ## Additional context
 

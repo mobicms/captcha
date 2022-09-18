@@ -1,8 +1,8 @@
 # Contributing
 
-Contributions are welcome. I accept pull requests on [GitHub][].
+Contributions are welcome. I accept pull requests on [GitHub][github].
 
-This project adheres to a [Contributor Code of Conduct][]. By participating in
+This project adheres to a [Contributor Code of Conduct][contributor]. By participating in
 this project and its community, you are expected to uphold this code.
 
 
@@ -10,7 +10,7 @@ this project and its community, you are expected to uphold this code.
 
 You can find help and discussion in the following places:
 
-* GitHub Issues: <https://github.com/mobicms/captcha/issues>
+* [GitHub Issues][issues]
 
 
 ## Reporting Bugs
@@ -54,21 +54,20 @@ When you do begin working on your feature, here are some guidelines to consider:
   I will use this description to update the CHANGELOG. If there is no
   description or it does not adequately describe your feature, I will ask you
   to update the description.
-* mobicms/captcha follows the **[PSR-12 coding standard][psr-12]**. Please
+* Our project follows the **[PSR-12 coding standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md)**. Please
   ensure your code does, too.
 * Please **write tests** for any new features you add.
 * Please **ensure that tests pass** before submitting your pull request.
-  mobicms/captcha has Travis CI automatically running tests for pull requests.
+  Our project has CI automatically running tests for pull requests.
   However, running the tests locally will help save time.
 * **Use topic/feature branches.** Please do not ask to pull from your master
   branch.
-  * For more information, see "[Understanding the GitHub flow][gh-flow]."
+  * For more information, see "[Understanding the GitHub flow](https://guides.github.com/introduction/flow)."
 * **Submit one feature per pull request.** If you have multiple features you
   wish to submit, please break them up into separate pull requests.
 * **Write good commit messages.** Make sure each individual commit in your pull
   request is meaningful. If you had to make multiple intermediate commits while
   developing, please squash them before submitting.
-  * For more information, see "[How to Write a Git Commit Message][git-commit]."
 
 
 ## Running Tests
@@ -87,9 +86,6 @@ composer check
 
 
 [github]: https://github.com/mobicms/captcha
-[contributor code of conduct]: https://github.com/mobicms/captcha/blob/master/.github/CODE_OF_CONDUCT.md
+[contributor]: https://github.com/mobicms/captcha/blob/master/.github/CODE_OF_CONDUCT.md
 [issues]: https://github.com/mobicms/captcha/issues
 [pull requests]: https://github.com/mobicms/captcha/pulls
-[psr-12]: https://github.com/php-fig/fig-standards/blob/master/proposed/extended-coding-style-guide.md
-[gh-flow]: https://guides.github.com/introduction/flow/
-[git-commit]: https://chris.beams.io/posts/git-commit/

@@ -38,12 +38,12 @@ jobs:
       - name: Install dependencies
         run: composer install --no-progress --no-interaction --ignore-platform-req=php
 
-      - name: PhpUnit test
+      - name: Test
         if: matrix.php-versions != '8.1'
         run: composer test
         continue-on-error: true
 
-      - name: PhpUnit test-coverage
+      - name: Test with Coverage
         if: matrix.php-versions == '8.1'
         working-directory: ./
         run: |
@@ -51,7 +51,7 @@ jobs:
           sed -i 's/\/home\/runner\/work\/captcha\/captcha\//\/github\/workspace\//g' report.xml
           sed -i 's/\/home\/runner\/work\/captcha\/captcha\//\/github\/workspace\//g' clover.xml
 
-      - name: Upload coverage report
+      - name: Scan code with SonarCloud
         if: matrix.php-versions == '8.1'
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -67,3 +67,9 @@ jobs:
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.php.tests.reportPath=report.xml
             -Dsonar.php.coverage.reportPaths=clover.xml
+
+      - name: Test with latest dependencies
+        if: matrix.php-versions == '8.1'
+        run: |
+          composer update
+          composer test
