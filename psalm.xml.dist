@@ -1,11 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<psalm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="https://getpsalm.org/schema/config"
-       xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd">
+<?xml version="1.0"?>
+<psalm
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+        findUnusedPsalmSuppress="true"
+        findUnusedCode="true"
+>
     <projectFiles>
         <directory name="src"/>
         <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Mobicms\Captcha\ImageOptions::setHeight"/>
+                <referencedMethod name="Mobicms\Captcha\ImageOptions::setWidth"/>
+                <referencedMethod name="Mobicms\Captcha\ImageOptions::setFontsFolder"/>
+                <referencedMethod name="Mobicms\Captcha\ImageOptions::setFontShuffle"/>
+                <referencedMethod name="Mobicms\Captcha\ImageOptions::setDefaultFontSize"/>
+                <referencedMethod name="Mobicms\Captcha\ImageOptions::adjustFont"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Mobicms\Captcha\Code"/>
+                <referencedClass name="Mobicms\Captcha\Image"/>
+            </errorLevel>
+        </UnusedClass>
+    </issueHandlers>
 </psalm>

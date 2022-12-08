@@ -36,7 +36,7 @@
         "phpunit/phpunit": "^9.5",
         "slevomat/coding-standard": "^7.2",
         "squizlabs/php_codesniffer": "^3.7",
-        "vimeo/psalm": "^4.27"
+        "vimeo/psalm": "^5.1"
     },
     "autoload": {
         "psr-4": {
