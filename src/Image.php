@@ -48,7 +48,7 @@ class Image implements Stringable
             if ($color !== false) {
                 imagesavealpha($image, true);
                 imagefill($image, 0, 0, $color);
-                $image = $this->drawTextOnImage(/** @scrutinizer ignore-type */ $image);
+                $image = $this->drawTextOnImage($image);
                 imagepng($image);
                 imagedestroy($image);
             }
@@ -65,7 +65,7 @@ class Image implements Stringable
     {
         $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
         $symbols = str_split($this->code);
-        $len = count(/** @scrutinizer ignore-type */ $symbols);
+        $len = count($symbols);
 
         foreach ($symbols as $i => $iValue) {
             if ($this->imageOptions->getFontShuffle()) {
