@@ -15,7 +15,7 @@
             "email": "oleg@mobicms.org"
         },
         {
-            "name": "mobiCMS Contributors",
+            "name": "Our Contributors",
             "homepage": "https://github.com/mobicms/captcha/graphs/contributors"
         }
     ],
@@ -29,7 +29,7 @@
         }
     },
     "require": {
-        "php": "~8.0.0 || ~8.1.0",
+        "php": "~8.0 || ~8.1 || ~8.2",
         "ext-gd": "*"
     },
     "require-dev": {
