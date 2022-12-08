@@ -4,8 +4,8 @@
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mobicms/captcha)](https://github.com/mobicms/captcha/releases)
 [![Packagist](https://img.shields.io/packagist/dt/mobicms/captcha)](https://packagist.org/packages/mobicms/captcha)
 
-[![CI-Analysis](https://github.com/mobicms/captcha/workflows/Analysis/badge.svg)](https://github.com/mobicms/captcha/actions?query=workflow%3AAnalysis)
-[![CI-Tests](https://github.com/mobicms/captcha/workflows/Tests/badge.svg)](https://github.com/mobicms/captcha/actions?query=workflow%3ATests)
+[![CI-Analysis](https://github.com/mobicms/captcha/workflows/analysis/badge.svg)](https://github.com/mobicms/captcha/actions?query=workflow%3AAnalysis)
+[![CI-Tests](https://github.com/mobicms/captcha/workflows/tests/badge.svg)](https://github.com/mobicms/captcha/actions?query=workflow%3ATests)
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/mobicms_captcha?server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/code?id=mobicms_captcha)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mobicms_captcha&metric=alert_status)](https://sonarcloud.io/summary/overall?id=mobicms_captcha)
 
@@ -66,29 +66,27 @@ if ($result !== null && $session !== null) {
 
 
 ## Contributing
+Contributions are welcome! Please read [Contributing][contributing] for details.
 
-Contributions are welcome! Please read [CONTRIBUTING][CONTRIBUTING] for details.  
+[![YAGNI](https://img.shields.io/badge/principle-YAGNI-blueviolet.svg)][yagni]
+[![KISS](https://img.shields.io/badge/principle-KISS-blueviolet.svg)][kiss]
 
-This project adheres to a [Contributor Code of Conduct][Code of Conduct].
-By participating in this project and its community, you are expected to uphold this code.
-
-[![YAGNI](https://img.shields.io/badge/principle-YAGNI-blueviolet.svg)](https://en.wikipedia.org/wiki/YAGNI)
-[![KISS](https://img.shields.io/badge/principle-KISS-blueviolet.svg)](https://en.wikipedia.org/wiki/KISS_principle)
-
-In our development, we follow the principles of YAGNI and KISS.  
+In our development, we follow the principles of [YAGNI][yagni] and [KISS][kiss].
 The source code should not have extra unnecessary functionality and should be as simple and efficient as possible.
 
 ## License
 
-The mobicms/captcha library is licensed for use under the MIT License (MIT).  
-Please see [LICENSE][LICENSE] for more information.
+This package is licensed for use under the MIT License (MIT).  
+Please see [LICENSE][license] for more information.
 
 
 ## Our links
-- [**mobiCMS Project**](https://mobicms.org) website and support forum
-- [**Facebook**](https://www.facebook.com/mobicms)
+- [**mobiCMS Project**][website] website and support forum
+- [**GitHub**](https://github.com/mobicms) mobiCMS project repositories
 - [**Twitter**](https://twitter.com/mobicms)
 
-[CONTRIBUTING]: https://github.com/mobicms/captcha/blob/main/.github/CONTRIBUTING.md
-[Code of Conduct]: https://github.com/mobicms/captcha/blob/main/.github/CODE_OF_CONDUCT.md
-[LICENSE]: https://github.com/mobicms/captcha/blob/main/LICENSE
+[website]: https://mobicms.org
+[yagni]: https://en.wikipedia.org/wiki/YAGNI
+[kiss]: https://en.wikipedia.org/wiki/KISS_principle
+[contributing]: https://github.com/mobicms/captcha/blob/main/.github/CONTRIBUTING.md
+[license]: https://github.com/mobicms/captcha/blob/main/LICENSE
