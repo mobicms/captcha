@@ -50,14 +50,7 @@ class CodeTest extends TestCase
         new Code($lengthMin, $lengthMax, $characterSet);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////
-    // Auxiliary methods                                                          //
-    ////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * @return array[]
-     */
-    public function invalidValues(): array
+    public static function invalidValues(): array
     {
         return [
             'Minimum length value less than 1'        => [0, 5, 'abcd'],

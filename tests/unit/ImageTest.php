@@ -83,20 +83,13 @@ class ImageTest extends TestCase
         $this->assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////
-    // Auxiliary methods                                                          //
-    ////////////////////////////////////////////////////////////////////////////////
-
     private function writeImage(string $image): void
     {
         $image = str_replace(self::DATAIMAGE, '', $image);
         file_put_contents(self::FOLDER . 'test.png', base64_decode($image));
     }
 
-    /**
-     * @psalm-return array<array<int>>
-     */
-    public function customFontValues(): array
+    public static function customFontValues(): array
     {
         return [
             'RANDOM' => [0],
