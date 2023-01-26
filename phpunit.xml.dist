@@ -7,7 +7,7 @@
          failOnRisky="true"
          failOnWarning="true"
          colors="true"
-         cacheDirectory=".phpunit.cache"
+         cacheDirectory=".cache"
          beStrictAboutCoverageMetadata="true">
 
     <testsuites>
