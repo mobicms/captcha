@@ -3,7 +3,6 @@
          xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
     <config name="installed_paths" value="../../slevomat/coding-standard"/>
     <arg name="basepath" value="."/>
-    <arg name="cache" value=".cache/phpcs.cache"/>
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
     <arg name="parallel" value="80"/>
