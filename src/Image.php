@@ -103,7 +103,7 @@ class Image implements Stringable
      */
     private function prepareFontsList(): array
     {
-        $list = glob(realpath($this->imageOptions->getFontsFolder()) . DIRECTORY_SEPARATOR . '*.ttf');
+        $list = glob($this->imageOptions->getFontsFolder() . DIRECTORY_SEPARATOR . '*.ttf');
 
         if ([] === $list || false === $list) {
             throw new LogicException('The specified folder does not contain any fonts.');

@@ -90,7 +90,7 @@ class ImageOptions
 
     public function getFontsFolder(): string
     {
-        return realpath($this->fontsFolder);
+        return (string) realpath($this->fontsFolder);
     }
 
     public function setFontShuffle(bool $shuffle): self
