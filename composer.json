@@ -39,7 +39,7 @@
         "phpunit/phpunit": "^10.5",
         "slevomat/coding-standard": "^8.15",
         "squizlabs/php_codesniffer": "^3.10",
-        "vimeo/psalm": "^5.25"
+        "phpstan/phpstan": "^1.12"
     },
     "autoload": {
         "psr-4": {
@@ -55,13 +55,11 @@
         "check": [
             "@cs-check",
             "@static-analysis",
-            "@taint-analysis",
             "@test"
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "static-analysis": "psalm --show-info=true",
-        "taint-analysis": "psalm --taint-analysis --show-info=true --report=results.sarif",
+        "static-analysis": "phpstan analyse --level 6 src tests",
         "test": "phpunit --colors=always",
         "test-coverage": [
             "@putenv XDEBUG_MODE=coverage",

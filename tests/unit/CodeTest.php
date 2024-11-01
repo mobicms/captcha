@@ -50,6 +50,9 @@ class CodeTest extends TestCase
         new Code($lengthMin, $lengthMax, $characterSet);
     }
 
+    /**
+     * @return array<array<mixed>>
+     */
     public static function invalidValues(): array
     {
         return [

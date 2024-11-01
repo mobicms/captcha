@@ -89,6 +89,9 @@ class ImageTest extends TestCase
         file_put_contents(self::FOLDER . 'test.png', base64_decode($image));
     }
 
+    /**
+     * @return array<array<int>>
+     */
     public static function customFontValues(): array
     {
         return [
