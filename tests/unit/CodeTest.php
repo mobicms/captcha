@@ -6,6 +6,7 @@ namespace MobicmsTest\Captcha;
 
 use InvalidArgumentException;
 use Mobicms\Captcha\Code;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class CodeTest extends TestCase
@@ -38,9 +39,7 @@ class CodeTest extends TestCase
         $this->assertEquals('bbb', $code);
     }
 
-    /**
-     * @dataProvider invalidValues
-     */
+    #[DataProvider('invalidValues')]
     public function testInvalidParameterValues(
         int $lengthMin,
         int $lengthMax,

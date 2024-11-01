@@ -7,6 +7,7 @@ namespace MobicmsTest\Captcha;
 use LogicException;
 use Mobicms\Captcha\Image;
 use Mobicms\Captcha\ImageOptions;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
@@ -69,9 +70,9 @@ class ImageTest extends TestCase
     }
 
     /**
-     * @dataProvider customFontValues
      * @throws \Exception
      */
+    #[DataProvider('customFontValues')]
     public function testSetLetterCase(int $case): void
     {
         $options = new ImageOptions();
