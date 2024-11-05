@@ -71,7 +71,7 @@ class ImageOptionsTest extends TestCase
 
     public function testGetFontShuffle(): void
     {
-        $this->assertIsBool($this->options->getFontShuffle());
+        $this->assertTrue($this->options->getFontShuffle());
     }
 
     public function testSetFontShuffle(): void
