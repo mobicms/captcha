@@ -28,7 +28,7 @@ class ImageTest extends TestCase
     public function testCanGenerateDataImageString(): void
     {
         $image = $this->imageObj->generate();
-        $this->assertStringStartsWith(self::DATAIMAGE, $image);
+        self::assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
     /**
@@ -38,15 +38,15 @@ class ImageTest extends TestCase
     {
         $this->writeImage($this->imageObj->generate());
         $info = getimagesize(self::FOLDER . 'test.png');
-        $this->assertSame(190, $info[0]);
-        $this->assertSame(80, $info[1]);
-        $this->assertSame('image/png', $info['mime']);
+        self::assertSame(190, $info[0]);
+        self::assertSame(80, $info[1]);
+        self::assertSame('image/png', $info['mime']);
     }
 
     public function testToString(): void
     {
         $image = (string) $this->imageObj;
-        $this->assertStringStartsWith(self::DATAIMAGE, $image);
+        self::assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
     /**
@@ -57,7 +57,7 @@ class ImageTest extends TestCase
         $options = new ImageOptions();
         $options->setFontsFolder(self::FOLDER);
         $image = (new Image('abcd', $options))->generate();
-        $this->assertStringStartsWith(self::DATAIMAGE, $image);
+        self::assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
     public function testFontsDoesNotExist(): void
@@ -81,12 +81,13 @@ class ImageTest extends TestCase
             ->adjustFont('test.ttf', 32, $case);
         $captcha = new Image('abcd', $options);
         $image = $captcha->generate();
-        $this->assertStringStartsWith(self::DATAIMAGE, $image);
+        self::assertStringStartsWith(self::DATAIMAGE, $image);
     }
 
     private function writeImage(string $image): void
     {
         $image = str_replace(self::DATAIMAGE, '', $image);
+        /** @phpstan-ignore function.strict */
         file_put_contents(self::FOLDER . 'test.png', base64_decode($image));
     }
 

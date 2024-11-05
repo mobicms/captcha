@@ -19,13 +19,13 @@ class ImageOptionsTest extends TestCase
 
     public function testGetImageHeight(): void
     {
-        $this->assertSame(80, $this->options->getHeight());
+        self::assertSame(80, $this->options->getHeight());
     }
 
     public function testSetImageHeight(): void
     {
         $this->options->setHeight(100);
-        $this->assertSame(100, $this->options->getHeight());
+        self::assertSame(100, $this->options->getHeight());
     }
 
     public function testSetImageHeightInvalidValue(): void
@@ -36,13 +36,13 @@ class ImageOptionsTest extends TestCase
 
     public function testGetImageWidth(): void
     {
-        $this->assertSame(190, $this->options->getWidth());
+        self::assertSame(190, $this->options->getWidth());
     }
 
     public function testSetImageWidth(): void
     {
         $this->options->setWidth(100);
-        $this->assertSame(100, $this->options->getWidth());
+        self::assertSame(100, $this->options->getWidth());
     }
 
     public function testSetImageWidthInvalidValue(): void
@@ -53,13 +53,13 @@ class ImageOptionsTest extends TestCase
 
     public function testGetFontsFolder(): void
     {
-        $this->assertStringEndsWith('fonts', $this->options->getFontsFolder());
+        self::assertStringEndsWith('fonts', $this->options->getFontsFolder());
     }
 
     public function testSetFontsFolder(): void
     {
         $this->options->setFontsFolder(__DIR__);
-        $this->assertSame(__DIR__, $this->options->getFontsFolder());
+        self::assertSame(__DIR__, $this->options->getFontsFolder());
     }
 
     public function testInvalidFontsFolder(): void
@@ -71,21 +71,21 @@ class ImageOptionsTest extends TestCase
 
     public function testGetFontShuffle(): void
     {
-        $this->assertTrue($this->options->getFontShuffle());
+        self::assertTrue($this->options->getFontShuffle());
     }
 
     public function testSetFontShuffle(): void
     {
         $this->options->setFontShuffle(false);
-        $this->assertFalse($this->options->getFontShuffle());
+        self::assertFalse($this->options->getFontShuffle());
         $this->options->setFontShuffle(true);
-        $this->assertTrue($this->options->getFontShuffle());
+        self::assertTrue($this->options->getFontShuffle());
     }
 
     public function testSetDefaultFontSize(): void
     {
         $this->options->setDefaultFontSize(40);
-        $this->assertSame(40, $this->options->getFontSize());
+        self::assertSame(40, $this->options->getFontSize());
     }
 
     public function testInvalidDefaultFontSize(): void
@@ -99,8 +99,8 @@ class ImageOptionsTest extends TestCase
     {
         $font = 'somefont.ttf';
         $this->options->adjustFont($font, 40, ImageOptions::FONT_CASE_UPPER);
-        $this->assertSame(40, $this->options->getFontSize($font));
-        $this->assertSame(ImageOptions::FONT_CASE_UPPER, $this->options->getFontCase($font));
+        self::assertSame(40, $this->options->getFontSize($font));
+        self::assertSame(ImageOptions::FONT_CASE_UPPER, $this->options->getFontCase($font));
     }
 
     public function testInvalidFontName(): void

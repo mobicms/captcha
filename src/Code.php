@@ -38,7 +38,7 @@ class Code implements Stringable
             );
         }
 
-        if (empty($this->characterSet)) {
+        if ($this->characterSet === '') {
             throw new InvalidArgumentException(
                 'Character set cannot be empty'
             );

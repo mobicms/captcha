@@ -14,29 +14,29 @@ class CodeTest extends TestCase
     public function testCanGenerateRandomCode(): void
     {
         $code = (new Code())->generate();
-        $this->assertGreaterThanOrEqual(3, strlen($code));
+        self::assertGreaterThanOrEqual(3, strlen($code));
     }
 
     public function testToString(): void
     {
         $code = (string) new Code();
-        $this->assertGreaterThanOrEqual(3, strlen($code));
+        self::assertGreaterThanOrEqual(3, strlen($code));
     }
 
     public function testCanSpecifyLength(): void
     {
         $code = (string) new Code(2, 2);
-        $this->assertEquals(2, strlen($code));
+        self::assertEquals(2, strlen($code));
         $code = (string) new Code(5, 5);
-        $this->assertEquals(5, strlen($code));
+        self::assertEquals(5, strlen($code));
     }
 
     public function testCanSpecifyLetters(): void
     {
         $code = (string) new Code(3, 3, 'aaaaa');
-        $this->assertEquals('aaa', $code);
+        self::assertEquals('aaa', $code);
         $code = (string) new Code(3, 3, 'bb');
-        $this->assertEquals('bbb', $code);
+        self::assertEquals('bbb', $code);
     }
 
     #[DataProvider('invalidValues')]
