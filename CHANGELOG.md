@@ -12,7 +12,8 @@ Detailed changes can see in the [repository log].
 - Nothing
 
 #### Changed
-- Nothing
+- Bumped minimum PHP version to 8.2
+- Various internal improvements
 
 #### Deprecated
 - Nothing
