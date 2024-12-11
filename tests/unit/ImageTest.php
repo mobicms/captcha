@@ -2,104 +2,65 @@
 
 declare(strict_types=1);
 
-namespace MobicmsTest\Captcha;
-
-use LogicException;
 use Mobicms\Captcha\Image;
 use Mobicms\Captcha\ImageOptions;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
 
-class ImageTest extends TestCase
+const FOLDER = __DIR__ . '/../stubs/';
+const DATAIMAGE = 'data:image/png;base64';
+
+beforeEach(function () {
+    $this->imageObj = new Image('abcd');
+});
+
+test('Can generate data image string', function () {
+    $image = (string)$this->imageObj;
+    expect($image)->toStartWith(DATAIMAGE);
+});
+
+test('Can generate valid image', function () {
+    writeImage((string)$this->imageObj);
+    $info = getimagesize(FOLDER . 'test.png');
+    expect($info[0])->toBe(190);
+    expect($info[1])->toBe(80);
+    expect($info['mime'])->toBe('image/png');
+});
+
+test('Can set custom fonts folder', function () {
+    $options = new ImageOptions();
+    $options->setFontsFolder(FOLDER);
+    $image = (new Image('abcd', $options));
+    expect((string)$image)->toStartWith(DATAIMAGE);
+});
+
+test('Fonts does not exist', function () {
+    $options = new ImageOptions();
+    $options->setFontsFolder(__DIR__);
+    new Image('abcd', $options);
+})->throws(LogicException::class, 'The specified folder does not contain any fonts.');
+
+test('set letter case', function (int $case) {
+    $options = new ImageOptions();
+    $options
+        ->setFontsFolder(FOLDER)
+        ->adjustFont('test.ttf', 32, $case);
+    $captcha = new Image('abcd', $options);
+    $image = $captcha->generate();
+    expect($image)->toStartWith(DATAIMAGE);
+})->with('customFontValues');
+
+dataset('customFontValues', function () {
+    return [
+        'random' => [0],
+        'upper' => [ImageOptions::FONT_CASE_UPPER],
+        'lower' => [ImageOptions::FONT_CASE_LOWER],
+    ];
+});
+
+// phpcs:disable
+function writeImage(string $image): void
 {
-    private const FOLDER = __DIR__ . '/../stubs/';
-    private const DATAIMAGE = 'data:image/png;base64';
-
-    private Image $imageObj;
-
-    public function setUp(): void
-    {
-        $this->imageObj = new Image('abcd');
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function testCanGenerateDataImageString(): void
-    {
-        $image = $this->imageObj->generate();
-        self::assertStringStartsWith(self::DATAIMAGE, $image);
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function testCanGenerateValidImage(): void
-    {
-        $this->writeImage($this->imageObj->generate());
-        $info = getimagesize(self::FOLDER . 'test.png');
-        self::assertSame(190, $info[0]);
-        self::assertSame(80, $info[1]);
-        self::assertSame('image/png', $info['mime']);
-    }
-
-    public function testToString(): void
-    {
-        $image = (string) $this->imageObj;
-        self::assertStringStartsWith(self::DATAIMAGE, $image);
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function testSetCustomFontsFolder(): void
-    {
-        $options = new ImageOptions();
-        $options->setFontsFolder(self::FOLDER);
-        $image = (new Image('abcd', $options))->generate();
-        self::assertStringStartsWith(self::DATAIMAGE, $image);
-    }
-
-    public function testFontsDoesNotExist(): void
-    {
-        $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('The specified folder does not contain any fonts.');
-        $options = new ImageOptions();
-        $options->setFontsFolder(__DIR__);
-        new Image('abcd', $options);
-    }
-
-    /**
-     * @throws \Exception
-     */
-    #[DataProvider('customFontValues')]
-    public function testSetLetterCase(int $case): void
-    {
-        $options = new ImageOptions();
-        $options
-            ->setFontsFolder(self::FOLDER)
-            ->adjustFont('test.ttf', 32, $case);
-        $captcha = new Image('abcd', $options);
-        $image = $captcha->generate();
-        self::assertStringStartsWith(self::DATAIMAGE, $image);
-    }
-
-    private function writeImage(string $image): void
-    {
-        $image = str_replace(self::DATAIMAGE, '', $image);
-        /** @phpstan-ignore function.strict */
-        file_put_contents(self::FOLDER . 'test.png', base64_decode($image));
-    }
-
-    /**
-     * @return array<array<int>>
-     */
-    public static function customFontValues(): array
-    {
-        return [
-            'RANDOM' => [0],
-            'UPPER'  => [ImageOptions::FONT_CASE_UPPER],
-            'LOWER'  => [ImageOptions::FONT_CASE_LOWER],
-        ];
-    }
+    $image = str_replace(DATAIMAGE, '', $image);
+    // @phpstan-ignore function.strict
+    file_put_contents(FOLDER . 'test.png', base64_decode($image));
 }
+// phpcs:enable

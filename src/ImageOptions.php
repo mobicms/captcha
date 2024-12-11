@@ -82,7 +82,7 @@ class ImageOptions
         $this->fontsFolder = (string) $folder;
 
         if (! is_dir($this->fontsFolder)) {
-            throw new InvalidArgumentException('The specified folder does not exist.');
+            throw new InvalidArgumentException('The specified folder does not exist');
         }
 
         return $this;
@@ -107,7 +107,7 @@ class ImageOptions
     public function setDefaultFontSize(int $size): self
     {
         if ($size < 5) {
-            throw new InvalidArgumentException('You specified the wrong font size.');
+            throw new InvalidArgumentException('The specified font size is invalid');
         }
 
         $this->defaultFontSize = $size;

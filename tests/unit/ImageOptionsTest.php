@@ -2,110 +2,67 @@
 
 declare(strict_types=1);
 
-namespace MobicmsTest\Captcha;
-
-use InvalidArgumentException;
 use Mobicms\Captcha\ImageOptions;
-use PHPUnit\Framework\TestCase;
 
-class ImageOptionsTest extends TestCase
-{
-    private ImageOptions $options;
+beforeEach(function () {
+    $this->imageOptions = new ImageOptions();
+});
 
-    public function setUp(): void
-    {
-        $this->options = new ImageOptions();
-    }
+test('Default configuration', function () {
+    expect($this->imageOptions)
+        ->getWidth()->toBe(190)
+        ->getHeight()->toBe(80)
+        ->getFontsFolder()->toEndWith('fonts')
+        ->getFontShuffle()->toBeTrue()
+        ->getFontSize()->toBe(26);
+});
 
-    public function testGetImageHeight(): void
-    {
-        self::assertSame(80, $this->options->getHeight());
-    }
+test('Set image width', function () {
+    $this->imageOptions->setWidth(100);
+    expect($this->imageOptions->getWidth())->toBe(100);
 
-    public function testSetImageHeight(): void
-    {
-        $this->options->setHeight(100);
-        self::assertSame(100, $this->options->getHeight());
-    }
+    // Trying to set an invalid value
+    $this->imageOptions->setWidth(1);
+})->throws(InvalidArgumentException::class);
 
-    public function testSetImageHeightInvalidValue(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->options->setHeight(1);
-    }
+test('Set image heigth', function () {
+    $this->imageOptions->setHeight(100);
+    expect($this->imageOptions->getHeight())->toBe(100);
 
-    public function testGetImageWidth(): void
-    {
-        self::assertSame(190, $this->options->getWidth());
-    }
+    // Trying to set an invalid value
+    $this->imageOptions->setHeight(1);
+})->throws(InvalidArgumentException::class);
 
-    public function testSetImageWidth(): void
-    {
-        $this->options->setWidth(100);
-        self::assertSame(100, $this->options->getWidth());
-    }
+test('Set fonts folder', function () {
+    $this->imageOptions->setFontsFolder(__DIR__);
+    expect($this->imageOptions->getFontsFolder())->toBe(__DIR__);
 
-    public function testSetImageWidthInvalidValue(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->options->setWidth(1);
-    }
+    // Trying to set an invalid value
+    $this->imageOptions->setFontsFolder('invalid_folder');
+})->throws(InvalidArgumentException::class);
 
-    public function testGetFontsFolder(): void
-    {
-        self::assertStringEndsWith('fonts', $this->options->getFontsFolder());
-    }
+test('Set default font size', function () {
+    $this->imageOptions->setDefaultFontSize(40);
+    expect($this->imageOptions->getFontSize())->toBe(40);
 
-    public function testSetFontsFolder(): void
-    {
-        $this->options->setFontsFolder(__DIR__);
-        self::assertSame(__DIR__, $this->options->getFontsFolder());
-    }
+    // Trying to set an invalid value
+    $this->imageOptions->setDefaultFontSize(1);
+})->throws(InvalidArgumentException::class);
 
-    public function testInvalidFontsFolder(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The specified folder does not exist.');
-        $this->options->setFontsFolder('invalid_folder');
-    }
+test('Font shuffle on/off', function () {
+    $this->imageOptions->setFontShuffle(false);
+    expect($this->imageOptions->getFontShuffle())->toBeFalse();
 
-    public function testGetFontShuffle(): void
-    {
-        self::assertTrue($this->options->getFontShuffle());
-    }
+    $this->imageOptions->setFontShuffle(true);
+    expect($this->imageOptions->getFontShuffle())->toBeTrue();
+});
 
-    public function testSetFontShuffle(): void
-    {
-        $this->options->setFontShuffle(false);
-        self::assertFalse($this->options->getFontShuffle());
-        $this->options->setFontShuffle(true);
-        self::assertTrue($this->options->getFontShuffle());
-    }
+test('Set custom font options', function () {
+    $font = 'somefont.ttf';
+    $this->imageOptions->adjustFont($font, 40, ImageOptions::FONT_CASE_UPPER);
+    expect($this->imageOptions->getFontSize($font))->toBe(40);
+    expect($this->imageOptions->getFontCase($font))->toBe(ImageOptions::FONT_CASE_UPPER);
 
-    public function testSetDefaultFontSize(): void
-    {
-        $this->options->setDefaultFontSize(40);
-        self::assertSame(40, $this->options->getFontSize());
-    }
-
-    public function testInvalidDefaultFontSize(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('You specified the wrong font size.');
-        $this->options->setDefaultFontSize(1);
-    }
-
-    public function testAdjustFont(): void
-    {
-        $font = 'somefont.ttf';
-        $this->options->adjustFont($font, 40, ImageOptions::FONT_CASE_UPPER);
-        self::assertSame(40, $this->options->getFontSize($font));
-        self::assertSame(ImageOptions::FONT_CASE_UPPER, $this->options->getFontCase($font));
-    }
-
-    public function testInvalidFontName(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->options->adjustFont('somefont.jpg', 27, ImageOptions::FONT_CASE_UPPER);
-    }
-}
+    // Trying to set an invalid value
+    $this->imageOptions->adjustFont('somefont.jpg', 27, ImageOptions::FONT_CASE_UPPER);
+})->throws(InvalidArgumentException::class, 'The font file must be with the extension .ttf');

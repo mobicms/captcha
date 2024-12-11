@@ -1,4 +1,8 @@
 parameters:
+    ignoreErrors:
+        -
+            identifier: property.notFound
+            path: tests
     level: 6
     paths:
         - src
@@ -8,3 +12,4 @@ includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-phpunit/rules.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
+

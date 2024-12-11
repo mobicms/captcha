@@ -2,63 +2,46 @@
 
 declare(strict_types=1);
 
-namespace MobicmsTest\Captcha;
-
-use InvalidArgumentException;
 use Mobicms\Captcha\Code;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
 
-class CodeTest extends TestCase
-{
-    public function testCanGenerateRandomCode(): void
-    {
-        $code = (new Code())->generate();
-        self::assertGreaterThanOrEqual(3, strlen($code));
-    }
+test('Can generate unique string', function () {
+    $code = (string) new Code();
+    $anotherCode = (string) new Code();
 
-    public function testToString(): void
-    {
-        $code = (string) new Code();
-        self::assertGreaterThanOrEqual(3, strlen($code));
-    }
+    expect(strlen($code))->toBeGreaterThanOrEqual(3);
+    expect($code)->not->toEqual($anotherCode);
+});
 
-    public function testCanSpecifyLength(): void
-    {
-        $code = (string) new Code(2, 2);
-        self::assertEquals(2, strlen($code));
-        $code = (string) new Code(5, 5);
-        self::assertEquals(5, strlen($code));
-    }
+test('Can specify length', function () {
+    $code = (string) new Code(2, 2);
+    expect(strlen($code))->toEqual(2);
 
-    public function testCanSpecifyLetters(): void
-    {
-        $code = (string) new Code(3, 3, 'aaaaa');
-        self::assertEquals('aaa', $code);
-        $code = (string) new Code(3, 3, 'bb');
-        self::assertEquals('bbb', $code);
-    }
+    $code = (string) new Code(5, 5);
+    expect(strlen($code))->toEqual(5);
+});
 
-    #[DataProvider('invalidValues')]
-    public function testInvalidParameterValues(
-        int $lengthMin,
-        int $lengthMax,
-        string $characterSet
-    ): void {
-        $this->expectException(InvalidArgumentException::class);
+test('Ability to set your own character set', function () {
+    $code = (string) new Code(3, 3, 'a');
+    expect($code)->toEqual('aaa');
+
+    $code = (string) new Code(3, 3, 'b');
+    expect($code)->toEqual('bbb');
+});
+
+test(
+    'Throwing an exception',
+    function (int $lengthMin, int $lengthMax, string $characterSet) {
         new Code($lengthMin, $lengthMax, $characterSet);
     }
+)
+    ->with('invalid values')
+    ->throws(InvalidArgumentException::class);
 
-    /**
-     * @return array<array<mixed>>
-     */
-    public static function invalidValues(): array
-    {
-        return [
-            'Minimum length value less than 1'        => [0, 5, 'abcd'],
-            'Maximum length value is greater than 20' => [3, 25, 'abcd'],
-            'Minimum length is greater than maximum'  => [5, 3, 'abcd'],
-            'Empty character set'                     => [3, 5, ''],
-        ];
-    }
-}
+dataset('invalid values', function () {
+    return [
+        'length less than 1'                     => [0, 5, 'abcd'],
+        'length greater than 20'                 => [3, 25, 'abcd'],
+        'length minimum is greater than maximum' => [5, 3, 'abcd'],
+        'Empty character set'                    => [3, 5, ''],
+    ];
+});
