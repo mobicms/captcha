@@ -60,7 +60,7 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "static-analysis": "phpstan analyse",
+        "static-analysis": "phpstan analyse --ansi",
         "test": "pest --colors=always",
         "test-coverage": [
             "@putenv XDEBUG_MODE=coverage",

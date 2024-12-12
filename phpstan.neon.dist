@@ -1,12 +1,7 @@
 parameters:
-    ignoreErrors:
-        -
-            identifier: property.notFound
-            path: tests
     level: 6
     paths:
         - src
-        - tests\unit
 includes:
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
