@@ -19,7 +19,7 @@ class Image implements Stringable
 
     public function __construct(
         string|Stringable $code,
-        ImageOptions $imageOptions = null
+        ImageOptions|null $imageOptions = null
     ) {
         $this->code = (string) $code;
         $this->imageOptions = $imageOptions ?? new ImageOptions();
