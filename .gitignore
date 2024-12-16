@@ -1,6 +1,7 @@
 /.idea
 /.cache
 /clover.xml
+/report.xml
 /*.cache
 /*.sarif
 /vendor
