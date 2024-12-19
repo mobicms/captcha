@@ -19,7 +19,7 @@ Major features:
 
 Example:
 
-![Captchas examples](resources/example/captcha_example.png)
+![Captchas examples](docs/images/captcha_example.png)
 
 ## Installation
 

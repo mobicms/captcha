@@ -17,7 +17,7 @@ class ImageOptions
 
     protected int $imageHeight = 80;
     protected int $imageWidth = 190;
-    protected string $fontsFolder = __DIR__ . '/../resources/fonts';
+    protected string $fontsFolder = __DIR__ . '/../fonts';
     protected bool $fontShuffle = true;
     protected int $defaultFontSize = 26;
 
