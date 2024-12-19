@@ -1,0 +1,28 @@
+<?php
+/**
+ * @var string $image
+ */
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CAPTCHA demo</title>
+</head>
+<body>
+<h1>CAPTCHA Demo</h1>
+<hr>
+<h3>Form</h3>
+<hr>
+<form method="post">
+    Verification code<br>
+    <img alt="Verification code" src="<?= $image ?>">
+    <br><br>
+    <label>Please enter verification code<br>
+        <input type="text" size="6" name="code">
+    </label>
+    <input type="submit" name="submit" value="Submit">
+</form>
+</body>
+</html>
