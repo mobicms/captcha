@@ -8,17 +8,12 @@ use Mobicms\Captcha\ImageOptions;
 const FOLDER = __DIR__ . '/../stubs/';
 const DATAIMAGE = 'data:image/png;base64';
 
-beforeEach(function () {
-    $this->imageObj = new Image('abcd');
-});
-
 test('Can generate data image string', function () {
-    $image = (string)$this->imageObj;
-    expect($image)->toStartWith(DATAIMAGE);
+    expect((string) new Image('abcd'))->toStartWith(DATAIMAGE);
 });
 
 test('Can generate valid image', function () {
-    writeImage((string)$this->imageObj);
+    writeImage((string) new Image('abcd'));
     $info = getimagesize(FOLDER . 'test.png');
     expect($info[0])->toBe(190);
     expect($info[1])->toBe(80);
@@ -29,7 +24,7 @@ test('Can set custom fonts folder', function () {
     $options = new ImageOptions();
     $options->setFontsFolder(FOLDER);
     $image = (new Image('abcd', $options));
-    expect((string)$image)->toStartWith(DATAIMAGE);
+    expect((string) $image)->toStartWith(DATAIMAGE);
 });
 
 test('Fonts does not exist', function () {
@@ -51,8 +46,8 @@ test('set letter case', function (int $case) {
 dataset('customFontValues', function () {
     return [
         'random' => [0],
-        'upper' => [ImageOptions::FONT_CASE_UPPER],
-        'lower' => [ImageOptions::FONT_CASE_LOWER],
+        'upper'  => [ImageOptions::FONT_CASE_UPPER],
+        'lower'  => [ImageOptions::FONT_CASE_LOWER],
     ];
 });
 
@@ -60,7 +55,6 @@ dataset('customFontValues', function () {
 function writeImage(string $image): void
 {
     $image = str_replace(DATAIMAGE, '', $image);
-    // @phpstan-ignore function.strict
     file_put_contents(FOLDER . 'test.png', base64_decode($image));
 }
 // phpcs:enable
