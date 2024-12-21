@@ -1,7 +1,7 @@
 <?php
 
 // phpcs:disable
-require_once '../../vendor/autoload.php';
+require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
 session_start();
 
@@ -9,9 +9,9 @@ if (isset($_POST['submit'])) {
     ////////////////////////////////////////////////////////////
     // Code verification result                               //
     ////////////////////////////////////////////////////////////
-    $class = 'error';
     if (empty($_POST['code'])) {
         // If you do not enter a verification code
+        $class = 'warning';
         $message = 'ERROR: You have not entered a verification code';
     } else {
         if (strtolower($_POST['code']) === strtolower($_SESSION['code'])) {
@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
             $message = 'SUCCESS: the verification code has been entered correctly';
         } else {
             // If the code verification fails
+            $class = 'error';
             $message = 'ERROR: the verification code was entered incorrectly';
         }
     }
