@@ -1,6 +1,6 @@
 <?php
 /**
- * @var string $image
+ * @var \Mobicms\Captcha\Image $image
  */
 
 ?>
@@ -17,7 +17,7 @@
 <hr>
 <form method="post">
     Verification code<br>
-    <img alt="Verification code" src="<?= $image ?>">
+    <img alt="Verification code" src="<?= $image->generate() ?>">
     <br><br>
     <label>Please enter verification code<br>
         <input type="text" size="6" name="code">

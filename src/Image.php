@@ -6,32 +6,56 @@ namespace Mobicms\Captcha;
 
 use GdImage;
 use LogicException;
-use Stringable;
 
-class Image implements Stringable
+class Image
 {
+    public const FONT_CASE_UPPER = 2;
+    public const FONT_CASE_LOWER = 1;
+
+    private int $imageWidth = 190;
+    private int $imageHeight = 80;
+    private string $fontsFolder = __DIR__ . '/../fonts';
+    private int $fontsSize = 26;
+    private bool $fontsMix = true;
+
+    /**
+     * Configuring individual font options
+     *
+     * @var array<string, array<string, int>>
+     */
+    protected array $fontsTune = [
+        '3dlet.ttf' => [
+            'size' => 38,
+            'case' => self::FONT_CASE_LOWER,
+        ],
+
+        'baby_blocks.ttf' => [
+            'size' => 16,
+        ],
+
+        'betsy_flanagan.ttf' => [
+            'size' => 30,
+        ],
+
+        'karmaticarcade.ttf' => [
+            'size' => 20,
+        ],
+
+        'tonight.ttf' => [
+            'size' => 28,
+        ],
+    ];
+
     /** @var array<string> */
     private array $fontList;
 
     private string $code;
 
-    private ImageOptions $imageOptions;
-
     public function __construct(
-        string|Stringable $code,
-        ImageOptions|null $imageOptions = null
+        string $code
     ) {
-        $this->code = (string) $code;
-        $this->imageOptions = $imageOptions ?? new ImageOptions();
+        $this->code = $code;
         $this->fontList = $this->prepareFontsList();
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function __toString(): string
-    {
-        return $this->generate();
     }
 
     /**
@@ -40,7 +64,7 @@ class Image implements Stringable
     public function generate(): string
     {
         ob_start();
-        $image = imagecreatetruecolor($this->imageOptions->getWidth(), $this->imageOptions->getHeight());
+        $image = imagecreatetruecolor($this->imageWidth, $this->imageHeight);
 
         if ($image !== false) {
             $color = imagecolorallocatealpha($image, 0, 0, 0, 127);
@@ -68,16 +92,16 @@ class Image implements Stringable
         $len = count($symbols);
 
         foreach ($symbols as $i => $iValue) {
-            if ($this->imageOptions->getFontShuffle()) {
+            if ($this->fontsMix) {
                 $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
             }
 
             $fontName = basename($font);
             $letter = $this->setLetterCase($iValue, $fontName);
-            $fontSize = $this->imageOptions->getFontSize($fontName);
-            $xPos = ($this->imageOptions->getWidth() - $fontSize) / $len * $i + ($fontSize / 2);
+            $fontSize = $this->fontsTune[$fontName]['size'] ?? $this->fontsSize;
+            $xPos = ($this->imageWidth - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
-            $yPos = $this->imageOptions->getHeight() - (($this->imageOptions->getHeight() - $fontSize) / 2);
+            $yPos = $this->imageHeight - (($this->imageHeight - $fontSize) / 2);
             $angle = random_int(-25, 25);
             $color = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
 
@@ -91,9 +115,10 @@ class Image implements Stringable
 
     private function setLetterCase(string $string, string $fontName): string
     {
-        return match ($this->imageOptions->getFontCase($fontName)) {
-            ImageOptions::FONT_CASE_UPPER => strtoupper($string),
-            ImageOptions::FONT_CASE_LOWER => strtolower($string),
+        $case = $this->fontsTune[$fontName]['case'] ?? 0;
+        return match ($case) {
+            self::FONT_CASE_UPPER => strtoupper($string),
+            self::FONT_CASE_LOWER => strtolower($string),
             default => $string,
         };
     }
@@ -103,7 +128,7 @@ class Image implements Stringable
      */
     private function prepareFontsList(): array
     {
-        $list = glob($this->imageOptions->getFontsFolder() . DIRECTORY_SEPARATOR . '*.ttf');
+        $list = glob($this->fontsFolder . DIRECTORY_SEPARATOR . '*.ttf');
 
         if ([] === $list || false === $list) {
             throw new LogicException('The specified folder does not contain any fonts.');
