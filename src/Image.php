@@ -12,18 +12,18 @@ class Image
     public const FONT_CASE_UPPER = 2;
     public const FONT_CASE_LOWER = 1;
 
-    private int $imageWidth = 190;
-    private int $imageHeight = 80;
-    private string $fontsFolder = __DIR__ . '/../fonts';
-    private int $fontsSize = 26;
-    private bool $fontsMix = true;
+    public int $imageWidth = 190;
+    public int $imageHeight = 80;
+    public string $fontFolder = __DIR__ . '/../fonts';
+    public int $fontSize = 26;
+    public bool $fontMix = true;
 
     /**
      * Configuring individual font options
      *
      * @var array<string, array<string, int>>
      */
-    protected array $fontsTune = [
+    public array $fontsTune = [
         '3dlet.ttf' => [
             'size' => 38,
             'case' => self::FONT_CASE_LOWER,
@@ -51,11 +51,9 @@ class Image
 
     private string $code;
 
-    public function __construct(
-        string $code
-    ) {
+    public function __construct(string $code)
+    {
         $this->code = $code;
-        $this->fontList = $this->prepareFontsList();
     }
 
     /**
@@ -63,6 +61,8 @@ class Image
      */
     public function generate(): string
     {
+        $this->fontList = $this->prepareFontsList();
+
         ob_start();
         $image = imagecreatetruecolor($this->imageWidth, $this->imageHeight);
 
@@ -92,13 +92,13 @@ class Image
         $len = count($symbols);
 
         foreach ($symbols as $i => $iValue) {
-            if ($this->fontsMix) {
+            if ($this->fontMix) {
                 $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
             }
 
             $fontName = basename($font);
             $letter = $this->setLetterCase($iValue, $fontName);
-            $fontSize = $this->fontsTune[$fontName]['size'] ?? $this->fontsSize;
+            $fontSize = $this->fontsTune[$fontName]['size'] ?? $this->fontSize;
             $xPos = ($this->imageWidth - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
             $yPos = $this->imageHeight - (($this->imageHeight - $fontSize) / 2);
@@ -128,7 +128,7 @@ class Image
      */
     private function prepareFontsList(): array
     {
-        $list = glob($this->fontsFolder . DIRECTORY_SEPARATOR . '*.ttf');
+        $list = glob($this->fontFolder . DIRECTORY_SEPARATOR . '*.ttf');
 
         if ([] === $list || false === $list) {
             throw new LogicException('The specified folder does not contain any fonts.');
