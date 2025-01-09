@@ -25,6 +25,10 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    // THIS IS IMPORTANT!
+    // In any case, after checking the session variable needs to be deleted.
+    unset($_SESSION['code']);
+
     include 'page_validate.phtml';
 } else {
     ////////////////////////////////////////////////////////////
