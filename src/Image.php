@@ -21,7 +21,8 @@ class Image
     ////////////////////////////////////////////////////////////
     public int $imageWidth = 190;
     public int $imageHeight = 80;
-    public string $fontFolder = __DIR__ . '/../fonts';
+    /** @var array<string> */
+    public array $fontFolders = [__DIR__ . '/../fonts'];
     public int $defaultFontSize = 26;
     public bool $fontMix = true;
     /** @var array<string, array<string, int>> */
@@ -125,12 +126,18 @@ class Image
      */
     private function prepareFontsList(): array
     {
-        $list = glob($this->fontFolder . DIRECTORY_SEPARATOR . '*.ttf');
+        $fonts = [];
 
-        if ([] === $list || false === $list) {
-            throw new LogicException('The specified folder does not contain any fonts.');
+        foreach ($this->fontFolders as $folder) {
+            $list = glob($folder . DIRECTORY_SEPARATOR . '*.ttf');
+
+            if ([] === $list || false === $list) {
+                throw new LogicException('The specified folder "' . $folder . '" does not contain any fonts.');
+            }
+
+            $fonts = array_merge($fonts, $list);
         }
 
-        return $list;
+        return $fonts;
     }
 }

@@ -21,19 +21,19 @@ test('Can generate valid image', function () {
 
 test('Can set custom fonts folder', function () {
     $captcha = (new Image('abcd'));
-    $captcha->fontFolder = FOLDER;
+    $captcha->fontFolders = [FOLDER];
     expect($captcha->generate())->toStartWith(DATAIMAGE);
 });
 
 test('If the font folder does not exist', function () {
     $captcha = new Image('abcd');
-    $captcha->fontFolder = __DIR__;
+    $captcha->fontFolders = [__DIR__];
     $captcha->generate();
-})->throws(LogicException::class, 'The specified folder does not contain any fonts.');
+})->throws(LogicException::class);
 
 test('set letter case', function (int $case) {
     $captcha = new Image('abcd');
-    $captcha->fontFolder = FOLDER;
+    $captcha->fontFolders = [FOLDER];
     $captcha->fontsTune = ['test.ttf' => ['case' => $case]];
     $image = $captcha->generate();
     expect($image)->toStartWith(DATAIMAGE);
