@@ -19,28 +19,25 @@ test('Can generate valid image', function () {
     expect($info['mime'])->toBe('image/png');
 });
 
-//test('Can set custom fonts folder', function () {
-//    $options = new ImageOptions();
-//    $options->setFontsFolder(FOLDER);
-//    $image = (new Image('abcd', $options));
-//    expect((string) $image)->toStartWith(DATAIMAGE);
-//});
+test('Can set custom fonts folder', function () {
+    $captcha = (new Image('abcd'));
+    $captcha->fontFolder = FOLDER;
+    expect($captcha->generate())->toStartWith(DATAIMAGE);
+});
 
-//test('Fonts does not exist', function () {
-//    $options = new ImageOptions();
-//    $options->setFontsFolder(__DIR__);
-//    new Image('abcd', $options);
-//})->throws(LogicException::class, 'The specified folder does not contain any fonts.');
+test('If the font folder does not exist', function () {
+    $captcha = new Image('abcd');
+    $captcha->fontFolder = __DIR__;
+    $captcha->generate();
+})->throws(LogicException::class, 'The specified folder does not contain any fonts.');
 
-//test('set letter case', function (int $case) {
-//    $options = new ImageOptions();
-//    $options
-//        ->setFontsFolder(FOLDER)
-//        ->adjustFont('test.ttf', 32, $case);
-//    $captcha = new Image('abcd', $options);
-//    $image = $captcha->generate();
-//    expect($image)->toStartWith(DATAIMAGE);
-//})->with('customFontValues');
+test('set letter case', function (int $case) {
+    $captcha = new Image('abcd');
+    $captcha->fontFolder = FOLDER;
+    $captcha->fontsTune = ['test.ttf' => ['case' => $case]];
+    $image = $captcha->generate();
+    expect($image)->toStartWith(DATAIMAGE);
+})->with('customFontValues');
 
 dataset('customFontValues', function () {
     return [
