@@ -55,6 +55,7 @@ class Image
     public int $lengthMin = 3;
     public int $lengthMax = 5;
     public string $characterSet = '23456789ABCDEGHJKMNPQRSTUVXYZabcdeghjkmnpqrstuvxyz';
+    public string $excludedCombinationsPattern = 'cp|cb|ck|c6|c9|rn|rm|mm|co|do|cl|db|qp|qb|dp|ww';
 
     public function __construct(string $code = '')
     {
@@ -68,7 +69,7 @@ class Image
 
             do {
                 $this->code = substr(str_shuffle(str_repeat($this->characterSet, 3)), 0, $length);
-            } while (preg_match('/cp|cb|ck|c6|c9|rn|rm|mm|co|do|cl|db|qp|qb|dp|ww/', $this->code));
+            } while (preg_match('/' . $this->excludedCombinationsPattern . '/', $this->code));
         }
 
         return $this->code;
