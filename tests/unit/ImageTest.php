@@ -7,6 +7,35 @@ use Mobicms\Captcha\Image;
 const FOLDER = __DIR__ . '/../stubs/';
 const DATAIMAGE = 'data:image/png;base64';
 
+test('Can generate unique code string', function () {
+    $code = (new Image())->getCode();
+    $anotherCode = (new Image())->getCode();
+
+    expect(strlen($code))->toBeGreaterThanOrEqual(3);
+    expect(strlen($anotherCode))->toBeGreaterThanOrEqual(3);
+    expect($code)->not->toEqual($anotherCode);
+});
+
+test('Can specify code length', function () {
+    $image = new Image();
+    $image->lengthMin = 2;
+    $image->lengthMax = 2;
+    expect(strlen($image->getCode()))->toEqual(2);
+
+    $image = new Image();
+    $image->lengthMin = 5;
+    $image->lengthMax = 5;
+    expect(strlen($image->getCode()))->toEqual(5);
+});
+
+test('Ability to set your own code character set', function () {
+    $image = new Image();
+    $image->lengthMin = 3;
+    $image->lengthMax = 3;
+    $image->characterSet = 'a';
+    expect($image->getCode())->toEqual('aaa');
+});
+
 test('Can generate data image string', function () {
     expect((new Image('abcd'))->getImage())->toStartWith(DATAIMAGE);
 });
