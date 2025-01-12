@@ -17,9 +17,9 @@
 <hr>
 <form method="post">
     Verification code<br>
-    <img alt="Verification code" src="<?= $image->generate() ?>">
+    <img alt="Verification code" src="<?= $image->generate() ?>" style="border: darkgray 1px solid">
     <br><br>
-    <label>Please enter verification code<br>
+    <label>Please enter verification code <small>(case-insensitive)</small><br>
         <input type="text" size="6" name="code">
     </label>
     <input type="submit" name="submit" value="Submit">

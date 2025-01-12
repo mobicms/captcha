@@ -9,20 +9,22 @@ use LogicException;
 
 class Image
 {
+    /** @var array<string> */
+    private array $fontList;
+    private string $code;
+
     public const FONT_CASE_UPPER = 2;
     public const FONT_CASE_LOWER = 1;
 
+    ////////////////////////////////////////////////////////////
+    // Image options                                          //
+    ////////////////////////////////////////////////////////////
     public int $imageWidth = 190;
     public int $imageHeight = 80;
     public string $fontFolder = __DIR__ . '/../fonts';
-    public int $fontSize = 26;
+    public int $defaultFontSize = 26;
     public bool $fontMix = true;
-
-    /**
-     * Configuring individual font options
-     *
-     * @var array<string, array<string, int>>
-     */
+    /** @var array<string, array<string, int>> */
     public array $fontsTune = [
         '3dlet.ttf' => [
             'size' => 38,
@@ -45,11 +47,6 @@ class Image
             'size' => 28,
         ],
     ];
-
-    /** @var array<string> */
-    private array $fontList;
-
-    private string $code;
 
     public function __construct(string $code)
     {
@@ -98,7 +95,7 @@ class Image
 
             $fontName = basename($font);
             $letter = $this->setLetterCase($iValue, $fontName);
-            $fontSize = $this->fontsTune[$fontName]['size'] ?? $this->fontSize;
+            $fontSize = $this->fontsTune[$fontName]['size'] ?? $this->defaultFontSize;
             $xPos = ($this->imageWidth - $fontSize) / $len * $i + ($fontSize / 2);
             $xPos = random_int((int) $xPos, (int) $xPos + 5);
             $yPos = $this->imageHeight - (($this->imageHeight - $fontSize) / 2);
