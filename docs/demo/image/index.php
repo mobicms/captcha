@@ -34,5 +34,5 @@ if (isset($_POST['submit'])) {
     $image = new Mobicms\Captcha\Image($code);
     $_SESSION['code'] = $code;
 
-    include 'page_form.phtml';
+    include __DIR__ . '/page_form.phtml';
 }
