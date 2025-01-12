@@ -9,9 +9,10 @@ Detailed changes can see in the [repository log].
 ## [Unreleased]
 
 #### Added
-- Nothing
+- Added the ability to specify multiple font folders
 
 #### Changed
+- Captcha parameters are specified through the properties of the **Image** class 
 - Bumped minimum PHP version to 8.2
 - Various internal improvements
 
@@ -19,7 +20,7 @@ Detailed changes can see in the [repository log].
 - Nothing
 
 #### Removed
-- Nothing
+- The **Options** class has been removed
 
 #### Fixed
 - Nothing
