@@ -49,15 +49,35 @@ class Image
         ],
     ];
 
-    public function __construct(string $code)
+    ////////////////////////////////////////////////////////////
+    // Code options                                           //
+    ////////////////////////////////////////////////////////////
+    public int $lengthMin = 3;
+    public int $lengthMax = 5;
+    public string $characterSet = '23456789ABCDEGHJKMNPQRSTUVXYZabcdeghjkmnpqrstuvxyz';
+
+    public function __construct(string $code = '')
     {
         $this->code = $code;
+    }
+
+    public function getCode(): string
+    {
+        if ($this->code === '') {
+            $length = random_int($this->lengthMin, $this->lengthMax);
+
+            do {
+                $this->code = substr(str_shuffle(str_repeat($this->characterSet, 3)), 0, $length);
+            } while (preg_match('/cp|cb|ck|c6|c9|rn|rm|mm|co|do|cl|db|qp|qb|dp|ww/', $this->code));
+        }
+
+        return $this->code;
     }
 
     /**
      * @throws \Exception
      */
-    public function generate(): string
+    public function getImage(): string
     {
         $this->fontList = $this->prepareFontsList();
 
@@ -86,7 +106,7 @@ class Image
     private function drawTextOnImage(GdImage $image): GdImage
     {
         $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
-        $symbols = str_split($this->code);
+        $symbols = str_split($this->getCode());
         $len = count($symbols);
 
         foreach ($symbols as $i => $iValue) {

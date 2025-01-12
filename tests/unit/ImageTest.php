@@ -8,11 +8,11 @@ const FOLDER = __DIR__ . '/../stubs/';
 const DATAIMAGE = 'data:image/png;base64';
 
 test('Can generate data image string', function () {
-    expect((new Image('abcd'))->generate())->toStartWith(DATAIMAGE);
+    expect((new Image('abcd'))->getImage())->toStartWith(DATAIMAGE);
 });
 
 test('Can generate valid image', function () {
-    writeImage((new Image('abcd'))->generate());
+    writeImage((new Image('abcd'))->getImage());
     $info = getimagesize(FOLDER . 'test.png');
     expect($info[0])->toBe(190);
     expect($info[1])->toBe(80);
@@ -22,20 +22,20 @@ test('Can generate valid image', function () {
 test('Can set custom fonts folder', function () {
     $captcha = (new Image('abcd'));
     $captcha->fontFolders = [FOLDER];
-    expect($captcha->generate())->toStartWith(DATAIMAGE);
+    expect($captcha->getImage())->toStartWith(DATAIMAGE);
 });
 
 test('If the font folder does not exist', function () {
     $captcha = new Image('abcd');
     $captcha->fontFolders = [__DIR__];
-    $captcha->generate();
+    $captcha->getImage();
 })->throws(LogicException::class);
 
 test('set letter case', function (int $case) {
     $captcha = new Image('abcd');
     $captcha->fontFolders = [FOLDER];
     $captcha->fontsTune = ['test.ttf' => ['case' => $case]];
-    $image = $captcha->generate();
+    $image = $captcha->getImage();
     expect($image)->toStartWith(DATAIMAGE);
 })->with('customFontValues');
 
