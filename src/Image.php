@@ -19,7 +19,7 @@ class Image
     ////////////////////////////////////////////////////////////
     // Image options                                          //
     ////////////////////////////////////////////////////////////
-    public int $imageWidth = 190;
+    public int $imageWidth = 170;
     public int $imageHeight = 80;
     /** @var array<string> */
     public array $fontFolders = [__DIR__ . '/../fonts'];
@@ -52,10 +52,10 @@ class Image
     ////////////////////////////////////////////////////////////
     // Code options                                           //
     ////////////////////////////////////////////////////////////
-    public int $lengthMin = 3;
+    public int $lengthMin = 4;
     public int $lengthMax = 5;
     public string $characterSet = '23456789ABCDEGHJKMNPQRSTUVXYZabcdeghjkmnpqrstuvxyz';
-    public string $excludedCombinationsPattern = 'cp|cb|ck|c6|c9|rn|rm|mm|co|do|cl|db|qp|qb|dp|ww';
+    public string $excludedCombinationsPattern = 'rn|rm|mm|ww';
 
     public function __construct(string $code = '')
     {
