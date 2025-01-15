@@ -41,10 +41,11 @@ test('Can generate data image string', function () {
 });
 
 test('Can generate valid image', function () {
-    writeImage((new Image('abcd'))->getImage());
+    $image = new Image('abcd');
+    writeImage($image->getImage());
     $info = getimagesize(FOLDER . 'test.png');
-    expect($info[0])->toBe(190);
-    expect($info[1])->toBe(80);
+    expect($info[0])->toBe($image->imageWidth);
+    expect($info[1])->toBe($image->imageHeight);
     expect($info['mime'])->toBe('image/png');
 });
 
