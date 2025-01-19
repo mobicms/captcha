@@ -7,6 +7,27 @@ namespace Mobicms\Captcha;
 use GdImage;
 use LogicException;
 
+use function base64_encode;
+use function basename;
+use function count;
+use function imagecolorallocate;
+use function imagecolorallocatealpha;
+use function imagecreatetruecolor;
+use function imagedestroy;
+use function imagefill;
+use function imagepng;
+use function imagesavealpha;
+use function imagettftext;
+use function ob_get_clean;
+use function ob_start;
+use function preg_match;
+use function random_int;
+use function str_repeat;
+use function str_shuffle;
+use function strtolower;
+use function strtoupper;
+use function substr;
+
 class Image
 {
     /** @var array<string> */
@@ -97,8 +118,7 @@ class Image
             }
         }
 
-        $out = ob_get_clean();
-        return 'data:image/png;base64,' . base64_encode((string) $out);
+        return 'data:image/png;base64,' . base64_encode((string) ob_get_clean());
     }
 
     /**
@@ -134,8 +154,7 @@ class Image
 
     private function setLetterCase(string $string, string $fontName): string
     {
-        $case = $this->fontsTune[$fontName]['case'] ?? 0;
-        return match ($case) {
+        return match ($this->fontsTune[$fontName]['case'] ?? 0) {
             self::FONT_CASE_UPPER => strtoupper($string),
             self::FONT_CASE_LOWER => strtolower($string),
             default => $string,
