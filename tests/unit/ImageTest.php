@@ -67,15 +67,13 @@ test('set letter case', function (int $case) {
     $captcha->fontsTune = ['test.ttf' => ['case' => $case]];
     $image = $captcha->getImage();
     expect($image)->toStartWith(DATAIMAGE);
-})->with('customFontValues');
-
-dataset('customFontValues', function () {
-    return [
+})->with(
+    [
         'random' => [0],
         'upper'  => [Image::FONT_CASE_UPPER],
         'lower'  => [Image::FONT_CASE_LOWER],
-    ];
-});
+    ]
+);
 
 // phpcs:disable
 function writeImage(string $image): void
