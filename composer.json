@@ -26,24 +26,17 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "pestphp/pest-plugin": true
-        },
-        "platform": {
-            "php": "8.2"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": "~8.2 || ~8.3 || ~8.4",
         "ext-gd": "*"
     },
     "require-dev": {
         "pestphp/pest": "^3.7",
-        "phpstan/phpstan": "^2.1",
-        "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-strict-rules": "^2.0",
         "slevomat/coding-standard": "^8.15",
-        "squizlabs/php_codesniffer": "^3.11"
+        "squizlabs/php_codesniffer": "^3.11",
+        "vimeo/psalm": "^6.8"
     },
     "autoload": {
         "psr-4": {
@@ -58,7 +51,7 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "static-analysis": "phpstan analyse --ansi",
+        "static-analysis": "psalm --no-diff --show-info=true",
         "test": "pest --colors=always",
         "test-coverage": [
             "@putenv XDEBUG_MODE=coverage",
