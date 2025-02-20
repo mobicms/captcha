@@ -58,4 +58,4 @@ jobs:
         run: composer install --no-progress --no-interaction
 
       - name: Static Analysis
-        run: ./vendor/bin/phpstan analyse --no-progress --error-format=github
+        run: composer static-analysis
