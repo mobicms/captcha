@@ -28,10 +28,10 @@ use function strtolower;
 use function strtoupper;
 use function substr;
 
-class Image
+final class Image
 {
     /** @var array<string> */
-    private array $fontList;
+    private array $fontList = [];
     private string $code;
 
     public const FONT_CASE_UPPER = 2;
@@ -130,17 +130,17 @@ class Image
         $symbols = str_split($this->getCode());
         $len = count($symbols);
 
-        foreach ($symbols as $i => $iValue) {
+        foreach ($symbols as $key => $symbol) {
             if ($this->fontMix) {
                 $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
             }
 
             $fontName = basename($font);
-            $letter = $this->setLetterCase($iValue, $fontName);
+            $letter = $this->setLetterCase($symbol, $fontName);
             $fontSize = $this->fontsTune[$fontName]['size'] ?? $this->defaultFontSize;
-            $xPos = ($this->imageWidth - $fontSize) / $len * $i + ($fontSize / 2);
-            $xPos = random_int((int) $xPos, (int) $xPos + 5);
-            $yPos = $this->imageHeight - (($this->imageHeight - $fontSize) / 2);
+            $xPos = intval(($this->imageWidth - $fontSize) / $len) * $key + intval($fontSize / 2);
+            $xPos = random_int($xPos, $xPos + 5);
+            $yPos = $this->imageHeight - intval(($this->imageHeight - $fontSize) / 2);
             $angle = random_int(-25, 25);
             $color = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
 
