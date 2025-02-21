@@ -1,8 +1,0 @@
-parameters:
-    level: 6
-    paths:
-        - src
-includes:
-    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
-    - vendor/phpstan/phpstan-strict-rules/rules.neon
-
