@@ -42,31 +42,17 @@ final class Image
     ////////////////////////////////////////////////////////////
     public int $imageWidth = 170;
     public int $imageHeight = 80;
-    /** @var array<string> */
-    public array $fontFolders = [__DIR__ . '/../fonts'];
     public int $defaultFontSize = 26;
     public bool $fontMix = true;
+
+    /** @var array<string> */
+    public array $fontFolders = [__DIR__ . '/../fonts'];
+
     /** @var array<string, array<string, int>> */
     public array $fontsTune = [
         '3dlet.ttf' => [
             'size' => 38,
             'case' => self::FONT_CASE_LOWER,
-        ],
-
-        'baby_blocks.ttf' => [
-            'size' => 16,
-        ],
-
-        'betsy_flanagan.ttf' => [
-            'size' => 30,
-        ],
-
-        'karmaticarcade.ttf' => [
-            'size' => 20,
-        ],
-
-        'tonight.ttf' => [
-            'size' => 28,
         ],
     ];
 
@@ -101,7 +87,7 @@ final class Image
      */
     public function getImage(): string
     {
-        $this->fontList = $this->prepareFontsList();
+        $this->fontList = $this->getFontsList();
 
         ob_start();
         $image = imagecreatetruecolor($this->imageWidth, $this->imageHeight);
@@ -112,7 +98,7 @@ final class Image
             if ($color !== false) {
                 imagesavealpha($image, true);
                 imagefill($image, 0, 0, $color);
-                $image = $this->drawTextOnImage($image);
+                $image = $this->drawText($image);
                 imagepng($image);
                 imagedestroy($image);
             }
@@ -124,7 +110,7 @@ final class Image
     /**
      * @throws \Exception
      */
-    private function drawTextOnImage(GdImage $image): GdImage
+    private function drawText(GdImage $image): GdImage
     {
         $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
         $symbols = str_split($this->getCode());
@@ -164,7 +150,7 @@ final class Image
     /**
      * @return array<string>
      */
-    private function prepareFontsList(): array
+    private function getFontsList(): array
     {
         $fonts = [];
 
