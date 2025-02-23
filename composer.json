@@ -34,7 +34,7 @@
     },
     "require-dev": {
         "pestphp/pest": "^3.7",
-        "slevomat/coding-standard": "^8.15",
+        "slevomat/coding-standard": "^8.16",
         "squizlabs/php_codesniffer": "^3.11",
         "vimeo/psalm": "^6.8"
     },
