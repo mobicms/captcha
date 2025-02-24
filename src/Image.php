@@ -40,9 +40,9 @@ final class Image
     ////////////////////////////////////////////////////////////
     // Image options                                          //
     ////////////////////////////////////////////////////////////
-    public int $imageWidth = 170;
-    public int $imageHeight = 80;
-    public int $defaultFontSize = 26;
+    public int $imageWidth = 190;
+    public int $imageHeight = 90;
+    public int $defaultFontSize = 30;
     public bool $fontMix = true;
 
     /** @var array<string> */
@@ -51,8 +51,17 @@ final class Image
     /** @var array<string, array<string, int>> */
     public array $fontsTune = [
         '3dlet.ttf' => [
-            'size' => 38,
+            'size' => 16,
             'case' => self::FONT_CASE_LOWER,
+        ],
+        'baby_blocks.ttf' => [
+            'size' => -8,
+        ],
+        'karmaticarcade.ttf' => [
+            'size' => -4,
+        ],
+        'betsy_flanagan.ttf' => [
+            'size' => 4,
         ],
     ];
 
@@ -123,7 +132,7 @@ final class Image
 
             $fontName = basename($font);
             $letter = $this->setLetterCase($symbol, $fontName);
-            $fontSize = $this->fontsTune[$fontName]['size'] ?? $this->defaultFontSize;
+            $fontSize = $this->getFontSize($fontName);
             $xPos = intval(($this->imageWidth - $fontSize) / $len) * $key + intval($fontSize / 2);
             $xPos = random_int($xPos, $xPos + 5);
             $yPos = $this->imageHeight - intval(($this->imageHeight - $fontSize) / 2);
@@ -165,5 +174,12 @@ final class Image
         }
 
         return $fonts;
+    }
+
+    private function getFontSize(string $fontName): int
+    {
+        return isset($this->fontsTune[$fontName]['size'])
+            ? $this->defaultFontSize + $this->fontsTune[$fontName]['size']
+            : $this->defaultFontSize;
     }
 }
