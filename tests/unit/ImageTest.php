@@ -50,7 +50,7 @@ test('Can generate valid image', function () {
 });
 
 test('Can set custom fonts folder', function () {
-    $captcha = (new Image('abcd'));
+    $captcha = new Image('abcd');
     $captcha->fontFolders = [FOLDER];
     expect($captcha->getImage())->toStartWith(DATAIMAGE);
 });
