@@ -9,6 +9,27 @@ Detailed changes can see in the [repository log].
 ## [Unreleased]
 
 #### Added
+- Nothing
+
+#### Changed
+- Nothing
+
+#### Deprecated
+- Nothing
+
+#### Removed
+- Nothing
+
+#### Fixed
+- Nothing
+
+#### Security
+- Nothing
+
+
+## [5.0.0] 2025-02-27
+
+#### Added
 - Ability to specify multiple font folders
 
 #### Changed
@@ -19,18 +40,9 @@ Detailed changes can see in the [repository log].
 - Bumped minimum PHP version to 8.2
 - Various internal improvements
 
-#### Deprecated
-- Nothing
-
 #### Removed
 - The **Options** class has been removed
 - The **Code** class has been removed
-
-#### Fixed
-- Nothing
-
-#### Security
-- Nothing
 
 
 ## [4.0.0] 2022-12-10
@@ -91,7 +103,8 @@ Detailed changes can see in the [repository log].
 Initial release
 
 
-[Unreleased]: https://github.com/mobicms/captcha/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/mobicms/captcha/compare/5.0.0...HEAD
+[5.0.0]: https://github.com/mobicms/captcha/compare/4.0.0...5.0.0
 [4.0.0]: https://github.com/mobicms/captcha/compare/3.1.0...4.0.0
 [3.1.0]: https://github.com/mobicms/captcha/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/mobicms/captcha/compare/2.0.1...3.0.0
