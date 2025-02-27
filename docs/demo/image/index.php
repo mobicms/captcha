@@ -34,8 +34,8 @@ if (isset($_POST['submit'])) {
     ////////////////////////////////////////////////////////////
     // Form with a verification code                          //
     ////////////////////////////////////////////////////////////
-    $image = new Mobicms\Captcha\Image();
-    $_SESSION['code'] = $image->getCode();
+    $captcha = new Mobicms\Captcha\Image();
+    $_SESSION['code'] = $captcha->getCode();
 
     include __DIR__ . '/page_form.phtml';
 }
