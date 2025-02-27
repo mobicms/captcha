@@ -31,19 +31,19 @@ command to install the package and add it as a requirement to your project's
 composer require mobicms/captcha
 ```
 
-## Usage
+## Simply usage
 
 - Display in form:
 
-```html+php
+```php
 <?php
-$code = (string) new Mobicms\Captcha\Code;
-$_SESSION['code'] = $code;
+$captcha = new Mobicms\Captcha\Image();
+$_SESSION['code'] = $captcha->getCode();
 ?>
 
 <form method="post">
 <!-- ... -->
-<img alt="Verification code" src="<?= new Mobicms\Captcha\Image($code) ?>">
+<img alt="Verification code" src="<?= $captcha->getImage() ?>">
 <input type="text" size="5" name="code">
 <!-- ... -->
 </form>
@@ -62,6 +62,78 @@ if ($result !== null && $session !== null) {
         // CAPTCHA code is incorrect, show an error to the user
     }
 }
+```
+
+
+## Customization
+### Use your own verification code
+The Image class already has the ability to generate validation code,
+which will be sufficient in most use cases.
+However, if necessary, you can generate the validation code yourself
+and then pass it to the constructor when the Image class is initialized:
+```php
+$code = 'FooBar';
+$captcha = new Mobicms\Captcha\Image($code);
+```
+
+### Resizing the image
+Keep in mind that the width of the image will affect the density of the text.  
+If the characters are very creeping on top of each other and become illegible,
+then increase the width of the image, reduce the length of the verification code, or the font size. 
+```php
+$captcha = new Mobicms\Captcha\Image($code);
+
+// Set the image width (default: 190)
+$captcha->imageWidth = 250;
+// Set the image height (default: 90)
+$captcha->imageHeight = 100;
+```
+
+### Default font size
+
+### Fonts mixer
+
+### Fonts folders
+
+### Adjust font
+Some fonts may have a size that looks too small or large compared to others.
+In this case, you need to specify an adjustment relative to the default size.
+Also, if necessary, you can force the specified font to use only uppercase or lowercase characters.
+
+Adjustment parameters are passed to the `$fontsTune` class property as an array.  
+Keep in mind that the class already has some adjustments, so if you use fonts from this package,
+then combine your array of adjustments with an array of `$fontsTune` properties. 
+```php
+$captcha = new Mobicms\Captcha\Image($code);
+
+$adjust = [
+    // Specify the name of the font file
+    'myfont1.ttf' => [
+        // Specify the relative font size.
+        // It will be summarized with the default size specified in the $defaultFontSize property
+        // In this case, the font will be used: 30+16=46
+        'size' => 16,
+        // Forcing the use of only lowercase characters of the specified font
+        'case' => \Mobicms\Captcha\Image::FONT_CASE_LOWER,
+    ],
+
+    'myfont2.ttf' => [
+        // Forcing the use of only uppercase characters of the specified font
+        'case' => \Mobicms\Captcha\Image::FONT_CASE_UPPER,
+    ],
+
+    'myfont3.ttf' => [
+        // Font size will be decreased by 8
+        'size' => -8,
+    ],
+
+    'myfont4.ttf' => [
+        // Font size will be increased by 4
+        'size' => 4,
+    ],
+];
+
+$captcha->fontsTune = array_merge($captcha->fontsTune, $adjust);
 ```
 
 
