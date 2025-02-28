@@ -75,7 +75,7 @@ Keep in mind that the width of the image will affect the density of the text.
 If the characters are very creeping on top of each other and become illegible,
 then increase the width of the image, reduce the length of the verification code, or the font size. 
 ```php
-$captcha = new Mobicms\Captcha\Image($code);
+$captcha = new Mobicms\Captcha\Image();
 
 // Set the image width (default: 190)
 $captcha->imageWidth = 250;
@@ -99,7 +99,7 @@ If you set it to `FALSE`, then a single, randomly selected font will be used for
 You can use your own set of TTF fonts. To do this, specify one or more folders in the array where .ttf font files are located.
 Keep in mind that this package already has some fonts. If you plan to use them, then merge the arrays.
 ```php
-$captcha = new Mobicms\Captcha\Image($code);
+$captcha = new Mobicms\Captcha\Image();
 
 $captcha->fontFolders = array_merge(
     // Using built-in fonts 
@@ -120,7 +120,7 @@ Adjustment parameters are passed to the `$fontsTune` class property as an array.
 Keep in mind that the class already has some adjustments, so if you use fonts from this package,
 then combine your array of adjustments with an array of `$fontsTune` properties. 
 ```php
-$captcha = new Mobicms\Captcha\Image($code);
+$captcha = new Mobicms\Captcha\Image();
 
 $adjust = [
     // Specify the name of the font file
