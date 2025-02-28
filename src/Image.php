@@ -28,6 +28,9 @@ use function strtolower;
 use function strtoupper;
 use function substr;
 
+/**
+ * @psalm-api
+ */
 final class Image
 {
     /** @var array<string> */
