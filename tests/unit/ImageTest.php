@@ -55,13 +55,7 @@ test('Can set custom fonts folder', function () {
     expect($captcha->getImage())->toStartWith(DATAIMAGE);
 });
 
-test('If the font folder does not exist', function () {
-    $captcha = new Image('abcd');
-    $captcha->fontFolders = [__DIR__];
-    $captcha->getImage();
-})->throws(LogicException::class);
-
-test('set letter case', function (int $case) {
+test('Set letter case', function (int $case) {
     $captcha = new Image('abcd');
     $captcha->fontFolders = [FOLDER];
     $captcha->fontsTune = ['test.ttf' => ['case' => $case]];
@@ -74,6 +68,14 @@ test('set letter case', function (int $case) {
         'lower'  => [Image::FONT_CASE_LOWER],
     ]
 );
+
+describe('Exception handling:', function () {
+    test('font folder does not exist', function () {
+        $captcha = new Image('abcd');
+        $captcha->fontFolders = [__DIR__];
+        $captcha->getImage();
+    })->throws(LogicException::class);
+});
 
 // phpcs:disable
 function writeImage(string $image): void
