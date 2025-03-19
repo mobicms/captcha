@@ -84,6 +84,7 @@ final class Image
     /**
      * Generates a random code if none is provided.
      *
+     * @return string
      * @throws \Random\RandomException
      */
     public function getCode(): string
@@ -102,7 +103,8 @@ final class Image
     /**
      * Creates a PNG image with a transparent background.
      *
-     * @throws \Exception
+     * @return string
+     * @throws \Random\RandomException
      */
     public function getImage(): string
     {
@@ -129,6 +131,8 @@ final class Image
     /**
      * Draws the captcha text on the image using random font, size, color, and angle.
      *
+     * @param GdImage $image
+     * @return GdImage
      * @throws \Random\RandomException
      */
     private function drawText(GdImage $image): GdImage
@@ -161,6 +165,10 @@ final class Image
 
     /**
      * Adjusts the case of a letter based on font-specific settings.
+     *
+     * @param string $string
+     * @param string $fontName
+     * @return string
      */
     private function setLetterCase(string $string, string $fontName): string
     {
@@ -195,6 +203,9 @@ final class Image
 
     /**
      * Calculates the font size based on default size and font-specific tuning.
+     *
+     * @param string $fontName
+     * @return int
      */
     private function getFontSize(string $fontName): int
     {
@@ -203,6 +214,12 @@ final class Image
             : $this->defaultFontSize;
     }
 
+    /**
+     * Random font selection
+     *
+     * @return string
+     * @throws \Random\RandomException
+     */
     private function getRandomFont(): string
     {
         return $this->fontList[random_int(0, count($this->fontList) - 1)];
