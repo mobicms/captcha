@@ -133,13 +133,13 @@ final class Image
      */
     private function drawText(GdImage $image): GdImage
     {
-        $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
+        $font = $this->getRandomFont();
         $symbols = str_split($this->getCode());
         $len = count($symbols);
 
         foreach ($symbols as $key => $symbol) {
             if ($this->fontMix) {
-                $font = $this->fontList[random_int(0, count($this->fontList) - 1)];
+                $font = $this->getRandomFont();
             }
 
             $fontName = basename($font);
@@ -201,5 +201,10 @@ final class Image
         return isset($this->fontsTune[$fontName]['size'])
             ? $this->defaultFontSize + $this->fontsTune[$fontName]['size']
             : $this->defaultFontSize;
+    }
+
+    private function getRandomFont(): string
+    {
+        return $this->fontList[random_int(0, count($this->fontList) - 1)];
     }
 }
