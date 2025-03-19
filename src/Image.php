@@ -39,6 +39,9 @@ final class Image
 
     public const FONT_CASE_UPPER = 2;
     public const FONT_CASE_LOWER = 1;
+    public const ALPHA_TRANSPARENT = 127;
+    public const COLOR_MAX = 150;
+    public const COLOR_MIN = 0;
 
     ////////////////////////////////////////////////////////////
     // Image options                                          //
@@ -53,11 +56,11 @@ final class Image
 
     /** @var array<string, array<string, int>> */
     public array $fontsTune = [
-        '3dlet.ttf' => [
+        '3dlet.ttf'          => [
             'size' => 16,
             'case' => self::FONT_CASE_LOWER,
         ],
-        'baby_blocks.ttf' => [
+        'baby_blocks.ttf'    => [
             'size' => -8,
         ],
         'karmaticarcade.ttf' => [
@@ -114,7 +117,7 @@ final class Image
         $image = imagecreatetruecolor($this->imageWidth, $this->imageHeight);
 
         if ($image !== false) {
-            $color = imagecolorallocatealpha($image, 0, 0, 0, 127);
+            $color = imagecolorallocatealpha($image, 0, 0, 0, self::ALPHA_TRANSPARENT);
 
             if ($color !== false) {
                 imagesavealpha($image, true);
@@ -153,7 +156,12 @@ final class Image
             $xPos = random_int($xPos, $xPos + 5);
             $yPos = $this->imageHeight - intval(($this->imageHeight - $fontSize) / 2);
             $angle = random_int(-25, 25);
-            $color = imagecolorallocate($image, random_int(0, 150), random_int(0, 150), random_int(0, 150));
+            $color = imagecolorallocate(
+                $image,
+                $this->getRandomColor(),
+                $this->getRandomColor(),
+                $this->getRandomColor()
+            );
 
             if ($color !== false) {
                 imagettftext($image, $fontSize, $angle, $xPos, (int) $yPos, $color, $font, $letter);
@@ -223,5 +231,16 @@ final class Image
     private function getRandomFont(): string
     {
         return $this->fontList[random_int(0, count($this->fontList) - 1)];
+    }
+
+    /**
+     * Random color selection
+     *
+     * @return int
+     * @throws \Random\RandomException
+     */
+    private function getRandomColor(): int
+    {
+        return random_int(self::COLOR_MIN, self::COLOR_MAX);
     }
 }
