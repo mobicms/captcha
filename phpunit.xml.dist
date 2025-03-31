@@ -5,7 +5,8 @@
          colors="true"
          failOnRisky="true"
          failOnWarning="true"
-         beStrictAboutCoverageMetadata="true">
+         beStrictAboutCoverageMetadata="true"
+         cacheDirectory=".cache">
 
     <testsuites>
         <testsuite name="default">
