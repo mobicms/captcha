@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 use Mobicms\Captcha\Image;
 
-const FOLDER = __DIR__ . '/../stubs/';
-const DATAIMAGE = 'data:image/png;base64';
-
 test('Can generate unique code string', function () {
     $code = (new Image())->getCode();
     $anotherCode = (new Image())->getCode();
@@ -76,11 +73,3 @@ describe('Exception handling:', function () {
         $captcha->getImage();
     })->throws(LogicException::class);
 });
-
-// phpcs:disable
-function writeImage(string $image): void
-{
-    $image = str_replace(DATAIMAGE, '', $image);
-    file_put_contents(FOLDER . 'test.png', base64_decode($image));
-}
-// phpcs:enable
