@@ -152,15 +152,6 @@ $adjust = [
 $captcha->fontsTune = array_merge($captcha->fontsTune, $adjust);
 ```
 
-### Verification code: use your own
-The Image class already has the ability to generate validation code,
-which will be sufficient in most use cases.
-However, if necessary, you can generate the validation code yourself
-and then pass string to the constructor when the `Image` class is initialized:
-```php
-$code = 'FooBar';
-$captcha = new Mobicms\Captcha\Image($code);
-```
 
 ### Verification code: length
 `int $lengthMin, int $lengthMax`  
@@ -178,6 +169,15 @@ ambiguously, such as O (letter) and 0 (number).
 You can use a pattern to specify combinations of adjacent characters that should not appear next to each other.
 For example, **rn** can be interpreted as **m**, and so on...
 
+### Verification code: use your own
+The Image class already has the ability to generate validation code,
+which will be sufficient in most use cases.
+However, if necessary, you can generate the validation code yourself
+and then pass string to the constructor when the `Image` class is initialized:
+```php
+$code = 'FooBar';
+$captcha = new Mobicms\Captcha\Image($code);
+```
 
 
 ## Contributing
