@@ -21,7 +21,7 @@ Example:
 
 ![Captchas examples](docs/images/captcha_example.png)
 
-## Installation
+# Installation
 
 The preferred method of installation is via [Composer](http://getcomposer.org). Run the following
 command to install the package and add it as a requirement to your project's
@@ -31,7 +31,7 @@ command to install the package and add it as a requirement to your project's
 composer require mobicms/captcha
 ```
 
-## Simply usage (v.5)
+# Simply usage (v.5)
 
 - Display in form:
 
@@ -65,12 +65,13 @@ if ($result !== null && $session !== null) {
 ```
 
 
-## Customization (v.5)
+# Customization (v.5)
 You can change CAPTCHA settings through `\Mobicms\Captcha\Image` class properties. 
 
+## Image properties
 
 ### Image: resizing
-`int $imageWidth, int $imageHeight`  
+`int $imageWidth = 190, int $imageHeight = 90`  
 Keep in mind that the width of the image will affect the density of the text.  
 If the characters are very creeping on top of each other and become illegible,
 then increase the width of the image, reduce the length of the verification code, or the font size. 
@@ -84,11 +85,11 @@ $captcha->imageHeight = 100;
 ```
 
 ### Image: default font size
-`int $defaultFontSize`  
+`int $defaultFontSize = 30`  
 This setting affects the size of all fonts used.
 
 ### Image: fonts mixer
-`bool $fontMix`  
+`bool $fontMix = true`  
 If this parameter is set to `TRUE` (default), a random font will be used for each character in the image.  
 ![TRUE](docs/images/mix_on.png)  
 If you set it to `FALSE`, then a single, randomly selected font will be used for all characters in the image.  
@@ -152,20 +153,21 @@ $adjust = [
 $captcha->fontsTune = array_merge($captcha->fontsTune, $adjust);
 ```
 
+## Verification code properties
 
 ### Verification code: length
-`int $lengthMin, int $lengthMax`  
+`int $lengthMin = 4`, `int $lengthMax = 5`  
 The length of the generated code string will be randomly between the
 specified minimum and maximum values.
 
 ### Verification code: character Set
-`string $characterSet`  
+`string $characterSet = '23456789ABCDEGHJKMNPQRSTUVXYZabcdeghjkmnpqrstuvxyz'`  
 In this string you can specify a set of characters that will be used randomly
 when generating the verification code. Avoid using characters that can be interpreted
 ambiguously, such as O (letter) and 0 (number).
 
 ### Verification code: excluded сombinations
-`string $excludedCombinationsPattern`  
+`string $excludedCombinationsPattern = 'rn|rm|mm|ww'`  
 You can use a pattern to specify combinations of adjacent characters that should not appear next to each other.
 For example, **rn** can be interpreted as **m**, and so on...
 
@@ -180,7 +182,7 @@ $captcha = new Mobicms\Captcha\Image($code);
 ```
 
 
-## Contributing
+# Contributing
 Contributions are welcome! Please read [Contributing][contributing] for details.
 
 [![YAGNI](https://img.shields.io/badge/principle-YAGNI-blueviolet.svg)][yagni]
@@ -189,13 +191,13 @@ Contributions are welcome! Please read [Contributing][contributing] for details.
 In our development, we follow the principles of [YAGNI][yagni] and [KISS][kiss].
 The source code should not have extra unnecessary functionality and should be as simple and efficient as possible.
 
-## License
+# License
 
 This package is licensed for use under the MIT License (MIT).  
 Please see [LICENSE][license] for more information.
 
 
-## Our links
+# Our links
 - [**mobiCMS Project**][website] website and support forum
 - [**GitHub**](https://github.com/mobicms) mobiCMS project repositories
 - [**Twitter**](https://twitter.com/mobicms)
