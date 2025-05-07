@@ -19,7 +19,7 @@ Major features:
 
 Example:
 
-![Captchas examples](docs/images/captcha_example.png)
+![Captchas examples](dev/images/captcha_example.png)
 
 # Installation
 
@@ -30,6 +30,18 @@ command to install the package and add it as a requirement to your project's
 ```bash
 composer require mobicms/captcha
 ```
+
+# Run DEMO
+1. Install all dependencies
+```bash
+composer install 
+```
+2. Build and run the Docker container:
+```bash
+docker compose up --build -d 
+```
+3. Demo page available at: [http://localhost:8080](http://localhost:8080) 
+
 
 # Simply usage (v.5)
 
@@ -91,9 +103,9 @@ This setting affects the size of all fonts used.
 ### Image: fonts mixer
 `bool $fontMix = true`  
 If this parameter is set to `TRUE` (default), a random font will be used for each character in the image.  
-![TRUE](docs/images/mix_on.png)  
+![TRUE](dev/images/mix_on.png)  
 If you set it to `FALSE`, then a single, randomly selected font will be used for all characters in the image.  
-![FALSE](docs/images/mix_off.png)  
+![FALSE](dev/images/mix_off.png)  
 
 ### Image: fonts folders
 `array $fontFolders`  

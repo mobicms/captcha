@@ -1,7 +1,7 @@
 <?php
 
 // phpcs:disable
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 session_start();
 

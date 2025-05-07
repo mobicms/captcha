@@ -1,0 +1,17 @@
+services:
+  php-apache:
+    image: php:8.3-apache
+    restart: unless-stopped
+    ports: ["8080:80"]
+    volumes:
+      - ./dev/docker/php.ini:/usr/local/etc/php/php.ini
+      - ./dev/demo:/var/www/html
+      - ./src:/var/www/src
+      - ./fonts:/var/www/fonts
+      - ./vendor:/var/www/vendor
+    command: >
+      bash -c "apt update
+      && apt install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
+      && docker-php-ext-configure gd --with-freetype --with-jpeg
+      && docker-php-ext-install -j$(nproc) gd
+      && apache2-foreground"
