@@ -104,12 +104,12 @@ final class Image
     }
 
     /**
-     * Creates a PNG image with a transparent background.
+     * Build
      *
      * @return string
      * @throws \Random\RandomException
      */
-    public function getImage(): string
+    public function build(): string
     {
         $this->fontList = $this->getFontsList();
 
@@ -128,7 +128,18 @@ final class Image
             }
         }
 
-        return 'data:image/png;base64,' . base64_encode((string) ob_get_clean());
+        return (string) ob_get_clean();
+    }
+
+    /**
+     * Creates a PNG image with a transparent background.
+     *
+     * @return string
+     * @throws \Random\RandomException
+     */
+    public function getImage(): string
+    {
+        return 'data:image/png;base64,' . base64_encode($this->build());
     }
 
     /**
@@ -152,9 +163,9 @@ final class Image
             $fontName = basename($font);
             $letter = $this->setLetterCase($symbol, $fontName);
             $fontSize = $this->getFontSize($fontName);
-            $xPos = intval(($this->imageWidth - $fontSize) / $len) * $key + intval($fontSize / 2);
+            $xPos = (int) (($this->imageWidth - $fontSize) / $len) * $key + (int) ($fontSize / 2);
             $xPos = random_int($xPos, $xPos + 5);
-            $yPos = $this->imageHeight - intval(($this->imageHeight - $fontSize) / 2);
+            $yPos = $this->imageHeight - (int) (($this->imageHeight - $fontSize) / 2);
             $angle = random_int(-25, 25);
             $color = imagecolorallocate(
                 $image,
@@ -199,7 +210,7 @@ final class Image
         foreach ($this->fontFolders as $folder) {
             $list = glob($folder . DIRECTORY_SEPARATOR . '*.ttf');
 
-            if ([] === $list || false === $list) {
+            if (!$list) {
                 throw new LogicException('The specified folder "' . $folder . '" does not contain any fonts.');
             }
 
