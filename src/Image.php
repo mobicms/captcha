@@ -210,7 +210,7 @@ final class Image
         foreach ($this->fontFolders as $folder) {
             $list = glob($folder . DIRECTORY_SEPARATOR . '*.ttf');
 
-            if (!$list) {
+            if ([] === $list || false === $list) {
                 throw new LogicException('The specified folder "' . $folder . '" does not contain any fonts.');
             }
 
