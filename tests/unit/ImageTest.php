@@ -78,6 +78,14 @@ describe('Image generation', function () {
         expect($info['mime'])->toBe('image/png');
     });
 
+    test('Can generate valid binary string', function () {
+        $captcha = new Image('abcd');
+        $data = $captcha->build();
+
+        expect($data)->toBeString();
+        expect(substr($data, 0, 8))->toEqual("\x89PNG\x0d\x0a\x1a\x0a");
+    });
+
     test('Can set custom fonts folder', function () {
         $captcha = new Image('abcd');
         $captcha->fontFolders = [FOLDER];
