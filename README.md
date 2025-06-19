@@ -19,7 +19,7 @@ Major features:
 
 Example:
 
-![Captchas examples](dev/images/captcha_example.png)
+![Captchas examples](.dev/images/captcha_example.png)
 
 # Installation
 
@@ -112,9 +112,9 @@ This setting affects the size of all fonts used.
 ### Image: fonts mixer
 `bool $fontMix = true`  
 If this parameter is set to `TRUE` (default), a random font will be used for each character in the image.  
-![TRUE](dev/images/mix_on.png)  
+![TRUE](.dev/images/mix_on.png)  
 If you set it to `FALSE`, then a single, randomly selected font will be used for all characters in the image.  
-![FALSE](dev/images/mix_off.png)  
+![FALSE](.dev/images/mix_off.png)  
 
 ### Image: fonts folders
 `array $fontFolders`  
