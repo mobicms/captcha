@@ -22,11 +22,8 @@ use function ob_get_clean;
 use function ob_start;
 use function preg_match;
 use function random_int;
-use function str_repeat;
-use function str_shuffle;
 use function strtolower;
 use function strtoupper;
-use function substr;
 
 /**
  * @psalm-api
@@ -56,11 +53,11 @@ final class Image
 
     /** @var array<string, array<string, int>> */
     public array $fontsTune = [
-        '3dlet.ttf'          => [
+        '3dlet.ttf' => [
             'size' => 16,
             'case' => self::FONT_CASE_LOWER,
         ],
-        'baby_blocks.ttf'    => [
+        'baby_blocks.ttf' => [
             'size' => -8,
         ],
         'karmaticarcade.ttf' => [
@@ -84,32 +81,22 @@ final class Image
         $this->code = $code;
     }
 
-    /**
-     * Generates a random code if none is provided.
-     *
-     * @return string
-     * @throws \Random\RandomException
-     */
     public function getCode(): string
     {
-        if ($this->code === '') {
-            $length = random_int($this->lengthMin, $this->lengthMax);
+        return $this->code === ''
+            ? $this->code = $this->generateRandomString()
+            : $this->code;
+    }
 
-            do {
-                $this->code = substr(str_shuffle(str_repeat($this->characterSet, 3)), 0, $length);
-            } while (preg_match('/' . $this->excludedCombinationsPattern . '/', $this->code));
-        }
-
-        return $this->code;
+    public function getImage(): string
+    {
+        return 'data:image/png;base64,' . base64_encode($this->build());
     }
 
     /**
-     * Build
-     *
-     * @return string
      * @throws \Random\RandomException
      */
-    public function build(): string
+    private function build(): string
     {
         $this->fontList = $this->getFontsList();
 
@@ -128,26 +115,11 @@ final class Image
             }
         }
 
-        return (string) ob_get_clean();
-    }
-
-    /**
-     * Creates a PNG image with a transparent background.
-     *
-     * @return string
-     * @throws \Random\RandomException
-     */
-    public function getImage(): string
-    {
-        return 'data:image/png;base64,' . base64_encode($this->build());
+        return (string)ob_get_clean();
     }
 
     /**
      * Draws the captcha text on the image using random font, size, color, and angle.
-     *
-     * @param GdImage $image
-     * @return GdImage
-     * @throws \Random\RandomException
      */
     private function drawText(GdImage $image): GdImage
     {
@@ -163,9 +135,9 @@ final class Image
             $fontName = basename($font);
             $letter = $this->setLetterCase($symbol, $fontName);
             $fontSize = $this->getFontSize($fontName);
-            $xPos = (int) (($this->imageWidth - $fontSize) / $len) * $key + (int) ($fontSize / 2);
+            $xPos = (int)(($this->imageWidth - $fontSize) / $len) * $key + (int)($fontSize / 2);
             $xPos = random_int($xPos, $xPos + 5);
-            $yPos = $this->imageHeight - (int) (($this->imageHeight - $fontSize) / 2);
+            $yPos = $this->imageHeight - (int)(($this->imageHeight - $fontSize) / 2);
             $angle = random_int(-25, 25);
             $color = imagecolorallocate(
                 $image,
@@ -175,7 +147,7 @@ final class Image
             );
 
             if ($color !== false) {
-                imagettftext($image, $fontSize, $angle, $xPos, (int) $yPos, $color, $font, $letter);
+                imagettftext($image, $fontSize, $angle, $xPos, (int)$yPos, $color, $font, $letter);
             }
         }
 
@@ -184,10 +156,6 @@ final class Image
 
     /**
      * Adjusts the case of a letter based on font-specific settings.
-     *
-     * @param string $string
-     * @param string $fontName
-     * @return string
      */
     private function setLetterCase(string $string, string $fontName): string
     {
@@ -222,9 +190,6 @@ final class Image
 
     /**
      * Calculates the font size based on default size and font-specific tuning.
-     *
-     * @param string $fontName
-     * @return int
      */
     private function getFontSize(string $fontName): int
     {
@@ -233,25 +198,30 @@ final class Image
             : $this->defaultFontSize;
     }
 
-    /**
-     * Random font selection
-     *
-     * @return string
-     * @throws \Random\RandomException
-     */
     private function getRandomFont(): string
     {
         return $this->fontList[random_int(0, count($this->fontList) - 1)];
     }
 
-    /**
-     * Random color selection
-     *
-     * @return int
-     * @throws \Random\RandomException
-     */
     private function getRandomColor(): int
     {
         return random_int(self::COLOR_MIN, self::COLOR_MAX);
+    }
+
+    public function generateRandomString(): string
+    {
+        $str = '';
+        $length = random_int($this->lengthMin, $this->lengthMax);
+        $characters = str_split($this->characterSet);
+
+        for ($i = 0; $i < $length; $i++) {
+            $str .= $characters[random_int(0, count($characters) - 1)];
+        }
+
+        return preg_match('/' . $this->excludedCombinationsPattern . '/', $str)
+            // @codeCoverageIgnoreStart
+            ? $this->generateRandomString()
+            // @codeCoverageIgnoreEnd
+            : $str;
     }
 }

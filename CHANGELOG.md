@@ -12,7 +12,7 @@ Detailed changes can see in the [repository log].
 - Nothing
 
 #### Changed
-- Nothing
+- Internal refactoring
 
 #### Deprecated
 - Nothing
