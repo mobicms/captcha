@@ -96,7 +96,7 @@ final class Image
     /**
      * @throws \Random\RandomException
      */
-    private function build(): string
+    public function build(): string
     {
         $this->fontList = $this->getFontsList();
 
