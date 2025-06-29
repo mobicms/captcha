@@ -6,6 +6,7 @@ namespace Mobicms\Captcha;
 
 use GdImage;
 use LogicException;
+use Random\RandomException;
 
 use function base64_encode;
 use function basename;
@@ -53,11 +54,11 @@ final class Image
 
     /** @var array<string, array<string, int>> */
     public array $fontsTune = [
-        '3dlet.ttf' => [
+        '3dlet.ttf'          => [
             'size' => 16,
             'case' => self::FONT_CASE_LOWER,
         ],
-        'baby_blocks.ttf' => [
+        'baby_blocks.ttf'    => [
             'size' => -8,
         ],
         'karmaticarcade.ttf' => [
@@ -81,6 +82,9 @@ final class Image
         $this->code = $code;
     }
 
+    /**
+     * @throws RandomException
+     */
     public function getCode(): string
     {
         return $this->code === ''
@@ -88,13 +92,16 @@ final class Image
             : $this->code;
     }
 
+    /**
+     * @throws RandomException
+     */
     public function getImage(): string
     {
         return 'data:image/png;base64,' . base64_encode($this->build());
     }
 
     /**
-     * @throws \Random\RandomException
+     * @throws RandomException
      */
     public function build(): string
     {
@@ -115,11 +122,13 @@ final class Image
             }
         }
 
-        return (string)ob_get_clean();
+        return (string) ob_get_clean();
     }
 
     /**
      * Draws the captcha text on the image using random font, size, color, and angle.
+     *
+     * @throws RandomException
      */
     private function drawText(GdImage $image): GdImage
     {
@@ -135,9 +144,9 @@ final class Image
             $fontName = basename($font);
             $letter = $this->setLetterCase($symbol, $fontName);
             $fontSize = $this->getFontSize($fontName);
-            $xPos = (int)(($this->imageWidth - $fontSize) / $len) * $key + (int)($fontSize / 2);
+            $xPos = (int) (($this->imageWidth - $fontSize) / $len) * $key + (int) ($fontSize / 2);
             $xPos = random_int($xPos, $xPos + 5);
-            $yPos = $this->imageHeight - (int)(($this->imageHeight - $fontSize) / 2);
+            $yPos = $this->imageHeight - (int) (($this->imageHeight - $fontSize) / 2);
             $angle = random_int(-25, 25);
             $color = imagecolorallocate(
                 $image,
@@ -147,7 +156,7 @@ final class Image
             );
 
             if ($color !== false) {
-                imagettftext($image, $fontSize, $angle, $xPos, (int)$yPos, $color, $font, $letter);
+                imagettftext($image, $fontSize, $angle, $xPos, $yPos, $color, $font, $letter);
             }
         }
 
@@ -198,17 +207,27 @@ final class Image
             : $this->defaultFontSize;
     }
 
+    /**
+     * @throws RandomException
+     */
     private function getRandomFont(): string
     {
         return $this->fontList[random_int(0, count($this->fontList) - 1)];
     }
 
+    /**
+     * @throws RandomException
+     */
     private function getRandomColor(): int
     {
         return random_int(self::COLOR_MIN, self::COLOR_MAX);
     }
 
-    public function generateRandomString(): string
+    /**
+     * @param int $count This parameter eliminates infinite recursion in some cases.
+     * @throws RandomException
+     */
+    private function generateRandomString(int $count = 1): string
     {
         $str = '';
         $length = random_int($this->lengthMin, $this->lengthMax);
@@ -218,10 +237,8 @@ final class Image
             $str .= $characters[random_int(0, count($characters) - 1)];
         }
 
-        return preg_match('/' . $this->excludedCombinationsPattern . '/', $str)
-            // @codeCoverageIgnoreStart
-            ? $this->generateRandomString()
-            // @codeCoverageIgnoreEnd
+        return $count < 10 && preg_match('/' . $this->excludedCombinationsPattern . '/', $str)
+            ? $this->generateRandomString(++$count)
             : $str;
     }
 }
