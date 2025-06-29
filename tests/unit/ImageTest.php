@@ -9,9 +9,9 @@ describe('Code generation', function () {
         $code = (new Image())->getCode();
         $anotherCode = (new Image())->getCode();
 
-        expect(strlen($code))->toBeGreaterThanOrEqual(3);
-        expect(strlen($anotherCode))->toBeGreaterThanOrEqual(3);
-        expect($code)->not->toEqual($anotherCode);
+        expect(strlen($code))->toBeGreaterThanOrEqual(3)
+            ->and(strlen($anotherCode))->toBeGreaterThanOrEqual(3)
+            ->and($code)->not->toEqual($anotherCode);
     });
 
     test('Generated code uses valid character set', function () {
@@ -73,18 +73,18 @@ describe('Image generation', function () {
         $image = new Image('abcd');
         writeImage($image->getImage());
         $info = getimagesize(FOLDER . 'test.png');
-        expect($info[0])->toBe($image->imageWidth);
-        expect($info[1])->toBe($image->imageHeight);
-        expect($info['mime'])->toBe('image/png');
+        expect($info[0])->toBe($image->imageWidth)
+            ->and($info[1])->toBe($image->imageHeight)
+            ->and($info['mime'])->toBe('image/png');
     });
 
-//    test('Can generate valid binary string', function () {
-//        $captcha = new Image('abcd');
-//        $data = $captcha->build();
-//
-//        expect($data)->toBeString();
-//        expect(substr($data, 0, 8))->toEqual("\x89PNG\x0d\x0a\x1a\x0a");
-//    });
+    test('Can generate valid binary string', function () {
+        $captcha = new Image('abcd');
+        $data = $captcha->build();
+
+        expect($data)->toBeString()
+            ->and(substr($data, 0, 8))->toEqual("\x89PNG\x0d\x0a\x1a\x0a");
+    });
 
     test('Can set custom fonts folder', function () {
         $captcha = new Image('abcd');
