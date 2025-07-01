@@ -62,6 +62,15 @@ describe('Code generation', function () {
         $image->characterSet = 'a';
         expect($image->getCode())->toEqual('aaa');
     });
+
+    test('There is no infinite recursion', function () {
+        $image = new Image();
+        $image->lengthMin = 5;
+        $image->lengthMax = 5;
+        $image->characterSet = 'm';
+        $image->excludedCombinationsPattern = 'm|m';
+        expect($image->getCode())->toEqual('mmmmm');
+    });
 });
 
 describe('Image generation', function () {
