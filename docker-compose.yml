@@ -2,9 +2,9 @@ services:
   php-apache:
     image: php:8.3-apache
     restart: unless-stopped
-    ports: ["8080:80"]
+    ports:
+      - 8080:80
     volumes:
-      - ./.dev/docker/php.ini:/usr/local/etc/php/php.ini
       - ./.dev/demo:/var/www/html
       - ./src:/var/www/src
       - ./fonts:/var/www/fonts
