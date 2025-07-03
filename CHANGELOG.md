@@ -12,7 +12,7 @@ Detailed changes can see in the [repository log].
 - Nothing
 
 #### Changed
-- Internal refactoring
+- Nothing
 
 #### Deprecated
 - Nothing
@@ -25,6 +25,12 @@ Detailed changes can see in the [repository log].
 
 #### Security
 - Nothing
+
+
+## [5.1.0] 2025-07-03
+
+#### Changed
+- Internal refactoring and improvements
 
 
 ## [5.0.0] 2025-02-27
@@ -104,6 +110,7 @@ Initial release
 
 
 [Unreleased]: https://github.com/mobicms/captcha/compare/5.0.0...HEAD
+[5.1.0]: https://github.com/mobicms/captcha/compare/5.0.0...5.1.0
 [5.0.0]: https://github.com/mobicms/captcha/compare/4.0.0...5.0.0
 [4.0.0]: https://github.com/mobicms/captcha/compare/3.1.0...4.0.0
 [3.1.0]: https://github.com/mobicms/captcha/compare/3.0.0...3.1.0
