@@ -32,15 +32,10 @@ composer require mobicms/captcha
 ```
 
 # Run DEMO
-1. Install all dependencies
-```bash
-composer install 
-```
-2. Build and run the Docker container:
+Compose and run the Docker container. Demo page available at: [http://localhost:1080](http://localhost:1080)
 ```bash
 docker compose up -d 
-```
-3. Demo page available at: [http://localhost:1080](http://localhost:1080) 
+``` 
 
 
 # Simply usage (v.5)

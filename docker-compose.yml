@@ -6,12 +6,17 @@ services:
       - "1080:80"
     volumes:
       - ./.dev/demo:/var/www/html
-      - ./src:/var/www/src
-      - ./fonts:/var/www/fonts
-      - ./vendor:/var/www/vendor
+      - .:/var/www/html/lib
     command: >
       bash -c "apt update
       && apt install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
       && docker-php-ext-configure gd --with-freetype --with-jpeg
       && docker-php-ext-install -j$(nproc) gd
       && apache2-foreground"
+
+  composer:
+    image: composer:lts
+    restart: no
+    command: install --no-dev --ignore-platform-req=ext-gd
+    volumes:
+      - .:/app

@@ -1,7 +1,7 @@
 <?php
 
 // phpcs:disable
-require_once '../vendor/autoload.php';
+require_once 'lib/vendor/autoload.php';
 
 session_start();
 
