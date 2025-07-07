@@ -38,9 +38,9 @@ composer install
 ```
 2. Build and run the Docker container:
 ```bash
-docker compose up --build -d 
+docker compose up -d 
 ```
-3. Demo page available at: [http://localhost:8080](http://localhost:8080) 
+3. Demo page available at: [http://localhost:1080](http://localhost:1080) 
 
 
 # Simply usage (v.5)
