@@ -3,7 +3,7 @@ services:
     image: php:8.3-apache
     restart: unless-stopped
     ports:
-      - "1080:80"
+      - "8080:80"
     volumes:
       - ./.dev/demo:/var/www/html
       - .:/var/www/html/lib

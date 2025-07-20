@@ -32,7 +32,7 @@ composer require mobicms/captcha
 ```
 
 # Run DEMO
-Compose and run the Docker container. Demo page available at: [http://localhost:1080](http://localhost:1080)
+Compose and run the Docker container. Demo page available at: [http://localhost:8080](http://localhost:8080)
 ```bash
 docker compose up -d 
 ``` 
