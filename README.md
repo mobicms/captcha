@@ -94,9 +94,7 @@ then increase the width of the image, reduce the length of the verification code
 ```php
 $captcha = new Mobicms\Captcha\Image();
 
-// Set the image width (default: 190)
 $captcha->imageWidth = 250;
-// Set the image height (default: 90)
 $captcha->imageHeight = 100;
 ```
 
