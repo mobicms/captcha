@@ -78,6 +78,10 @@ if ($result !== null && $session !== null) {
         // CAPTCHA code is incorrect, show an error to the user
     }
 }
+
+// THIS IS IMPORTANT!
+// In any case, after checking the session variable needs to be deleted.
+unset($_SESSION['code']);
 ```
 
 
