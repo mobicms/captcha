@@ -56,15 +56,6 @@ $_SESSION['code'] = $captcha->getCode();
 </form>
 ```
 
-- Sending in browser:
-
-```php
-<?php
-header('Content-Type: image/png');
-$captcha = new Mobicms\Captcha\Image();
-echo $captcha->build();
-```
-
 - Check whether the entered code is correct:
 
 ```php
