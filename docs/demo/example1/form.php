@@ -1,8 +1,12 @@
 <?php
-/**
- * @var \Mobicms\Captcha\Image $captcha
- */
 
+// phpcs:disable
+require_once '../lib/vendor/autoload.php';
+
+session_start();
+
+$captcha = new Mobicms\Captcha\Image();
+$_SESSION['code'] = $captcha->getCode();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,9 +17,9 @@
 <body>
 <h1>CAPTCHA Demo</h1>
 <hr>
-<h3>Form</h3>
+<h2><a href="../index.html">Home</a> | Form</h2>
 <hr>
-<form method="post">
+<form method="post" action="validate.php">
     Verification code<br>
     <img alt="Verification code" src="<?= $captcha->getImage() ?>" style="border: darkgray 1px solid">
     <br><br>

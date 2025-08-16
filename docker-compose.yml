@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./.dev/demo:/var/www/html
+      - ./docs/demo:/var/www/html
       - .:/var/www/html/lib
     command: >
       bash -c "apt update
