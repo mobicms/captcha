@@ -81,7 +81,7 @@ if (empty($_POST['code']) || empty($_SESSION['code'])) {
     // or there is no session variable
 } else {
     // We use a comparison that is independent of the Letter Case
-    if (strtolower($_POST['code']) === strtolower($_SESSION['code'])) {
+    if (strtolower(trim($_POST['code'])) === strtolower($_SESSION['code'])) {
         // If your code passes validation
     } else {
         // If the code verification fails

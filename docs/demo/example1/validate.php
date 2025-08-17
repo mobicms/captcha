@@ -8,7 +8,7 @@ if (empty($_POST['code'])) {
     $class = 'warning';
     $message = 'ERROR: You have not entered a verification code';
 } else {
-    if (strtolower($_POST['code']) === strtolower($_SESSION['code'])) {
+    if (strtolower(trim($_POST['code'])) === strtolower($_SESSION['code'])) {
         // If your code passes validation
         $class = 'success';
         $message = 'SUCCESS: the verification code has been entered correctly';
