@@ -43,9 +43,7 @@ If you are planning to do development, you should install all the necessary depe
 ```
 composer install
 ```
-When running this command on Linux or Windows WSL, you may encounter a permissions error,\
-such as “`... does not exist and could not be created`”
-
+When running this command on Linux or Windows WSL, you may encounter a permission error.
 If this happens, run the following command in the terminal, using the path to your project:
 ```
 sudo chown -R $(whoami) /path_to_my_project
