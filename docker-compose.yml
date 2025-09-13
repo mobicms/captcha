@@ -1,21 +1,28 @@
+name: captcha
+
 services:
-  php-apache:
-    image: php:8.3-apache
-    restart: unless-stopped
-    ports:
-      - "8080:80"
+  nginx:
+    image: nginx:stable-alpine
     volumes:
-      - ./docs/demo:/var/www/html
-      - .:/var/www/html/lib
-    command: >
-      bash -c "apt update
-      && apt install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
-      && docker-php-ext-configure gd --with-freetype --with-jpeg
-      && docker-php-ext-install -j$(nproc) gd
-      && apache2-foreground"
+      - .:/app/lib
+      - ./docs/demo:/app
+      - ./docker/nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: ./docker/php
+    restart: unless-stopped
+    volumes:
+      - ./docs/demo:/app
+      - .:/app/lib
 
   composer:
     image: composer:lts
+    user: ${USER_ID:-1000}:${GROUP_ID:-1000}
     restart: no
     command: install --no-dev --ignore-platform-req=ext-gd
     volumes:

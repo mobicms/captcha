@@ -5,6 +5,7 @@
 *.xml   text eol=lf
 *.yml   text eol=lf
 /.github/           export-ignore
+/docker/            export-ignore
 /docs/              export-ignore
 /tests/             export-ignore
 /.editorconfig      export-ignore
