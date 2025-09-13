@@ -3,6 +3,7 @@ name: captcha
 services:
   nginx:
     image: nginx:stable-alpine
+    restart: unless-stopped
     volumes:
       - .:/app/lib
       - ./docs/demo:/app
