@@ -32,23 +32,15 @@ composer require mobicms/captcha
 ```
 
 ## Run DEMO
-Compose and run the Docker container.
+Compose and run the Docker container.  
+The demo page will be available on: [http://localhost](http://localhost)
+- Using make
 ```bash
-# Using make
-make up      # Start all services
-make down    # Stop and remove all containers
-make build   # Build or rebuild Docker images
-make         # Get help
-
-# Or using Docker CLI
-docker compose up -d 
+make up 
 ``` 
-Demo page available at: [http://localhost](http://localhost)
-
-Please note that for the demo version, Composer will not install any additional libraries.
-If you are planning to do development, you should install all the necessary dependencies:
-```
-composer install
+- Or using Docker CLI
+```bash
+docker compose up -d 
 ```
 
 
