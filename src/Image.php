@@ -124,7 +124,10 @@ final class Image
             'gif' => imagegif($image),
             'png' => imagepng($image),
             'webp' => imagewebp($image),
-            default => throw new InvalidArgumentException('Unsupported image format.'),
+            default => (function () {
+                ob_end_clean();
+                throw new InvalidArgumentException('Unsupported image format "' . $this->imageFormat . '".');
+            })()
         };
 
         return (string) ob_get_clean();
