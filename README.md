@@ -49,7 +49,7 @@ make up
 docker compose up -d 
 ```
 
-## Usage (v.5)
+## Usage
 
 ### Simply example
 
@@ -94,7 +94,7 @@ if (empty($_POST['code']) || empty($_SESSION['code'])) {
 unset($_SESSION['code']);
 ```
 
-## Customization (v.5)
+## Customization
 
 You can change CAPTCHA settings through `\Mobicms\Captcha\Image` class properties.
 
@@ -103,7 +103,7 @@ You can change CAPTCHA settings through `\Mobicms\Captcha\Image` class propertie
 #### Image: format
 
 `string $imageFormat = 'png';`  
-You can choose one of the supported image formats. Acceptable values are `png`, `gif`, and `webp`.
+You can choose one of the supported image formats. Acceptable values are `png`, `gif`, and `webp`.  
 The `jpeg` format doesn't support transparency, which is why it's not used.
 
 ```php
