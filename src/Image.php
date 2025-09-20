@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Mobicms\Captcha;
 
 use GdImage;
-use InvalidArgumentException;
-use LogicException;
+use Mobicms\Captcha\Exception\ConfigException;
+use Mobicms\Captcha\Exception\FontException;
+use Mobicms\Captcha\Exception\ImageException;
 use Random\RandomException;
-use RuntimeException;
 
 use function base64_encode;
 use function basename;
@@ -106,7 +106,7 @@ final class Image
     }
 
     /**
-     * @throws RuntimeException|RandomException
+     * @throws ConfigException|RandomException
      */
     public function build(): string
     {
@@ -126,7 +126,7 @@ final class Image
             'webp' => imagewebp($image),
             default => (function () {
                 ob_end_clean();
-                throw new InvalidArgumentException('Unsupported image format "' . $this->imageFormat . '".');
+                throw new ConfigException('Unsupported image format "' . $this->imageFormat . '".');
             })()
         };
 
@@ -139,7 +139,7 @@ final class Image
 
         if ($image === false) {
             // @codeCoverageIgnoreStart
-            throw new RuntimeException('Failed to create image.');
+            throw new ImageException('Failed to create image.');
             // @codeCoverageIgnoreEnd
         }
 
@@ -152,7 +152,7 @@ final class Image
 
         if ($backgroundColor === false) {
             // @codeCoverageIgnoreStart
-            throw new RuntimeException('Failed to allocate background color.');
+            throw new ImageException('Failed to allocate background color.');
             // @codeCoverageIgnoreEnd
         }
 
@@ -222,7 +222,7 @@ final class Image
             $list = glob($folder . DIRECTORY_SEPARATOR . '*.ttf');
 
             if ([] === $list || false === $list) {
-                throw new LogicException('The specified folder "' . $folder . '" does not contain any fonts.');
+                throw new FontException('The specified folder "' . $folder . '" does not contain any fonts.');
             }
 
             $fonts = array_merge($fonts, $list);

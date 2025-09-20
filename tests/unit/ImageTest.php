@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Mobicms\Captcha\Exception\ConfigException;
+use Mobicms\Captcha\Exception\FontException;
 use Mobicms\Captcha\Image;
 
 describe('Code generation', function () {
@@ -113,11 +115,11 @@ describe('Image generation', function () {
         $image = new Image('abcd');
         $image->imageFormat = 'jpg';
         $image->build();
-    })->throws(InvalidArgumentException::class);
+    })->throws(ConfigException::class, 'Unsupported image format');
 
     it('throws an exception on font folder does not exist', function () {
         $captcha = new Image('abcd');
         $captcha->fontFolders = [__DIR__];
         $captcha->getImage();
-    })->throws(LogicException::class);
+    })->throws(FontException::class, 'The specified folder');
 });
