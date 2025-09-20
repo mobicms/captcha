@@ -27,6 +27,15 @@ Detailed changes can see in the [repository log].
 - Nothing
 
 
+## [5.2.0] 2025-09-20
+
+#### Added
+- Ability to select an image format `png, gif, webp`
+
+#### Changed
+- Internal refactoring and improvements
+
+
 ## [5.1.0] 2025-07-03
 
 #### Changed
@@ -110,6 +119,7 @@ Initial release
 
 
 [Unreleased]: https://github.com/mobicms/captcha/compare/5.0.0...HEAD
+[5.2.0]: https://github.com/mobicms/captcha/compare/5.1.0...5.2.0
 [5.1.0]: https://github.com/mobicms/captcha/compare/5.0.0...5.1.0
 [5.0.0]: https://github.com/mobicms/captcha/compare/4.0.0...5.0.0
 [4.0.0]: https://github.com/mobicms/captcha/compare/3.1.0...4.0.0
