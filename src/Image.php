@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mobicms\Captcha;
 
 use GdImage;
+use InvalidArgumentException;
 use LogicException;
 use Random\RandomException;
 use RuntimeException;
@@ -15,7 +16,6 @@ use function count;
 use function imagecolorallocate;
 use function imagecolorallocatealpha;
 use function imagecreatetruecolor;
-use function imagedestroy;
 use function imagefill;
 use function imagepng;
 use function imagesavealpha;
@@ -45,6 +45,7 @@ final class Image
     ////////////////////////////////////////////////////////////
     // Image options                                          //
     ////////////////////////////////////////////////////////////
+    public string $imageFormat = 'png'; // png, gif, webp
     public int $imageWidth = 190;
     public int $imageHeight = 90;
     public int $defaultFontSize = 30;
@@ -101,7 +102,7 @@ final class Image
      */
     public function getImage(): string
     {
-        return 'data:image/png;base64,' . base64_encode($this->build());
+        return 'data:image/' . $this->imageFormat . ';base64,' . base64_encode($this->build());
     }
 
     /**
@@ -112,13 +113,19 @@ final class Image
         $this->fontList = $this->getFontsList();
         $image = $this->createBaseImage();
         $backgroundColor = $this->allocateBackgroundColor($image);
-
-        ob_start();
         imagesavealpha($image, true);
+        imagecolortransparent($image, $backgroundColor);
         imagefill($image, 0, 0, $backgroundColor);
         $image = $this->drawText($image);
-        imagepng($image);
-        imagedestroy($image);
+
+        ob_start();
+
+        match ($this->imageFormat) {
+            'gif' => imagegif($image),
+            'png' => imagepng($image),
+            'webp' => imagewebp($image),
+            default => throw new InvalidArgumentException('Unsupported image format.'),
+        };
 
         return (string) ob_get_clean();
     }
@@ -138,7 +145,7 @@ final class Image
 
     private function allocateBackgroundColor(GdImage $image): int
     {
-        $backgroundColor = imagecolorallocatealpha($image, 0, 0, 0, self::ALPHA_TRANSPARENT);
+        $backgroundColor = imagecolorallocatealpha($image, 240, 240, 240, self::ALPHA_TRANSPARENT);
 
         if ($backgroundColor === false) {
             // @codeCoverageIgnoreStart
