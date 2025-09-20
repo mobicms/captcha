@@ -6,6 +6,6 @@ namespace Mobicms\Captcha\Exception;
 
 use RuntimeException;
 
-final class ImageException extends RuntimeException
+final class ImageException extends RuntimeException implements CaptchaException
 {
 }

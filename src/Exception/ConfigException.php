@@ -6,6 +6,6 @@ namespace Mobicms\Captcha\Exception;
 
 use InvalidArgumentException;
 
-final class ConfigException extends InvalidArgumentException
+final class ConfigException extends InvalidArgumentException implements CaptchaException
 {
 }

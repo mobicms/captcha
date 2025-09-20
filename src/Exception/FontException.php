@@ -6,6 +6,6 @@ namespace Mobicms\Captcha\Exception;
 
 use LogicException;
 
-final class FontException extends LogicException
+final class FontException extends LogicException implements CaptchaException
 {
 }
