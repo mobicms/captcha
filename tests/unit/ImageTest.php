@@ -74,25 +74,19 @@ describe('Code generation', function () {
 });
 
 describe('Image generation', function () {
-    test('Can generate data image string', function () {
-        expect((new Image('abcd'))->getImage())->toStartWith(DATAIMAGE);
-    });
-
-    test('Can generate valid image', function () {
+    test('Can generate valid image', function (string $format) {
+        $file = FOLDER . 'test.' . $format;
         $image = new Image('abcd');
-        writeImage($image->getImage());
-        $info = getimagesize(FOLDER . 'test.png');
+        $image->imageFormat = $format;
+        file_put_contents($file, $image->build());
+        $info = getimagesize($file);
         expect($info[0])->toBe($image->imageWidth)
             ->and($info[1])->toBe($image->imageHeight)
-            ->and($info['mime'])->toBe('image/png');
-    });
+            ->and($info['mime'])->toBe('image/' . $format);
+    })->with(['png', 'gif', 'webp']);
 
-    test('Can generate valid binary string', function () {
-        $captcha = new Image('abcd');
-        $data = $captcha->build();
-
-        expect($data)->toBeString()
-            ->and(substr($data, 0, 8))->toEqual("\x89PNG\x0d\x0a\x1a\x0a");
+    test('Can generate data image string', function () {
+        expect((new Image('abcd'))->getImage())->toStartWith(DATAIMAGE);
     });
 
     test('Can set custom fonts folder', function () {
@@ -114,6 +108,12 @@ describe('Image generation', function () {
             'lower'  => [Image::FONT_CASE_LOWER],
         ]
     );
+
+    it('throws an exception on unsupported image format', function () {
+        $image = new Image('abcd');
+        $image->imageFormat = 'jpg';
+        $image->build();
+    })->throws(InvalidArgumentException::class);
 
     it('throws an exception on font folder does not exist', function () {
         $captcha = new Image('abcd');
