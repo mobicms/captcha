@@ -7,6 +7,7 @@ namespace Mobicms\Captcha;
 use GdImage;
 use LogicException;
 use Random\RandomException;
+use RuntimeException;
 
 use function base64_encode;
 use function basename;
@@ -93,7 +94,10 @@ final class Image
     }
 
     /**
-     * @throws RandomException
+     * Generates a CAPTCHA image as a base64-encoded PNG.
+     *
+     * @return string Base64-encoded PNG image data URI.
+     * @throws RandomException If image creation fails or no fonts are found.
      */
     public function getImage(): string
     {
@@ -101,28 +105,48 @@ final class Image
     }
 
     /**
-     * @throws RandomException
+     * @throws RuntimeException|RandomException
      */
     public function build(): string
     {
         $this->fontList = $this->getFontsList();
+        $image = $this->createBaseImage();
+        $backgroundColor = $this->allocateBackgroundColor($image);
 
         ob_start();
-        $image = imagecreatetruecolor($this->imageWidth, $this->imageHeight);
-
-        if ($image !== false) {
-            $color = imagecolorallocatealpha($image, 0, 0, 0, self::ALPHA_TRANSPARENT);
-
-            if ($color !== false) {
-                imagesavealpha($image, true);
-                imagefill($image, 0, 0, $color);
-                $image = $this->drawText($image);
-                imagepng($image);
-                imagedestroy($image);
-            }
-        }
+        imagesavealpha($image, true);
+        imagefill($image, 0, 0, $backgroundColor);
+        $image = $this->drawText($image);
+        imagepng($image);
+        imagedestroy($image);
 
         return (string) ob_get_clean();
+    }
+
+    private function createBaseImage(): GdImage
+    {
+        $image = imagecreatetruecolor($this->imageWidth, $this->imageHeight);
+
+        if ($image === false) {
+            // @codeCoverageIgnoreStart
+            throw new RuntimeException('Failed to create image.');
+            // @codeCoverageIgnoreEnd
+        }
+
+        return $image;
+    }
+
+    private function allocateBackgroundColor(GdImage $image): int
+    {
+        $backgroundColor = imagecolorallocatealpha($image, 0, 0, 0, self::ALPHA_TRANSPARENT);
+
+        if ($backgroundColor === false) {
+            // @codeCoverageIgnoreStart
+            throw new RuntimeException('Failed to allocate background color.');
+            // @codeCoverageIgnoreEnd
+        }
+
+        return $backgroundColor;
     }
 
     /**
@@ -148,15 +172,15 @@ final class Image
             $xPos = random_int($xPos, $xPos + 5);
             $yPos = $this->imageHeight - (int) (($this->imageHeight - $fontSize) / 2);
             $angle = random_int(-25, 25);
-            $color = imagecolorallocate(
+            $textColor = imagecolorallocate(
                 $image,
                 $this->getRandomColor(),
                 $this->getRandomColor(),
                 $this->getRandomColor()
             );
 
-            if ($color !== false) {
-                imagettftext($image, $fontSize, $angle, $xPos, $yPos, $color, $font, $letter);
+            if ($textColor !== false) {
+                imagettftext($image, $fontSize, $angle, $xPos, $yPos, $textColor, $font, $letter);
             }
         }
 
