@@ -7,7 +7,7 @@ use Mobicms\Captcha\Exception\FontException;
 use Mobicms\Captcha\Image;
 
 describe('Code generation', function () {
-    test('Can generate unique code string', function () {
+    test('returns unique code string', function () {
         $code = (new Image())->getCode();
         $anotherCode = (new Image())->getCode();
 
@@ -16,7 +16,22 @@ describe('Code generation', function () {
             ->and($code)->not->toEqual($anotherCode);
     });
 
-    test('Generated code uses valid character set', function () {
+    test('returns provided code and remains same on subsequent calls', function () {
+        $image = new Image('ABC123');
+        expect($image->getCode())->toBe('ABC123');
+        expect($image->getCode())->toBe('ABC123');
+    });
+
+    test('generates when empty and respects length bounds', function () {
+        $img = new Image('');
+        $code = $img->getCode();
+
+        expect($code)->not->toBe('')
+            ->and(strlen($code))->toBeGreaterThanOrEqual($img->lengthMin)
+            ->toBeLessThanOrEqual($img->lengthMax);
+    });
+
+    test('uses valid character set', function () {
         $image = new Image();
         $image->characterSet = 'abc123';
         $code = $image->getCode();
@@ -27,7 +42,7 @@ describe('Code generation', function () {
         }
     });
 
-    test('Generated code does not contain excluded combinations', function () {
+    test('does not contain excluded combinations', function () {
         $image = new Image();
         $image->excludedCombinationsPattern = 'ab|cd|ef';
         $code = $image->getCode();
@@ -35,7 +50,7 @@ describe('Code generation', function () {
         expect(preg_match('/' . $image->excludedCombinationsPattern . '/', $code))->toBe(0);
     });
 
-    test('Can specify code length', function () {
+    test('can specify code length', function () {
         $image = new Image();
         $image->lengthMin = 2;
         $image->lengthMax = 2;
@@ -47,7 +62,7 @@ describe('Code generation', function () {
         expect(strlen($image->getCode()))->toEqual(5);
     });
 
-    test('Generated code respects length boundaries', function () {
+    test('respects length boundaries', function () {
         $image = new Image();
         $image->lengthMin = 6;
         $image->lengthMax = 8;
@@ -57,7 +72,7 @@ describe('Code generation', function () {
         expect(strlen($code))->toBeLessThanOrEqual(8);
     });
 
-    test('Ability to set your own code character set', function () {
+    test('ability to set your own code character set', function () {
         $image = new Image();
         $image->lengthMin = 3;
         $image->lengthMax = 3;
@@ -65,7 +80,7 @@ describe('Code generation', function () {
         expect($image->getCode())->toEqual('aaa');
     });
 
-    test('There is no infinite recursion', function () {
+    test('there is no infinite recursion', function () {
         $image = new Image();
         $image->lengthMin = 5;
         $image->lengthMax = 5;
@@ -76,7 +91,7 @@ describe('Code generation', function () {
 });
 
 describe('Image generation', function () {
-    test('Can generate valid image', function (string $format) {
+    test('can generate valid image', function (string $format) {
         $file = FOLDER . 'test.' . $format;
         $image = new Image('abcd');
         $image->imageFormat = $format;
@@ -87,11 +102,11 @@ describe('Image generation', function () {
             ->and($info['mime'])->toBe('image/' . $format);
     })->with(['png', 'gif', 'webp']);
 
-    test('Can generate data image string', function () {
+    test('can generate data image string', function () {
         expect((new Image('abcd'))->getImage())->toStartWith(DATAIMAGE);
     });
 
-    test('Can set custom fonts folder', function () {
+    test('can set custom fonts folder', function () {
         $captcha = new Image('abcd');
         $captcha->fontFolders = [FOLDER];
         expect($captcha->getImage())->toStartWith(DATAIMAGE);
