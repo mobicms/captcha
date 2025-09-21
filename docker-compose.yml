@@ -5,8 +5,7 @@ services:
     image: nginx:stable-alpine
     restart: unless-stopped
     volumes:
-      - .:/app/lib
-      - ./docs/demo:/app
+      - .:/app
       - ./docker/nginx:/etc/nginx/conf.d
     ports:
       - "80:80"
@@ -18,8 +17,7 @@ services:
       context: ./docker/php
     restart: unless-stopped
     volumes:
-      - ./docs/demo:/app
-      - .:/app/lib
+      - .:/app
 
   composer:
     image: composer:lts

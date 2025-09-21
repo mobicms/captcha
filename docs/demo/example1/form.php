@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 // phpcs:disable
-require_once '../lib/vendor/autoload.php';
+require_once '../../../vendor/autoload.php';
 
 session_start();
 
