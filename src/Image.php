@@ -39,8 +39,6 @@ final class Image
     public const FONT_CASE_UPPER = 2;
     public const FONT_CASE_LOWER = 1;
     public const ALPHA_TRANSPARENT = 127;
-    public const COLOR_MAX = 150;
-    public const COLOR_MIN = 0;
 
     ////////////////////////////////////////////////////////////
     // Image options                                          //
@@ -50,6 +48,12 @@ final class Image
     public int $imageHeight = 90;
     public int $defaultFontSize = 30;
     public bool $fontMix = true;
+    /** @var array<string, array<int, int>> */
+    public array $fontColors = [
+        'red'   => [0, 180],
+        'green' => [0, 180],
+        'blue'  => [0, 180],
+    ];
 
     /** @var array<string> */
     public array $fontFolders = [__DIR__ . '/../fonts'];
@@ -184,9 +188,9 @@ final class Image
             $angle = random_int(-25, 25);
             $textColor = imagecolorallocate(
                 $image,
-                $this->getRandomColor(),
-                $this->getRandomColor(),
-                $this->getRandomColor()
+                $this->getRandomColor('red'),
+                $this->getRandomColor('green'),
+                $this->getRandomColor('blue')
             );
 
             if ($textColor !== false) {
@@ -250,11 +254,18 @@ final class Image
     }
 
     /**
-     * @throws RandomException
+     * @throws ConfigException|RandomException
      */
-    private function getRandomColor(): int
+    private function getRandomColor(string $color): int
     {
-        return random_int(self::COLOR_MIN, self::COLOR_MAX);
+        $min = $this->fontColors[$color][0];
+        $max = $this->fontColors[$color][1];
+
+        if ($min > $max || $min < 0 || $max < 0 || $min > 255 || $max > 255) {
+            throw new ConfigException('Invalid color range for "' . $color . '".');
+        }
+
+        return random_int($min, $max);
     }
 
     /**
