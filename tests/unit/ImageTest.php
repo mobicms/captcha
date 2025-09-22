@@ -126,15 +126,41 @@ describe('Image generation', function () {
         ]
     );
 
-    it('throws an exception on unsupported image format', function () {
+    test('missing colors uses default values', function () {
+        $captcha = new Image('abcd');
+        $captcha->fontColors = [];
+        expect($captcha->getImage())->toStartWith(DATAIMAGE);
+    });
+});
+
+describe('Throws an exception on', function () {
+    test('unsupported image format', function () {
         $image = new Image('abcd');
         $image->imageFormat = 'jpg';
         $image->build();
     })->throws(ConfigException::class, 'Unsupported image format');
 
-    it('throws an exception on font folder does not exist', function () {
+    test('font folder does not exist', function () {
         $captcha = new Image('abcd');
         $captcha->fontFolders = [__DIR__];
         $captcha->getImage();
     })->throws(FontException::class, 'The specified folder');
+
+    test('color', function (array $color) {
+        $captcha = new Image('abcd');
+        $captcha->fontColors = $color;
+        $captcha->build();
+    })
+        ->throws(ConfigException::class, 'Invalid color range')
+        ->with([
+                   'red: min < 0'     => [['red' => [-1, 180], 'green' => [0, 180], 'blue' => [0, 180]]],
+                   'red: max > 255'   => [['red' => [0, 256], 'green' => [0, 180], 'blue' => [0, 180]]],
+                   'red: min > max'   => [['red' => [200, 180], 'green' => [0, 180], 'blue' => [0, 180]]],
+                   'green: min < 0'   => [['red' => [0, 180], 'green' => [-1, 180], 'blue' => [0, 180]]],
+                   'green: max > 255' => [['red' => [0, 180], 'green' => [0, 256], 'blue' => [0, 180]]],
+                   'green: min > max' => [['red' => [0, 180], 'green' => [200, 180], 'blue' => [0, 180]]],
+                   'blue: min < 0'    => [['red' => [0, 180], 'green' => [0, 180], 'blue' => [-1, 180]]],
+                   'blue: max > 255'  => [['red' => [0, 180], 'green' => [0, 180], 'blue' => [0, 256]]],
+                   'blue: min > max'  => [['red' => [0, 180], 'green' => [0, 180], 'blue' => [200, 180]]],
+               ]);
 });
