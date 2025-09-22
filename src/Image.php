@@ -39,6 +39,8 @@ final class Image
     public const FONT_CASE_UPPER = 2;
     public const FONT_CASE_LOWER = 1;
     public const ALPHA_TRANSPARENT = 127;
+    public const DEFAULT_COLOR_MIN = 0;
+    public const DEFAULT_COLOR_MAX = 150;
 
     ////////////////////////////////////////////////////////////
     // Image options                                          //
@@ -258,8 +260,8 @@ final class Image
      */
     private function getRandomColor(string $color): int
     {
-        $min = $this->fontColors[$color][0];
-        $max = $this->fontColors[$color][1];
+        $min = $this->fontColors[$color][0] ?? self::DEFAULT_COLOR_MIN;
+        $max = $this->fontColors[$color][1] ?? self::DEFAULT_COLOR_MAX;
 
         if ($min > $max || $min < 0 || $max < 0 || $min > 255 || $max > 255) {
             throw new ConfigException('Invalid color range for "' . $color . '".');
