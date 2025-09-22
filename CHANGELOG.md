@@ -9,7 +9,7 @@ Detailed changes can see in the [repository log].
 ## [Unreleased]
 
 #### Added
-- Nothing
+- Ability to set a range of colors for fonts
 
 #### Changed
 - Nothing
