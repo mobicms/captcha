@@ -1,23 +1,13 @@
 name: captcha
 
 services:
-  nginx:
-    image: nginx:stable-alpine
+  php-nginx:
+    build: .docker
     restart: unless-stopped
-    volumes:
-      - .:/app
-      - ./docker/nginx:/etc/nginx/conf.d
     ports:
-      - "80:80"
-    depends_on:
-      - php
-
-  php:
-    build:
-      context: ./docker/php
-    restart: unless-stopped
+      - "8080:80"
     volumes:
-      - .:/app
+      - ./:/var/www/html
 
   composer:
     image: composer:lts
