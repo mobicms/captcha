@@ -35,7 +35,7 @@ composer require mobicms/captcha
 ## Run DEMO
 
 Compose and run the Docker container.  
-The demo page will be available on: [http://localhost](http://localhost)
+The demo page will be available on: [http://localhost:8080](http://localhost:8080)
 
 - Using make
 
