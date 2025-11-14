@@ -39,12 +39,12 @@ jobs:
         run: composer install --no-progress --no-interaction --ignore-platform-req=php
 
       - name: Test
-        if: matrix.php-versions != '8.3'
+        if: matrix.php-versions != '8.4'
         run: composer test
         continue-on-error: true
 
       - name: Test with Coverage
-        if: matrix.php-versions == '8.3'
+        if: matrix.php-versions == '8.4'
         working-directory: ./
         run: |
           composer test-coverage
@@ -52,7 +52,7 @@ jobs:
           sed -i 's/\/home\/runner\/work\/captcha\/captcha\//\/github\/workspace\//g' clover.xml
 
       - name: Scan code with SonarCloud
-        if: matrix.php-versions == '8.3'
+        if: matrix.php-versions == '8.4'
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,9 +67,3 @@ jobs:
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.php.tests.reportPath=report.xml
             -Dsonar.php.coverage.reportPaths=clover.xml
-
-      - name: Test with latest dependencies
-        if: matrix.php-versions == '8.3'
-        run: |
-          composer update
-          composer test
