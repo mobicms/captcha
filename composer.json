@@ -29,11 +29,11 @@
         }
     },
     "require": {
-        "php": "~8.2 || ~8.3 || ~8.4",
+        "php": "~8.3 || ~8.4",
         "ext-gd": "*"
     },
     "require-dev": {
-        "pestphp/pest": "^3.8",
+        "pestphp/pest": "^v4.1",
         "slevomat/coding-standard": "^8.22",
         "squizlabs/php_codesniffer": "^3.13",
         "vimeo/psalm": "^6.13"
