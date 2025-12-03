@@ -3,10 +3,8 @@ FROM alpine:3.22
 RUN apk add --no-cache \
     nginx \
     php84 \
-    php84-ctype \
     php84-fpm \
     php84-gd \
-    php84-mbstring \
     php84-session
 
 RUN mkdir -p /var/www/html /run/nginx /run/php
