@@ -36,11 +36,11 @@ final class Image
     private array $fontList = [];
     private string $code;
 
-    public const FONT_CASE_UPPER = 2;
-    public const FONT_CASE_LOWER = 1;
-    public const ALPHA_TRANSPARENT = 127;
-    public const DEFAULT_COLOR_MIN = 0;
-    public const DEFAULT_COLOR_MAX = 150;
+    public const int FONT_CASE_UPPER = 2;
+    public const int FONT_CASE_LOWER = 1;
+    public const int ALPHA_TRANSPARENT = 127;
+    public const int DEFAULT_COLOR_MIN = 0;
+    public const int DEFAULT_COLOR_MAX = 150;
 
     ////////////////////////////////////////////////////////////
     // Image options                                          //
