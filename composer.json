@@ -33,7 +33,7 @@
         "ext-gd": "*"
     },
     "require-dev": {
-        "pestphp/pest": "^v4.3",
+        "pestphp/pest": "^v4.4",
         "slevomat/coding-standard": "^8.22",
         "squizlabs/php_codesniffer": "^3.13",
         "vimeo/psalm": "^6.15"
