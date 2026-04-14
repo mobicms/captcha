@@ -33,10 +33,9 @@
         "ext-gd": "*"
     },
     "require-dev": {
-        "pestphp/pest": "^v4.4",
-        "slevomat/coding-standard": "^8.22",
-        "squizlabs/php_codesniffer": "^3.13",
-        "vimeo/psalm": "^6.15"
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "pestphp/pest": "^v4.7",
+        "vimeo/psalm": "^6.16"
     },
     "autoload": {
         "psr-4": {
@@ -49,8 +48,8 @@
             "@static-analysis",
             "@test"
         ],
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
+        "cs-check": "php-cs-fixer check",
+        "cs-fix": "php-cs-fixer fix",
         "static-analysis": "psalm --no-diff --show-info=true",
         "test": "pest --colors=always",
         "test-coverage": [
