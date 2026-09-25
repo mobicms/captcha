@@ -33,8 +33,8 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.95",
-        "pestphp/pest": "^v4.7",
-        "vimeo/psalm": "^6.16"
+        "pestphp/pest": "^v5.2",
+        "vimeo/psalm": "^6.19"
     },
     "autoload": {
         "psr-4": {
@@ -49,7 +49,7 @@
         ],
         "cs-check": "php-cs-fixer check",
         "cs-fix": "php-cs-fixer fix",
-        "static-analysis": "psalm --no-diff --show-info=true",
+        "static-analysis": "psalm --no-diff --show-info=true --force-jit",
         "test": "pest --colors=always",
         "test-coverage": [
             "@putenv XDEBUG_MODE=coverage",
